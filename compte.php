@@ -1,0 +1,314 @@
+<?php
+$login = isset($_POST["id"])? $_POST["id"] : "";
+$pass = isset($_POST["mdp"])? $_POST["mdp"] : "";
+
+//test//
+$users = array("admin" => "123654789");
+
+
+$database = "sportify";
+
+//connectez-vous dans votre BDD
+//Rappel : votre serveur = localhost | votre login = root | votre mot de pass = '' (rien)
+$db_handle = mysqli_connect('localhost', 'root', '' );
+$db_found = mysqli_select_db($db_handle, $database);
+
+
+$found = false;
+$who = 0; //1 -> admin // 2 -> coatch // 3 -> client
+
+
+
+foreach ($users as $key => $value) {
+	if ($key == $login) {
+	$found = true;
+	break;
+	}}
+
+
+$sql0 = "SELECT * FROM coach";
+$sql1 = "SELECT * FROM client";
+$result0 = mysqli_query($db_handle, $sql0);
+$result1 = mysqli_query($db_handle, $sql1);
+
+
+
+//Si l'utilisateur est valide, vérifier son mot de passe
+$connexion = false;
+if ($found) {
+	//connexion debuts
+
+if ($users[$login] == $pass && $login == "admin") { ///admin $who = 1
+$connexion = true;
+$who = 1;
+
+}
+
+if($who == 0){
+
+for ($i = 0;$i < count($sql0); $i++){	
+//while($data = mysqli_fetch_assoc($result0) && $who == 0){ //dans la table coach
+
+	if(($data["Mail"] == $login)){ //&& ($data["MOTDEPASSE"] == $pass)){
+	$who = 2;
+	$connexion = true;
+	break;
+	echo"
+<p> OK: Caotch CONNECTE </p>
+";
+
+}
+}
+
+
+for ($i = 0;$i < count($sql1); $i++){
+//while($data1 = mysqli_fetch_assoc($result1) && $who == 0){ //dans la table client
+	if(($data1["Mail"] == $login)){ //&& ($data["MOTDEPASSE"] == $pass)){
+		$who == 3;
+		$connexion = true;
+
+		echo"
+<p> OK: client CONNECTE </p>
+";
+
+	}
+}
+
+}
+
+
+
+//else{echo"<p> NOPE </p>";}
+
+}
+//connexion fin 
+//////////////
+
+if ($who == 1){ //admin
+
+
+	//affichage coach
+
+		 $sql = "SELECT * FROM coach";
+	 	$result = mysqli_query($db_handle, $sql);
+
+	echo"
+	<h1> LISTE DE COACH <h1>
+
+	<table>
+	<tr>
+
+	<th> ID </th> <th> Nom </th> <th> Spécialité </th> <th>Photo </th>
+	 <th> Adresse </th> <th> Mail </th> <th> CV </th> <th> Tarif </th>
+
+	 </tr>
+	";
+
+	 	 while ($data = mysqli_fetch_assoc($result)) {
+
+
+	///affichage
+	echo "
+
+	 <tr> 
+		<td>" . $data['ID_coach'] . " </td> 
+		<td>" . $data['Nom'] . " </td>
+		<td>" . $data['Specialite'] . " </td>
+		<td> <img src='".$data['Photo']."' height='100' width='100'>" .  " </td>
+		<td>" . $data['Adresse'] . " </td>
+		<td>" . $data['Mail'] . " </td>
+		 <td> CV </td>
+		 <td> " . $data['Tarif'] . "</td>
+	 </tr>
+
+	";
+
+	}
+
+	///ajouter un coatch 
+
+	echo"
+
+	</table>
+
+
+	<h1> AJOUTER OU SUPPRIMER COACH </h1>
+
+	<table>
+		<form action = 'admin.php' method = 'post'>
+		<tr> 
+			<td>  NOM </td>
+			<td><input type = 'text' name = 'nom'></td> 
+		</tr>
+		<tr> 
+			<td> Spécialité </td>
+			<td><input type = 'text' name = 'spe'></td> 
+		</tr>
+
+		<tr> 
+			<td> Photo </td>
+			<td><input type = 'text' name = 'photo'></td> 
+		</tr>
+
+		<tr> 
+			<td> Adresse </td>
+			<td><input type = 'text' name = 'ad'></td> 
+		</tr>
+
+		<tr> 
+			<td> Mail </td>
+			<td><input type = 'text' name = 'mail'></td> 
+		</tr>
+
+		<tr> 
+			<td> Tarif </td>
+			<td><input type = 'text' name = 'tarif'></td> 
+		</tr>
+
+		<tr>
+			<td colspan='2'>
+			<INPUT TYPE = 'Submit' Name = 'Ajouter' VALUE = 'Ajouter'>
+		</td>
+		<tr>
+			<td colspan='2'>
+			<INPUT TYPE = 'Submit' Name = 'Supprimer' VALUE = 'Supprimer'>
+		</td>
+		</tr>
+
+		
+
+		</form>
+	</table>	
+		";
+
+ 	 }
+
+
+
+if ($who == 2){ //COACH
+
+$sql = "SELECT * FROM coach";
+$result = mysqli_query($db_handle, $sql);
+while( $data = mysqli_fetch_assoc($result)){
+	if(($data['Mail'] == $id) && ($data["Mot de pasee"] == $pass)){ ///////A MODIFIER
+echo" BIENVENUE". $data["Nom"] ." ! <br>
+
+	<br> 
+	<h1> VOS INFOS </h1>
+
+<table>
+	<tr> <td> Specialité </td>
+	<td>". $data["Specialite"] ."</td>
+	 </tr>
+
+	 <tr> <td> PHOTO </td>
+	<td>". $data["Photo"] ."</td>
+	 </tr>
+
+	 <tr> <td> Adresse </td>
+	<td>". $data["Adresse"] ."</td>
+	 </tr>
+
+	 <tr> <td> Mail </td>
+	<td>". $data["Mail"] ."</td>
+	 </tr>
+
+	 <tr> <td> Tarif </td>
+	<td>". $data["Tarif"] ."</td>
+	 </tr>
+
+
+</table>
+
+";
+	}
+
+
+}
+
+
+
+
+}
+
+if( $who == 3){ //Client
+
+$sql = "SELECT * FROM client";
+$result = mysqli_query($db_handle, $sql);
+while( $data = mysqli_fetch_assoc($result)){
+	if(($data['Carte'] == $id) && ($data["Mot de pasee"] == $pass)) ////A revoirr
+
+
+	echo" BIENVENUE". $data["Nom"] ." ! <br>
+
+<br> 
+<h1> VOS INFOS </h1>
+
+<table>
+<tr> <td> Adresse </td>
+<td>". $data["Adesse"] ."</td>
+ </tr>
+
+ <tr> <td> Numero de carte étudiante </td>
+<td>". $data["Carte"] ."</td>
+ </tr>
+
+
+ <tr> <td> Mail </td>
+<td>". $data["Mail"] ."</td>
+ </tr>
+ ";
+
+ break;
+
+}
+
+echo"
+
+</table>
+<br>
+
+<h1> VOS RDV </h1>
+
+<table>
+
+<tr> <th> SPE</th> <th> COACH </th> <th> HEURES </th> <th> LIEU </th> </tr>";
+
+$sql = "SELECT * FROM rdv";
+$result = mysqli_query($db_handle, $sql);
+while( $data = mysqli_fetch_assoc($result)){
+
+	echo"
+<tr> 
+<td> SPE DU COACH </td>
+<td>". $data["coach"]."</td>
+<td>". $data["Heures"]."</td>
+<td>". $data["Lieu"]."</td>
+</tr>
+
+
+";
+
+}
+
+"
+</table>
+";
+
+}
+
+
+//Message
+if (!$found) {
+echo "Connexion refusée. Utilisateur inconnu.";
+} 
+
+
+else {
+if ($connexion) {
+echo "Connexion okay.";
+} else {
+echo "Connexion refusée. Mot de passe invalide.";
+}
+}
+?>
