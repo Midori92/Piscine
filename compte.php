@@ -13,7 +13,7 @@ $database = "sportify";
 $db_handle = mysqli_connect('localhost', 'root', '' );
 $db_found = mysqli_select_db($db_handle, $database);
 
-
+//0 -> non connecté
 $who = 0; //1 -> admin // 2 -> coatch // 3 -> client
 
 //Si l'utilisateur est valide, vérifier son mot de passe
