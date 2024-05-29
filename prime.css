@@ -1,0 +1,132 @@
+ body { background-color: write;  
+color: white;  
+font-family: Arial, Helvetica, sans-serif; 
+background-image:"primevertical.png"  ; 
+}
+
+
+h2 { background-color: white;  
+color: darkslateblue;  
+}  
+h3{ 
+    color: green;
+    padding: 5px;
+
+    border-radius: 5px; 
+}  
+dd { font-style:italic;  
+font-size: .90em;  
+line-height: 200%;  
+}  
+.logo { background-color: #ffffcc;  
+color: #48751A;  
+}  
+.contact { font-family: "Times New Roman", serif;  
+font-size: .90em;  
+font-weight: bold;  
+}  
+#nav {   
+font-size: 0.7em;  
+}  
+#footer { font-size: .60em;  
+font-style: italic;  
+} 
+img {
+        border: none;
+}
+
+.property {
+    padding-right: 30px;
+    padding-top: 5px;
+    float: left;
+}
+
+#wrapper{
+    margin : 0 auto;
+    width : 680px;
+    min-width: 680px ;
+    background-color: write;
+    color: #003300;
+    padding-left: 10px;
+
+} 
+#leftcolumn{
+    background-color: white;
+    float :left;
+    width: 150px;
+    margin-left: -350px;
+
+}
+#leftcolumn a{
+    display: block;
+    margin-right: 15px;
+    margin-left: 15px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+#rightcolumn {
+    margin-left: -100px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+}
+
+#event-week {
+    color: black; 
+}
+
+.availability-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.availability-table th,
+.availability-table td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: center;
+}
+
+.available {
+    background-color: grey; 
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.btn-rdv {
+    background-color: lightpink;
+    color: black;
+    border: 2px solid black;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+
+
+.btn-comm {
+    background-color: skyblue;
+    color: black;
+    border: 2px solid black;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+
+
+.btn-cv {
+    background-color: lightgreen;
+    color: black;
+    border: 2px solid black;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
