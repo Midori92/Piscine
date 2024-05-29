@@ -46,10 +46,10 @@ $who = 1;
 
 if($who == 0){
 
-for ($i = 0;$i < count($sql0); $i++){	
-//while($data = mysqli_fetch_assoc($result0) && $who == 0){ //dans la table coach
+//for ($i = 0;$i < count($sql0); $i++){
+while($data = mysqli_fetch_assoc($result0) && $who == 0){ //dans la table coach
 
-	if(($data["Mail"] == $login)){ //&& ($data["MOTDEPASSE"] == $pass)){
+	if(($data["Mail"] == $login)&& ($data["Mot_de_passe"] == $pass)){
 	$who = 2;
 	$connexion = true;
 	break;
@@ -61,9 +61,9 @@ for ($i = 0;$i < count($sql0); $i++){
 }
 
 
-for ($i = 0;$i < count($sql1); $i++){
-//while($data1 = mysqli_fetch_assoc($result1) && $who == 0){ //dans la table client
-	if(($data1["Mail"] == $login)){ //&& ($data["MOTDEPASSE"] == $pass)){
+//for ($i = 0;$i < count($sql1); $i++){
+while($data1 = mysqli_fetch_assoc($result1) && $who == 0){ //dans la table client
+	if(($data1["Mail"] == $login)&& ($data["Mot_de_passe"] == $pass)){
 		$who == 3;
 		$connexion = true;
 
@@ -187,10 +187,10 @@ if ($who == 1){ //admin
 
 if ($who == 2){ //COACH
 
-$sql = "SELECT * FROM coach";
+$sql = "SELECT * FROM coach WHERE Mail = '$login' AND Mot_de_passe ='$pass'";
 $result = mysqli_query($db_handle, $sql);
-while( $data = mysqli_fetch_assoc($result)){
-	if(($data['Mail'] == $id) && ($data["Mot de pasee"] == $pass)){ ///////A MODIFIER
+if( $data = mysqli_fetch_assoc($result)){
+
 echo" BIENVENUE". $data["Nom"] ." ! <br>
 
 	<br> 
@@ -224,7 +224,7 @@ echo" BIENVENUE". $data["Nom"] ." ! <br>
 	}
 
 
-}
+
 
 
 
@@ -233,10 +233,10 @@ echo" BIENVENUE". $data["Nom"] ." ! <br>
 
 if( $who == 3){ //Client
 
-$sql = "SELECT * FROM client";
+$sql = "SELECT * FROM client WHERE Mail = '$login' AND Mot_de_passe ='$pass'";
 $result = mysqli_query($db_handle, $sql);
-while( $data = mysqli_fetch_assoc($result)){
-	if(($data['Carte'] == $id) && ($data["Mot de pasee"] == $pass)) ////A revoirr
+if( $data = mysqli_fetch_assoc($result)){
+	//if(($data['Carte'] == $id) && ($data["Mot de pasee"] == $pass)) ////A revoirr
 
 
 	echo" BIENVENUE". $data["Nom"] ." ! <br>
@@ -259,7 +259,7 @@ while( $data = mysqli_fetch_assoc($result)){
  </tr>
  ";
 
- break;
+
 
 }
 
@@ -274,7 +274,7 @@ echo"
 
 <tr> <th> SPE</th> <th> COACH </th> <th> HEURES </th> <th> LIEU </th> </tr>";
 
-$sql = "SELECT * FROM rdv";
+$sql = "SELECT * FROM rdv WHERE client = '{$data['ID_client']}'";
 $result = mysqli_query($db_handle, $sql);
 while( $data = mysqli_fetch_assoc($result)){
 
