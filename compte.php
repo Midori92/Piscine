@@ -82,7 +82,7 @@ while($data1 = mysqli_fetch_assoc($result1) && $who == 0){ //dans la table clien
 
 }
 //connexion fin 
-//////////////
+///////////
 
 if ($who == 1){ //admin
 
@@ -182,8 +182,6 @@ if ($who == 1){ //admin
 		";
 
  	 }
-
-
 
 if ($who == 2){ //COACH
 
