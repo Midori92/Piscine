@@ -14,56 +14,41 @@ $db_handle = mysqli_connect('localhost', 'root', '' );
 $db_found = mysqli_select_db($db_handle, $database);
 
 
-$found = false;
 $who = 0; //1 -> admin // 2 -> coatch // 3 -> client
-
-
-
-foreach ($users as $key => $value) {
-	if ($key == $login) {
-	$found = true;
-	break;
-	}}
-
-
-$sql0 = "SELECT * FROM coach";
-$sql1 = "SELECT * FROM client";
-$result0 = mysqli_query($db_handle, $sql0);
-$result1 = mysqli_query($db_handle, $sql1);
-
-
 
 //Si l'utilisateur est valide, vérifier son mot de passe
 $connexion = false;
-if ($found) {
-	//connexion debuts
 
-if ($users[$login] == $pass && $login == "admin") { ///admin $who = 1
-$connexion = true;
-$who = 1;
+	//connexion debuts
+if ($pass == "123654789" && $login == "admin") { ///admin $who = 1
+	$connexion = true;
+	$who = 1;
 
 }
+
+
 
 if($who == 0){
 
-//for ($i = 0;$i < count($sql0); $i++){
-while($data = mysqli_fetch_assoc($result0) && $who == 0){ //dans la table coach
+	$sql0 = "SELECT * FROM coach WHERE Mail = '$login' AND Mot_de_passe ='$pass'";
+	$sql1 = "SELECT * FROM client WHERE Carte = '$login' AND Mot_de_passe ='$pass'";
+	$result0 = mysqli_query($db_handle, $sql0);
+	$result1 = mysqli_query($db_handle, $sql1);
 
-	if(($data["Mail"] == $login)&& ($data["Mot_de_passe"] == $pass)){
-	$who = 2;
-	$connexion = true;
-	break;
-	echo"
+
+if($data = mysqli_fetch_assoc($result0)){ //dans la table coach
+
+		$who = 2;
+		$connexion = true;
+		echo "
 <p> OK: Caotch CONNECTE </p>
 ";
-
-}
 }
 
 
-//for ($i = 0;$i < count($sql1); $i++){
-while($data1 = mysqli_fetch_assoc($result1) && $who == 0){ //dans la table client
-	if(($data1["Mail"] == $login)&& ($data["Mot_de_passe"] == $pass)){
+
+if($data1 = mysqli_fetch_assoc($result1) && $who == 0){ //dans la table client
+
 		$who == 3;
 		$connexion = true;
 
@@ -72,15 +57,10 @@ while($data1 = mysqli_fetch_assoc($result1) && $who == 0){ //dans la table clien
 ";
 
 	}
-}
 
 }
 
 
-
-//else{echo"<p> NOPE </p>";}
-
-}
 //connexion fin 
 ///////////
 
@@ -99,7 +79,7 @@ if ($who == 1){ //admin
 	<tr>
 
 	<th> ID </th> <th> Nom </th> <th> Spécialité </th> <th>Photo </th>
-	 <th> Adresse </th> <th> Mail </th> <th> CV </th> <th> Tarif </th>
+	 <th> Adresse </th> <th> Mail </th> <th> CV </th> <th> Tarif </th> <th>Mot de passe</th>
 
 	 </tr>
 	";
@@ -119,6 +99,7 @@ if ($who == 1){ //admin
 		<td>" . $data['Mail'] . " </td>
 		 <td> CV </td>
 		 <td> " . $data['Tarif'] . "</td>
+		 <td> " . $data['Mot_de_passe'] . "</td>
 	 </tr>
 
 	";
@@ -297,8 +278,17 @@ while( $data = mysqli_fetch_assoc($result)){
 
 
 //Message
-if (!$found) {
-echo "Connexion refusée. Utilisateur inconnu.";
+if ($who == 0) {
+echo "Connexion refusée. Utilisateur inconnu.
+<br>
+Etes-vous sûr d'avoir déjà un compte ? <br> <br>
+<button TYPE='button'>
+<a href='creation.html'><INPUT TYPE = 'PDC' Name = 'Pas de compte' VALUE = 'Pas de compte ?'> </a>
+</button> 
+
+";
+
+
 } 
 
 
