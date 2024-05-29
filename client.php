@@ -9,6 +9,7 @@ $pays = isset($_POST["pays"])? $_POST["pays"] : "";
 $tel = isset($_POST["tel"])? $_POST["tel"] : "";
 $carte = isset($_POST["carte"])? $_POST["carte"] : "";
 $mdp = isset($_POST["mdp"])? $_POST["mdp"] : "";
+
 $database = "sportify";
 
 //connectez-vous dans votre BDD
