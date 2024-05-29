@@ -6,14 +6,6 @@ $database = "sportify";
 $db_handle = mysqli_connect('localhost', 'root', '' );
 $db_found = mysqli_select_db($db_handle, $database);
 
-$me = 132645; ///session
-$sql = "SELECT * FROM coach";
-$result = mysqli_query($db_handle, $sql);
-$conn = new mysqli('localhost', 'root', '',$database);
-
-$coach = isset($_POST["Coach"])? mysqli_real_escape_string($db_handle, $_POST["Coach"]) : "";
-$mess = isset($_POST["message"])? mysqli_real_escape_string($db_handle, $_POST["message"]) : "";
-
 
 ?>
 
@@ -23,8 +15,59 @@ $mess = isset($_POST["message"])? mysqli_real_escape_string($db_handle, $_POST["
     <meta charset="UTF-8">
     <title>Chatroom</title>
 </head>
-
 <body>
+<table>
+
+    <form action = "" method = "post">
+
+        <input type = "text" name = "message" required>
+        <INPUT TYPE = "Submit" Name = "Submit1" VALUE = "Envoyer"> <br>
+        <label for="Coach">Choose a Coach:</label>
+        <select id="Coach" name="Coach">
+
+
+
+        <?php
+        $me = 132645; ///session
+        $sql = "SELECT * FROM coach";
+	 	$result = mysqli_query($db_handle, $sql);
+        $conn = new mysqli('localhost', 'root', '',$database);
+
+         ///affichage nom coach
+        while ($data = mysqli_fetch_assoc($result)){
+
+            echo'
+            <option value="'.$data["Nom"].'">'. $data["Nom"].'</option>
+            ';
+        }
+
+        $coach = isset($_POST["Coach"])? mysqli_real_escape_string($db_handle, $_POST["Coach"]) : "";
+        $mess = isset($_POST["message"])? mysqli_real_escape_string($db_handle, $_POST["message"]) : "";
+
+?>
+    </form>
+</table>
+
+    <?php
+
+
+        $sql1 = "INSERT INTO message (source, dest, message) 
+Values ('$me','$coach','$mess')";
+
+
+
+    if (mysqli_query($db_handle, $sql1)){
+        //if($conn->query($sql1) == TRUE) {
+            echo "
+<br>
+<p> Message envoyé ! </p>
+
+";
+    }
+
+
+    //affichage  message
+    ?>
 
 
 <h1> Messages </h1>
@@ -52,57 +95,6 @@ while($data = mysqli_fetch_assoc($result3)){//messages reçu
 }
 
 ?>
-
-
-
-
-<table>
-
-    <form action = "" method = "post">
-
-        <input type = "text" name = "message" required>
-        <INPUT TYPE = "Submit" Name = "Submit1" VALUE = "Envoyer"> <br>
-        <label for="Coach">Choose a Coach:</label>
-        <select id="Coach" name="Coach">
-
-
-
-        <?php
-
-         ///affichage nom coach
-        while ($data = mysqli_fetch_assoc($result)){
-
-            echo'
-            <option value="'.$data["Nom"].'">'. $data["Nom"].'</option>
-            ';
-        }
-
-
-?>
-    </form>
-</table>
-
-    <?php
-
-
-        $sql1 = "INSERT INTO message (source, dest, message) 
-Values ('$me','$coach','$mess')";
-
-
-
-    if (mysqli_query($db_handle, $sql1)){
-        //if($conn->query($sql1) == TRUE) {
-            echo "
-<br>
-<p> Message envoyé ! </p>
-
-";
-    }
-
-
-    //affichage  message
-    ?>
-
 
 
 
