@@ -27,6 +27,15 @@ $conn = new mysqli('localhost', 'root', '',$database);
             text-align: center;
         }
 
+        .titre{
+            color: white;
+            background-color: gray;
+            height: 30px;
+            border-radius: 50px;
+            margin-top: 5px;
+
+        }
+
         .recu{
             color:white;
             background: gray;
@@ -43,8 +52,7 @@ $conn = new mysqli('localhost', 'root', '',$database);
         .send{
             color:white;
             background: blueviolet;
-            margin-bottom: 10px;
-            margin-right: 200px;
+           margin-right: 20px;
             width: 100px;
             float:right;
             clear: both;
@@ -52,14 +60,30 @@ $conn = new mysqli('localhost', 'root', '',$database);
         }
 
         .chat{
-            margin:auto;
+            margin:0 auto;
+            padding: 20px;
             background-color: black;
+            width:50%;
+            max-width: 600px;
+            border-radius: 10px;
+            position:relative;
+            top:50%;
         }
 
         form{
             margin-right: auto;
             margin-left: auto;
             clear: both;
+        }
+
+        .icon{
+            position: fixed;
+            border-radius: 50%;
+            background-color: blueviolet;
+            align-items: center;
+            color: white;
+            cursor:pointer;
+
         }
     </style>
 </head>
@@ -93,6 +117,10 @@ Values ('$me','$coach','$mess')";
 <h1> Messages </h1>
 
 <div class="chat">
+    <div class="titre"> <p>
+            <?php echo"$coach" ?></p></div>
+    <div class="message">
+
 <?php
 
 
@@ -117,12 +145,10 @@ while($data = mysqli_fetch_assoc($result3)){//messages reçu
 
 ?>
 
-    <table>
+<div class="bas">
 
         <form action = "" method = "post">
-
-            <input type = "text" name = "message" required>
-            <INPUT TYPE = "Submit" Name = "Submit1" VALUE = "Envoyer"> <br>
+<div class="form1">
             <label for="Coach">Choose a Coach:</label>
             <select id="Coach" name="Coach">
 
@@ -135,14 +161,23 @@ while($data = mysqli_fetch_assoc($result3)){//messages reçu
 
                     echo'
             <option value="'.$data["Nom"].'">'. $data["Nom"].'</option>
-            ';
-                }
-
+            ';  }
 
                 ?>
-        </form>
-    </table>
+</div>
 
+            <div class="form2">
+            <input type = "text" name = "message" required>
+            <INPUT TYPE = "Submit" Name = "Submit1" VALUE = "Envoyer">
+
+
+            </div>
+
+
+        </form>
+
+</div>
+    </div>
 </div>
 
 </body>
