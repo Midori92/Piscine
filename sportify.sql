@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 28 mai 2024 à 19:56
+-- Généré le : mer. 29 mai 2024 à 22:32
 -- Version du serveur : 8.3.0
 -- Version de PHP : 8.2.18
 
@@ -40,6 +40,14 @@ CREATE TABLE IF NOT EXISTS `client` (
   `Mot_de_passe` varchar(255) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   PRIMARY KEY (`Carte`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `client`
+--
+
+INSERT INTO `client` (`Nom`, `Prenom`, `Adresse`, `Ville`, `CodePostal`, `Pays`, `Numero`, `Carte`, `Mot_de_passe`) VALUES
+('Mathurin', 'Elodie', '15 rue du 18 juin 1940  Asnières-sur-seine Matrys Frane', '', 0, '', 615446227, 132645, 'Matrys'),
+('He', 'Max', '13 avenue   Levallois  Mx2  Frane', '', 0, '', 752952, 3955, 'Mx2');
 
 -- --------------------------------------------------------
 
@@ -116,6 +124,72 @@ CREATE TABLE IF NOT EXISTS `lieu_sport` (
   `Dispo_samedi` varchar(255) NOT NULL,
   `Dispo_dimanche` varchar(255) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `message`
+--
+
+DROP TABLE IF EXISTS `message`;
+CREATE TABLE IF NOT EXISTS `message` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `source` varchar(255) NOT NULL,
+  `dest` varchar(255) NOT NULL,
+  `message` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=77 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `message`
+--
+
+INSERT INTO `message` (`id`, `source`, `dest`, `message`) VALUES
+(51, '132645', '', ''),
+(50, '132645', '', ''),
+(49, '132645', '', ''),
+(48, '132645', '', ''),
+(47, '132645', '', ''),
+(46, '132645', 'Jean Dupont', 'Coucou'),
+(45, '132645', 'Jean Dupont', 'Coucou'),
+(44, '132645', '', ''),
+(43, '132645', '', ''),
+(42, '132645', '', ''),
+(41, '132645', 'Guy DUMAIS', 'Je souhaiterais avoir des information au sujet de vos ours'),
+(40, '132645', 'Jean Dupont', 'Bonsoir !'),
+(39, '132645', '', ''),
+(38, '132645', '', ''),
+(37, '132645', '', ''),
+(36, '132645', '', ''),
+(35, '132645', '', ''),
+(34, '132645', '', ''),
+(33, '132645', '', ''),
+(32, '132645', '', ''),
+(52, '132645', '', ''),
+(53, '132645', 'Guy DUMAIS', 'Coucou'),
+(54, '132645', 'Guy DUMAIS', 'Coucou'),
+(55, '132645', 'Guy DUMAIS', 'Coucou'),
+(56, '132645', 'Guy DUMAIS', 'Coucou'),
+(57, '132645', 'Guy DUMAIS', 'Coucou'),
+(58, '132645', '', ''),
+(59, '132645', 'Guy DUMAIS', 'Helooo'),
+(60, '132645', '', ''),
+(61, '132645', 'Marc Leclerc', 'yooo'),
+(62, '132645', '', ''),
+(63, '132645', 'Marc Leclerc', 'lo'),
+(64, '132645', '', ''),
+(65, '132645', '', ''),
+(66, '132645', 'Guy DUMAIS', 'lol'),
+(67, '132645', '', ''),
+(68, '132645', '', ''),
+(69, '132645', '', ''),
+(70, '132645', 'Guy DUMAIS', 'heloo'),
+(71, '132645', '', ''),
+(72, '132645', 'Elisa Garnier', 'ok'),
+(73, '132645', '', ''),
+(74, '132645', 'Nicolas Dubreuil', 'ok'),
+(75, '132645', 'Nicolas Dubreuil', 'ok'),
+(76, '132645', 'Nicolas Dubreuil', 'ok');
 
 -- --------------------------------------------------------
 
