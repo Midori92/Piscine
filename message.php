@@ -10,11 +10,22 @@ $db_found = mysqli_select_db($db_handle, $database);
 
 $who = $_SESSION['me']; //1/2 ou 3
 $me = $_SESSION['login']; //mail ou carte
+
+//nom du coach a partir de son mail
+$namecoach = "SELECT * From coach WHERE Mail = '$me'";
+$nom_coach = mysqli_query($db_handle, $namecoach);
+$me_coach = mysqli_fetch_assoc($nom_coach);
+
+//nom du client a partir de sa carte
+$nameclient = "SELECT * From Client WHERE Carte = '$me'";
+$nom_client = mysqli_query($db_handle, $nameclient);
+$me_client = mysqli_fetch_assoc($nom_client);
+
 $sql = "SELECT * FROM coach";
 $result = mysqli_query($db_handle, $sql);
 
 $conn = new mysqli('localhost', 'root', '',$database);
-
+//me = email
 
 ?>
 
@@ -95,23 +106,27 @@ $conn = new mysqli('localhost', 'root', '',$database);
 
 
     <?php
-
+//raisonnement nom coach -> numero client
     if ($who == 2){ //coach
 
         $client = isset($_POST["client"]) ? mysqli_real_escape_string($db_handle, $_POST["client"]) : "";
         $mess = isset($_POST["message"]) ? mysqli_real_escape_string($db_handle, $_POST["message"]) : "";
 
+        $sql_cl = "SELECT * From client WHERE Nom = '$client'";
+        $result_cl = mysqli_query($db_handle, $sql_cl);
+        $info_client = mysqli_fetch_assoc($result_cl);
+
         $sql1 = "INSERT INTO message (source, dest, message) 
-Values ('$me','$client','$mess')";
+Values ('$me_coach[Nom]','$info_client[Carte]','$mess')";
 
 
 
         if (mysqli_query($db_handle, $sql1)){
-
+            //if($conn->query($sql1) == TRUE) {
             echo "
 <br>
 <p> Message envoyé ! </p>
-
+ <p> ".$me." ". $me_coach["Nom"]." ".$client." </p>
 ";
         }
     }
@@ -124,7 +139,7 @@ Values ('$me','$client','$mess')";
         $mess = isset($_POST["message"]) ? mysqli_real_escape_string($db_handle, $_POST["message"]) : "";
 
         $sql1 = "INSERT INTO message (source, dest, message) 
-Values ('$me','$coach','$mess')";
+Values ('$me_client[Carte]','$coach','$mess')";
 
 
 
@@ -133,7 +148,7 @@ Values ('$me','$coach','$mess')";
             echo "
 <br>
 <p> Message envoyé ! </p>
-
+ <p> ".$_SESSION['login']." ". $me_client["Nom"]." ".$coach."</p>
 ";
     }
  }
@@ -166,6 +181,7 @@ if($who == 3) //client
 
 {
 
+//$caoch == nom et prenom du coach choisi
 
 $sql2 = "SELECT * FROM message WHERE source = '$me' AND dest = '$coach'"; //message envoyé
 $sql3 = "SELECT * FROM message WHERE dest = '$me' AND source = '$coach'"; //messages reçu
@@ -215,24 +231,26 @@ if($who == 2) //coach
 
 {
 
-$sql = "SELECT * FROM client";
-$resultc = mysqli_query($db_handle, $sql);
+
+$sql_coach2 = "SELECT * FROM message WHERE source = '$me_coach[Nom]' AND dest = '$info_client[Carte]'"; //message envoyé
+$sql_coach3 = "SELECT * FROM message WHERE dest = '$me_coach[Nom]' AND source = '$info_client[Carte]'"; //messages reçu
+$result_coach2 = mysqli_query($db_handle, $sql_coach2);
+$result_coach3 = mysqli_query($db_handle, $sql_coach3);
+
+$sql_coach = "SELECT * FROM client";
+$result_coach = mysqli_query($db_handle, $sql_coach);
 
 
-$sql4 = "SELECT * FROM message WHERE source = '$me' AND dest = '$client'"; //message envoyé
-$sql5 = "SELECT * FROM message WHERE dest = '$me' AND source = '$client'"; //messages reçu
-$result4 = mysqli_query($db_handle, $sql4);
-$result5 = mysqli_query($db_handle, $sql5);
-
-
-while($data = mysqli_fetch_assoc($result4)){//messages envoyé
+while($data_envoi = mysqli_fetch_assoc($result_coach2)){//messages envoyé
     echo"
-    <p class = 'send'>".$data['message']."</p>
-    ";}
+    <p class = 'send'>".$data_envoi['message']."</p>
+    ";
 
-while($data = mysqli_fetch_assoc($result5)){//messages reçu
+}
+
+while($data_recu = mysqli_fetch_assoc($result_coach3)){//messages reçu
     echo"
-    <p class='recu'>".$data['message']."</p>
+    <p class='recu'>".$data_recu['message']."</p>
     ";
 
 }
@@ -243,23 +261,25 @@ while($data = mysqli_fetch_assoc($result5)){//messages reçu
 
                 <form action = "" method = "post">
                     <div class="form1">
-                        <label for="client">Choose a Client:</label>
+                        <label for="client">Choose a client:</label>
                         <select id="client" name="client">
 
 
 
                             <?php
 
-                            ///affichage nom coach
-                            while ($data = mysqli_fetch_assoc($resultc)){
+                            ///affichage nom client
+                            while ($data = mysqli_fetch_assoc($result_coach)){
 
                                 echo'
-            <option value="'.$data["Nom"].'">'. $data["Nom"].' '. $data["Prenom"].'</option>
+            <option value="'.$data["Nom"].'">'. $data["Nom"].' '.$data["Prenom"].'</option>
             ';  }
 
                             ?>
                     </div>
-                    <?php } ?>
+                    <?php }
+
+?>
 
 
             <div class="form2">
