@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sportify - Salle de sport Omnes</title>
+    <link rel="stylesheet" href="sallesport.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="tout-parcourir.html">Tout Parcourir</a></li>
+                <li><a href="recherche.html">Recherche</a></li>
+                <li><a href="rendez-vous.html">Rendez-vous</a></li>
+                <li><a href="votre-compte.html">Votre Compte</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="salle-de-sport">
+            <h1>Salle de sport Omnes</h1>
+            <p><strong>Numéro de la salle :</strong> 101</p>
+            <p><strong>Téléphone :</strong> 01 23 45 67 89</p>
+            <p><strong>Courriel :</strong> <a href="mailto:salledesport@omneseducation.com">salledesport@omneseducation.com</a></p>
+            <button id="services-btn">Nos services</button>
+
+            <div id="services" class="hidden">
+                <h2>Services fournis par la salle de sport</h2>
+                <ul>
+                    <li><a href="personnels.html">Personnels de la salle de sport</a></li>
+                    <li><a href="horaire.html">Horaire de la gym</a></li>
+                    <li><a href="regles-utilisation.html">Règles sur l’utilisation des machines</a></li>
+                    <li><a href="nouveaux-clients.html">Nouveaux clients</a></li>
+                    <li><a href="alimentation-nutrition.html">Alimentation et nutrition</a></li>
+                </ul>
+            </div>
+
+            <div id="regles-utilisation">
+                <h2>Règles sur l’utilisation des machines</h2>
+                <ul>
+                    <li>Poids</li>
+                    <li>Haltères</li>
+                    <li>Barbellons</li>
+                    <li>Appareils cardio</li>
+                </ul>
+            </div>
+
+            <div id="calendrier">
+                <h2>Calendrier des créneaux disponibles</h2>
+                <table>
+                    <tr>
+                        <th>Jour</th>
+                        <th>8h-10h</th>
+                        <th>10h-12h</th>
+                        <th>12h-14h</th>
+                        <th>14h-16h</th>
+                        <th>16h-18h</th>
+                        <th>18h-20h</th>
+                    </tr>
+                    <tr>
+                        <td>Lundi</td>
+                        <td class="available">Disponible</td>
+                        <td class="not-available">Indisponible</td>
+                        <td class="available">Disponible</td>
+                        <td class="available">Disponible</td>
+                        <td class="not-available">Indisponible</td>
+                        <td class="available">Disponible</td>
+                    </tr>
+                    <!-- Ajouter plus de lignes pour les autres jours -->
+                </table>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>Contactez-nous : <a href="mailto:sportify@omneseducation.com">sportify@omneseducation.com</a> | Téléphone : 01 23 45 67 89</p>
+    </footer>
+
+    <script>
+        document.getElementById('services-btn').addEventListener('click', function() {
+            document.getElementById('services').classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
