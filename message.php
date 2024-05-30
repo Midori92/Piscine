@@ -183,22 +183,16 @@ if($who == 3) //client
 
 //$caoch == nom et prenom du coach choisi
 
-$sql2 = "SELECT * FROM message WHERE source = '$me' AND dest = '$coach'"; //message envoyé
-$sql3 = "SELECT * FROM message WHERE dest = '$me' AND source = '$coach'"; //messages reçu
-$result2 = mysqli_query($db_handle, $sql2);
-$result3 = mysqli_query($db_handle, $sql3);
+$sql_mess1 = "SELECT * FROM message WHERE (source = '$me' AND dest = '$coach') OR (source = '$coach' AND dest = '$me') ORDER BY id ASC";
+$result_mess1 = mysqli_query($db_handle, $sql_mess1);
 
-while($data = mysqli_fetch_assoc($result2)){//messages envoyé
-    echo"
-    <p class = 'send'>".$data['message']."</p>
-    ";
+while ($data = mysqli_fetch_assoc($result_mess1)) {
 
-}
-
-while($data = mysqli_fetch_assoc($result3)){//messages reçu
-    echo"
-    <p class='recu'>".$data['message']."</p>
-    ";
+    if ($data['source'] == $me) {
+        echo "<p class='send'>".$data['message']."</p>";
+    } else {
+        echo "<p class='recu'>".$data['message']."</p>";
+    }
 
 }
 
@@ -231,29 +225,25 @@ if($who == 2) //coach
 
 {
 
-
-$sql_coach2 = "SELECT * FROM message WHERE source = '$me_coach[Nom]' AND dest = '$info_client[Carte]'"; //message envoyé
-$sql_coach3 = "SELECT * FROM message WHERE dest = '$me_coach[Nom]' AND source = '$info_client[Carte]'"; //messages reçu
-$result_coach2 = mysqli_query($db_handle, $sql_coach2);
-$result_coach3 = mysqli_query($db_handle, $sql_coach3);
-
 $sql_coach = "SELECT * FROM client";
 $result_coach = mysqli_query($db_handle, $sql_coach);
 
 
-while($data_envoi = mysqli_fetch_assoc($result_coach2)){//messages envoyé
-    echo"
-    <p class = 'send'>".$data_envoi['message']."</p>
-    ";
+$sql_mess2 = "SELECT * FROM message WHERE (source = '$me_coach[Nom]' AND dest = '$info_client[Carte]') OR (source = '$info_client[Carte]' AND dest = '$me_coach[Nom]') ORDER BY id ASC";
+$result_mess2 = mysqli_query($db_handle, $sql_mess2);
+
+while ($data = mysqli_fetch_assoc($result_mess2)) {
+
+    if ($data['source'] == $me_coach['Nom']) {
+        echo "<p class='send'>".$data['message']."</p>";
+    } else {
+        echo "<p class='recu'>".$data['message']."</p>";
+    }
 
 }
+//ORDER BY ID ASC
 
-while($data_recu = mysqli_fetch_assoc($result_coach3)){//messages reçu
-    echo"
-    <p class='recu'>".$data_recu['message']."</p>
-    ";
 
-}
 
 ?>
 
