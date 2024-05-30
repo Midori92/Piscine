@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disponibilités</title>
+    <style>
+        .calendar-table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        .calendar-table th, .calendar-table td {
+            border: 1px solid ;
+            padding: 8px;
+            text-align: center;
+        }
+        .calendar-table th {
+            background-color: lightgrey;
+        }
+        .available {
+            background-color: white;
+            cursor: pointer;
+        }
+        .unavailable {
+            background-color: lightblue;
+        }
+    </style>
+    
+    <script>
+        function bookSlot(element) {
+            if (confirm('Voulez-vous réserver ce créneau ?')) {
+                element.classList.remove('available');
+                element.classList.add('unavailable');
+                element.innerText = 'Réservé';
+                alert('Créneau réservé. Vous recevrez une confirmation par SMS ou courriel.');
+                
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="rightcolumn">
+        <h2>Prendre un RDV avec Jean Dupont</h2>
+        <table class="calendar-table">
+            <thead>
+                <tr>
+                    <th>Heure</th>
+                    <th>Lundi</th>
+                    <th>Mardi</th>
+                    <th>Mercredi</th>
+                    <th>Jeudi</th>
+                    <th>Vendredi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>9:00 - 10:00</td>
+                    <td class="available" onclick="bookSlot(this)">Disponible</td>
+                    <td class="available" onclick="bookSlot(this)">Disponible</td>
+                    <td class="available" onclick="bookSlot(this)">Disponible</td>
+                    <td class="available" onclick="bookSlot(this)">Disponible</td>
+                    <td class="available" onclick="bookSlot(this)">Disponible</td>
+                </tr>
+                <tr>
+                    <td>10:00 - 11:00</td>
+                    <td class="available" onclick="bookSlot(this)">Disponible</td>
+                    <td class="available" onclick="bookSlot(this)">Disponible</td>
+                    <td class="available" onclick="bookSlot(this)">Disponible</td>
+                    <td class="unavailable"></td>
+                    <td class="unavailable"></td>
+                </tr>
+                <tr>
+                    <td>11:00 - 12:00</td>
+                    <td class="available" onclick="bookSlot(this)">Disponible</td>
+                    <td class="unavailable"></td>
+                    <td class="unavailable"></td>
+                    <td class="available" onclick="bookSlot(this)">Disponible</td>
+                    <td class="available" onclick="bookSlot(this)">Disponible</td>
+                </tr>
+                <tr>
+                    <td>12:00 - 13:00</td>
+                    <td class="unavailable"></td>
+                    <td class="unavailable"></td>
+                    <td class="unavailable"></td>
+                    <td class="unavailable"></td>
+                    <td class="unavailable"></td>
+                </tr>
+                <tr>
+                    <td>13:00 - 14:00</td>
+                    <td class="available" onclick="bookSlot(this)">Disponible</td>
+                    <td class="available" onclick="bookSlot(this)">Disponible</td>
+                    <td class="available" onclick="bookSlot(this)">Disponible</td>
+                    <td class="available" onclick="bookSlot(this)">Disponible</td>
+                    <td class="available" onclick="bookSlot(this)">Disponible</td>
+                </tr>
+                <tr>
+                    <td>14:00 - 15:00</td>
+                    <td class="available" onclick="bookSlot(this)">Disponible</td>
+                    <td class="available" onclick="bookSlot(this)">Disponible</td>
+                    <td class="available" onclick="bookSlot(this)">Disponible</td>
+                    <td class="unavailable"></td>
+                    <td class="unavailable"></td>
+                </tr>
+                <tr>
+                    <td>16:00 - 17:00</td>
+                    <td class="available" onclick="bookSlot(this)">Disponible</td>
+                    <td class="unavailable"></td>
+                    <td class="unavailable"></td>
+                    <td class="available" onclick="bookSlot(this)">Disponible</td>
+                    <td class="available" onclick="bookSlot(this)">Disponible</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,23 +1,192 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sportify - Salle de sport Omnes</title>
-    <link rel="stylesheet" href="sallesport.css">
-</head>
-<body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="index.html">Accueil</a></li>
-                <li><a href="tout-parcourir.html">Tout Parcourir</a></li>
-                <li><a href="recherche.html">Recherche</a></li>
-                <li><a href="rendez-vous.html">Rendez-vous</a></li>
-                <li><a href="votre-compte.html">Votre Compte</a></li>
-            </ul>
-        </nav>
-    </header>
+<!DOCTYPE html>  
+<head>  
+    <title>Sportify</title>  
+    <meta charset="utf-8"/>  
+    <link href="prime.css" rel="stylesheet" type="text/css" />  
+    <link rel="icon"type="image/x-icon" href="favicon.ico">
+</head>  
+<body> 
+<style> 
+h7 , h8{
+    color: steelblue ;
+    font-weight: bold;
+}
+
+
+main {
+    padding: 20px;
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    height: 700px;
+    width: 700px;
+}
+
+#salle-de-sport {padding: 10px;
+    margin: 5px auto;
+    max-width: 800px;
+    background-color: aliceblue;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    height: 630px;
+    width: 600px;
+    float: left;
+}
+
+h1, h2 {
+    color: #0056b3;
+}
+
+.hidden {
+    display: none;
+}
+
+#services-btn {
+    display: inline-block;
+    margin: 20px 0;
+    padding: 10px 20px;
+    color: white;
+    background-color: steelblue;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#services-btn:hover {
+    background-color: #0056b3;
+}
+
+#services {
+    margin: 20px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fafafa;
+}
+
+#services ul {
+    list-style: none;
+    padding: 0;
+}
+
+#services ul li {
+    margin: 5px 0;
+}
+
+#services ul li a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+#services ul li a:hover {
+    text-decoration: underline;
+}
+
+#regle-btn {
+    display: inline-block;
+    margin: 20px 0;
+    padding: 10px 20px;
+    color: white;
+    background-color: steelblue;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#regle-btn:hover {
+    background-color: #0056b3;
+}
+#regle {
+    margin: 20px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fafafa;
+}
+
+#regle ul {
+    list-style: none;
+    padding: 0;
+}
+
+#regle ul li {
+    margin: 5px 0;
+}
+
+#regle ul li a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+#regle ul li a:hover {
+    text-decoration: underline;
+}
+
+#regles-utilisation ul {
+    list-style: none;
+    padding: 0;
+}
+
+#regles-utilisation ul li {
+    margin: 5px 0;
+}
+
+
+        .calendar-table {
+            border-collapse: collapse;
+            float : left;
+        }
+        .calendar-table th, .calendar-table td {
+            border: 1px solid ;
+            padding: 8px;
+            text-align: center;
+        }
+        .calendar-table th {
+            background-color: lightgrey;
+        }
+        .available {
+            background-color: white;
+            cursor: pointer;
+        }
+        .unavailable {
+            background-color: lightblue;
+        }
+
+
+
+
+</style> 
+    
+      <div id="wrapper">
+      <h1 class=titre> <img width="750" heigh="750" src="titre.png"></h1> 
+      
+      <div id="leftcolumn"> 
+
+            <div id="nav">  
+            <a href="index.html">
+                   <img src="accueilbouton.png" width="115" heigh="115">
+            </a>  
+          
+            <a href="toutparcourir.html">
+               <img  src="parcourirbouton.png" width="115" heigh="115">
+            </a>  
+            
+           <a href="recherche.html">
+                <img  src="recherchebouton.png" width="115" heigh="150">
+           </a>  
+          
+           <a href="rendezvous.html">
+                <img  src="rendezvousbouton.png" width="115" heigh="150">
+           </a>  
+           <a href="votrecompte.html">
+                <img  src="votrecompte.png" width="115" heigh="150">
+           </a> 
+          </div> 
+     </div>
     <main>
         <section id="salle-de-sport">
             <h1>Salle de sport Omnes</h1>
@@ -25,61 +194,136 @@
             <p><strong>Téléphone :</strong> 01 23 45 67 89</p>
             <p><strong>Courriel :</strong> <a href="mailto:salledesport@omneseducation.com">salledesport@omneseducation.com</a></p>
             <button id="services-btn">Nos services</button>
+            <button id="regle-btn">Nos Règles sur les machines</button>
 
             <div id="services" class="hidden">
-                <h2>Services fournis par la salle de sport</h2>
                 <ul>
-                    <li><a href="personnels.html">Personnels de la salle de sport</a></li>
-                    <li><a href="horaire.html">Horaire de la gym</a></li>
-                    <li><a href="regles-utilisation.html">Règles sur l’utilisation des machines</a></li>
-                    <li><a href="nouveaux-clients.html">Nouveaux clients</a></li>
-                    <li><a href="alimentation-nutrition.html">Alimentation et nutrition</a></li>
+                    <li><h2>Personnels de la salle de sport</h2> 
+                        <p>Notre salle de sport est fière de compter sur une équipe de professionnels qualifiés et passionnés. Nos entraîneurs personnels sont certifiés et expérimentés, prêts à vous aider à atteindre vos objectifs de fitness. Ils proposent des séances personnalisées adaptées à vos besoins et à votre niveau de forme physique. Nos instructeurs de cours collectifs apportent énergie et motivation à chaque séance, qu'il s'agisse de Musculation avec Coach Bob et Francois, de Fitness avec Coach Marie et Elise, de Cardio-Trainning avec Coach Elodie et Roamin ou encore de Biking avec Coach Valence et Adrien. Le personnel d'accueil, toujours souriant et disponible, est là pour répondre à toutes vos questions et vous offrir un service de qualité dès votre arrivée.</p></li>
+                    <li><h2>Horaire de la gym</h2>
+                        <p> Nous comprenons que chacun a des emplois du temps différents, c'est pourquoi notre salle de sport est ouverte tous les jours de la semaine avec des horaires allant de 7h à 22h. Nous ouvrons tôt le matin et fermons tard le soir pour que vous puissiez trouver le moment idéal pour votre entraînement. Consultez notre site web ou notre application mobile pour connaître les horaires détaillés des cours collectifs et réserver votre place. Pendant les jours fériés et les vacances, des horaires spéciaux peuvent s'appliquer, alors assurez-vous de vérifier les mises à jour régulières</li>
+                    <li> <h2>Règles sur l’utilisation des machines</h2>
+                        <p>Pour garantir la sécurité et le confort de tous nos membres, nous avons mis en place des règles d'utilisation des machines. Il est essentiel de toujours utiliser une serviette pour essuyer les machines après utilisation et de replacer les poids et les équipements à leur place. Respectez les temps d'utilisation afin de permettre à tous les membres de profiter des installations. En cas de besoin, n'hésitez pas à demander de l'aide à nos entraîneurs ou au personnel de la salle pour des instructions sur l'utilisation correcte des équipements. Le port d'une tenue de sport et chaussures de sport appropriées est obligatoire.</li>
+                    <li><h2>Nouveaux clients</h2>
+                        <p>Nous accueillons chaleureusement tous les nouveaux clients et leur offrons une séance d'orientation gratuite pour découvrir nos installations et services. À votre arrivée, un membre de notre équipe vous fera visiter la salle, vous présentera les différents équipements et vous expliquera nos offres et abonnements. Nous proposons également une évaluation de votre condition physique initiale et des conseils personnalisés pour établir un programme de fitness adapté à vos objectifs. Rejoignez notre communauté et bénéficiez d'un suivi constant pour vous aider à rester motivé et à progresser.</p></li>
+                    <li><h2>Alimentation et nutrition</h2>
+                        <p>La nutrition joue un rôle crucial dans l'atteinte de vos objectifs de fitness. C'est pourquoi nous offrons des consultations avec des nutritionnistes certifiés pour vous aider à adopter une alimentation saine et équilibrée. Que vous souhaitiez perdre du poids, gagner en masse musculaire ou simplement améliorer votre bien-être général, nos experts en nutrition peuvent vous fournir des plans alimentaires personnalisés et des conseils pratiques. Participez à nos ateliers de nutrition pour en apprendre davantage sur les meilleures pratiques alimentaires et découvrez des recettes saines et délicieuses pour optimiser vos performances et votre récupération.</p></li>
                 </ul>
             </div>
 
-            <div id="regles-utilisation">
-                <h2>Règles sur l’utilisation des machines</h2>
-                <ul>
-                    <li>Poids</li>
-                    <li>Haltères</li>
-                    <li>Barbellons</li>
-                    <li>Appareils cardio</li>
-                </ul>
-            </div>
+           <div id="regle" class="hidden">
+            <ul>
+                <li><h7>Pour garantir une utilisation sécurisée et respectueuse des équipements dans notre salle de sport, veuillez suivre les directives spécifiques pour chaque type de dispositif sportif :</h7>
+                <h2>Poids et Haltères</h2>
+                <p><ul><li><h8>Utilisation Correcte :</h8> Avant de commencer, assurez-vous de savoir comment utiliser correctement les poids et les haltères pour éviter les blessures. Si nécessaire, demandez des instructions à un entraîneur</li>
+                <li><h8>Sécurité :</h8> Utilisez toujours des colliers de sécurité pour maintenir les poids en place sur les barres. Échauffez-vous avant de soulever des poids lourds.</li>
+                <li><h8>Nettoyage :</h8> Utilisez une serviette pour essuyer les poids et les haltères après utilisation. Désinfectez-les avec les produits fournis.</li>
+                <li><h8>Rangement :</h8> Remettez les poids et les haltères à leur place respective après utilisation. Ne laissez pas les poids traîner sur le sol pour éviter les risques de trébuchement.</li></ul>
 
+                <li><h2>Appareils de Musculation</h2>
+                <p><ul><li><h8>Utilisation Correcte :</h8> Lisez les instructions sur chaque appareil ou demandez à un entraîneur comment les utiliser correctement.</li>
+                <li><h8>Sécurité :</h8> Ajustez les sièges, les coussins et les poignées à votre taille avant de commencer l'exercice pour éviter les blessures.</li>
+                <li><h8>Nettoyage :</h8> Utilisez une serviette pour essuyer les sièges et les poignées après chaque utilisation. Désinfectez les surfaces avec les produits fournis</li>
+                <li><h8>Rangement :</h8> Si l'appareil a des pièces mobiles ou des accessoires, assurez-vous qu'ils sont rangés correctement après utilisation</li></ul>
+
+            </ul>
+
+             
+</div>
             <div id="calendrier">
-                <h2>Calendrier des créneaux disponibles</h2>
-                <table>
-                    <tr>
-                        <th>Jour</th>
-                        <th>8h-10h</th>
-                        <th>10h-12h</th>
-                        <th>12h-14h</th>
-                        <th>14h-16h</th>
-                        <th>16h-18h</th>
-                        <th>18h-20h</th>
-                    </tr>
-                    <tr>
-                        <td>Lundi</td>
-                        <td class="available">Disponible</td>
-                        <td class="not-available">Indisponible</td>
-                        <td class="available">Disponible</td>
-                        <td class="available">Disponible</td>
-                        <td class="not-available">Indisponible</td>
-                        <td class="available">Disponible</td>
-                    </tr>
-                    <!-- Ajouter plus de lignes pour les autres jours -->
-                </table>
-            </div>
+        <h1>Calendrier de la salle OMNES</h1>
+        <table class="calendar-table">
+            <thead>
+                <tr>
+                    <th>Heure</th>
+                    <th>Lundi</th>
+                    <th>Mardi</th>
+                    <th>Mercredi</th>
+                    <th>Jeudi</th>
+                    <th>Vendredi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>9:00 - 10:00</td>
+                    <td class="available" onclick="bookSlot(this)">Disponible</td>
+                    <td class="available" onclick="bookSlot(this)">Disponible</td>
+                    <td class="available" onclick="bookSlot(this)">Disponible</td>
+                    <td class="available" onclick="bookSlot(this)">Disponible</td>
+                    <td class="available" onclick="bookSlot(this)">Disponible</td>
+                </tr>
+                <tr>
+                    <td>10:00 - 11:00</td>
+                    <td class="available" onclick="bookSlot(this)">Disponible</td>
+                    <td class="available" onclick="bookSlot(this)">Disponible</td>
+                    <td class="available" onclick="bookSlot(this)">Disponible</td>
+                    <td class="unavailable"></td>
+                    <td class="unavailable"></td>
+                </tr>
+                <tr>
+                    <td>11:00 - 12:00</td>
+                    <td class="available" onclick="bookSlot(this)">Disponible</td>
+                    <td class="unavailable"></td>
+                    <td class="unavailable"></td>
+                    <td class="available" onclick="bookSlot(this)">Disponible</td>
+                    <td class="available" onclick="bookSlot(this)">Disponible</td>
+                </tr>
+                <tr>
+                    <td>12:00 - 13:00</td>
+                    <td class="unavailable"></td>
+                    <td class="unavailable"></td>
+                    <td class="unavailable"></td>
+                    <td class="unavailable"></td>
+                    <td class="unavailable"></td>
+                </tr>
+                <tr>
+                    <td>13:00 - 14:00</td>
+                    <td class="available" onclick="bookSlot(this)">Disponible</td>
+                    <td class="available" onclick="bookSlot(this)">Disponible</td>
+                    <td class="available" onclick="bookSlot(this)">Disponible</td>
+                    <td class="available" onclick="bookSlot(this)">Disponible</td>
+                    <td class="available" onclick="bookSlot(this)">Disponible</td>
+                </tr>
+                <tr>
+                    <td>14:00 - 15:00</td>
+                    <td class="available" onclick="bookSlot(this)">Disponible</td>
+                    <td class="available" onclick="bookSlot(this)">Disponible</td>
+                    <td class="available" onclick="bookSlot(this)">Disponible</td>
+                    <td class="unavailable"></td>
+                    <td class="unavailable"></td>
+                </tr>
+                <tr>
+                    <td>16:00 - 17:00</td>
+                    <td class="available" onclick="bookSlot(this)">Disponible</td>
+                    <td class="unavailable"></td>
+                    <td class="unavailable"></td>
+                    <td class="available" onclick="bookSlot(this)">Disponible</td>
+                    <td class="available" onclick="bookSlot(this)">Disponible</td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+
+    </div>
+
         </section>
     </main>
-    <footer>
-        <p>Contactez-nous : <a href="mailto:sportify@omneseducation.com">sportify@omneseducation.com</a> | Téléphone : 01 23 45 67 89</p>
-    </footer>
+    <p class="contact"> Sportify <br>  
+         67 avenue Marceau<br>  
+         75015 Paris<br> 
+         (+33) 01 02 03 04 05 06  
+    <div id="footer">Copyright &copy; 2024 Sportify<br>  
+        <a href="mailto:sportify@gmail.com">sportify@gmail.com</a>  
+            </p>  
+    </div>
+</div>
 
     <script>
         document.getElementById('services-btn').addEventListener('click', function() {
             document.getElementById('services').classList.toggle('hidden');
+        });
+        document.getElementById('regle-btn').addEventListener('click', function() {
+            document.getElementById('regle').classList.toggle('hidden');
         });
     </script>
 </body>

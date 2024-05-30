@@ -2,61 +2,61 @@
 <head>  
     <title>Sportify</title>  
     <meta charset="utf-8"/>  
-    <link href="prime.css" rel="stylesheet" type="text/css" /> 
+    <link href="prime.css" rel="stylesheet" type="text/css" />  
     <link rel="icon"type="image/x-icon" href="favicon.ico">
 
 </head>  
-<body>
-<style>
-    .availability-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-}
+<body> 
+    <style>
+        .availability-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+    }
 
-.availability-table th,
-.availability-table td {
-    border: 1px solid black;
-    padding: 10px;
-    text-align: center;
-}
+    .availability-table th,
+    .availability-table td {
+        border: 1px solid black;
+        padding: 10px;
+        text-align: center;
+    }
 
-.available {
-    background-color: grey; 
-}
+    .available {
+        background-color: grey; 
+    }
 
-.button-group {
-    display: flex;
-    justify-content: center;
-    gap: 50px;
-    margin-top: 10px;
-    flex-wrap: wrap;
-    
-}
+    .button-group {
+        display: flex;
+        justify-content: center;
+        gap: 50px;
+        margin-top: 10px;
+        flex-wrap: wrap;
+        
+    }
 
-.btn-rdv,
-.btn-comm,
-.btn-cv {
-    color: black;
-    border: 2px solid black;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 1em;
-    cursor: pointer;
-}
+    .btn-rdv,
+    .btn-comm,
+    .btn-cv {
+        color: black;
+        border: 2px solid black;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 1em;
+        cursor: pointer;
+    }
 
-.btn-rdv {
-    background-color: lightpink;
-}
+    .btn-rdv {
+        background-color: lightpink;
+    }
 
-.btn-comm {
-    background-color: skyblue;
-}
+    .btn-comm {
+        background-color: skyblue;
+    }
 
-.btn-cv {
-    background-color: lightgreen;
-}
-</style>  
+    .btn-cv {
+        background-color: lightgreen;
+    }
+    </style> 
     
       <div id="wrapper">
       <h1 class=titre> <img width="750" heigh="750" src="titre.png"></h1> 
@@ -86,11 +86,11 @@
      </div>
 
  <div id="rightcolumn">
-            <h2>Coach de Tennis</h2>
+            <h2>Coach de Football</h2>
             <div class="coach-details">
-                <img src="jeandupont.jpeg" alt="Coach Tennis" class="coach-photo" width="150" heigh="150">
-                <p><strong>Nom:</strong> Jean Dupont</p>
-                <p><strong>Bureau:</strong> 123 rue de la Raquette, 75001 Paris</p>
+                <img src="paulmartin.jpeg" alt="Coach de Football" class="coach-photo" width="150" heigh="150">
+                <p><strong>Nom:</strong> Paul Martin</p>
+                <p><strong>Bureau:</strong> 88 Boulevard du But, 75015 Paris</p>
                 <p><strong>Disponibilité:</strong></p>
                 
 
@@ -108,41 +108,29 @@
                     <tbody>
                         <tr>
                             <td>Matin</td>
+                            <td></td>
+                            <td></td>
                             <td class="available"></td>
-                            <td class="available"></td>
-                            <td class="available"></td>
-                            <td class="available"></td>
-                            <td class="available"></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <td>Après-midi</td>
-                            <td></td>
-                            <td></td>
                             <td class="available"></td>
-                            <td></td>
-                            <td></td>
+                            <td class="available"></td>
+                            <td class="available"></td>
+                            <td class="available"></td>
+                            <td class="available"></td>
                         </tr>
                     </tbody>
                 </table>
                 <br>
                 <div class="button-group">
-                    <button class="btn-rdv"  id="book-appointment" onclick="window.location.href='disponibilites.html'">Prendre Rendez-vous</button>
-                    <button class="btn-comm" onclick="communicateWithCoach()">Communiquer avec le coach</button>
-                    <script>
-                function communicateWithCoach() {
-                    const choice = confirm("Souhaitez-vous appeler le coach ou envoyer un email? Cliquez sur 'OK' pour appeler ou 'Annuler' pour envoyer un email.");
-                    if (choice) {
-                        alert("Appeler le coach au numéro: (+33) 01 02 03 04 05 06");
-                    } else {
-                        window.location.href = "mailto:jean.dupont@sportify.com";
-                    }
-                }
-                    </script>
-
+                    <button class="btn-rdv" href="disponibilites.html" id="book-appointment">Prendre Rendez-vous</button>
+                    <button class="btn-comm" onclick="alert('Communiquer avec le coach')">Communiquer avec le coach</button>
                     <button class="btn-cv" onclick="alert('Voir le CV')">Voir le CV</button>              
+                </div>     
 
-</div>
-          <br>  
             <p class="contact"> Sportify <br>  
          67 avenue Marceau<br>  
          75015 Paris<br> <br>  
@@ -150,6 +138,7 @@
     </p>  
     <div id="footer">Copyright &copy; 2024 Sportify<br>  
         <a href="mailto:sportify@gmail.com">sportify@gmail.com</a>  
+
     </div>  
 </div>
 </body>  

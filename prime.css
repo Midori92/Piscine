@@ -5,56 +5,42 @@ background-image:"primevertical.png"  ;
 }
 
 
-h2 { background-color: white;  
+h2 {  
 color: darkslateblue;  
 }  
-h3{ 
-    color: green;
-    padding: 5px;
 
+h3{ 
+    color: royalblue;
+    padding: 5px;
     border-radius: 5px; 
 }  
-dd { font-style:italic;  
-font-size: .90em;  
-line-height: 200%;  
-}  
-.logo { background-color: #ffffcc;  
-color: #48751A;  
-}  
-.contact { font-family: "Times New Roman", serif;  
-font-size: .90em;  
-font-weight: bold;  
-}  
-#nav {   
-font-size: 0.7em;  
-}  
-#footer { font-size: .60em;  
-font-style: italic;  
-} 
-img {
-        border: none;
-}
-
-.property {
-    padding-right: 30px;
-    padding-top: 5px;
-    float: left;
+main {
+    padding: 10px;
+    background-image: url("fond.png");
+    background-size: cover; 
+    background-position: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    height: 700px;
+    width: 700px;
 }
 
 #wrapper{
     margin : 0 auto;
     width : 680px;
     min-width: 680px ;
-    background-color: write;
     color: #003300;
     padding-left: 10px;
-
 } 
+
 #leftcolumn{
     background-color: white;
     float :left;
+    margin-left: -300px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    height: 250px;
     width: 150px;
-    margin-left: -350px;
 
 }
 #leftcolumn a{
@@ -65,68 +51,61 @@ img {
     margin-top: 15px;
 }
 
-#rightcolumn {
-    margin-left: -100px;
-    padding-right: 20px;
-    padding-bottom: 20px;
-}
-
 #event-week {
-    color: black; 
-}
-
-.availability-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-}
-
-.availability-table th,
-.availability-table td {
-    border: 1px solid black;
     padding: 10px;
-    text-align: center;
+    max-width: 800px;
+    margin: 10px auto;
+    background-color: aliceblue;
+    border-radius: 9px;
+    height: 370px;
+    width: 650px;
+    float: left;
 }
 
-.available {
-    background-color: grey; 
-}
 
-.button-group {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
+#map {
+    width: 100%;
+    height: 300px;
     margin-top: 20px;
+    border: 1px solid #ddd;
+}
+.rdv-item {
+    margin: 20px 0;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fafafa;
 }
 
-.btn-rdv {
-    background-color: lightpink;
-    color: black;
-    border: 2px solid black;
-    padding: 10px 20px;
+.rdv-item h2 {
+    margin-top: 0;
+}
+
+.rdv-item p,
+.rdv-item ul {
+    margin: 5px 0;
+}
+
+.rdv-item ul {
+    padding-left: 20px;
+}
+.cancel-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 15px;
+
+    background-color: #dc3545;
+    border: none;
     border-radius: 5px;
-    font-size: 1em;
+    cursor: pointer;
+    font-weight: bold;
 }
 
-
-
-.btn-comm {
-    background-color: skyblue;
-    color: black;
-    border: 2px solid black;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 1em;
-}
-
-
-
-.btn-cv {
-    background-color: lightgreen;
-    color: black;
-    border: 2px solid black;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 1em;
-}
+#footer { font-size: .60em;  
+font-style: italic;  
+} 
+.contact { font-family: "Times New Roman", serif;  
+font-size: .90em;  
+font-weight: bold;  
+}  
 
