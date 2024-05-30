@@ -1,4 +1,8 @@
 <?php
+
+session_start();
+
+
 $nom = isset($_POST["nom"])? $_POST["nom"] : "";
 $prenom = isset($_POST["prenom"])? $_POST["prenom"] : "";
 $adresse1 = isset($_POST["ad1"])? $_POST["ad1"] : "";
@@ -18,25 +22,32 @@ $db_handle = mysqli_connect('localhost', 'root', '' );
 $db_found = mysqli_select_db($db_handle, $database);
 $adresse = $adresse1." ". $adresse2. "  ". $ville."  ". $cdp."  ". $pays;
 
-if ($db_found) {
+if($_SESSION['me'] == 0) { //non connecté
+    if ($db_found) {
 
- //ajouter client dans database
+        //ajouter client dans database
 
 
-$conn = new mysqli('localhost', 'root', '',$database);
+        $conn = new mysqli('localhost', 'root', '', $database);
 
-$sql1 = "INSERT INTO client (Nom, Prenom, Adresse, Numero, Carte,Mot_de_passe) 
+        $sql1 = "INSERT INTO client (Nom, Prenom, Adresse, Numero, Carte,Mot_de_passe) 
 Values ('$nom','$prenom','$adresse','$tel','$carte','$mdp')";
 
 
-if($conn->query($sql1) == TRUE){
-echo"
+        if ($conn->query($sql1) == TRUE) {
+            echo "
 
-<p> Bienvnue ". $nom." ".$prenom." </p>
-<P> Voici vos informations: <br>". $adresse. "<br>
+<p> Bienvnue " . $nom . " " . $prenom . " </p>
+<P> Voici vos informations: <br>" . $adresse . "<br>
 
 ";
 
+        }
+    }
 }
+
+else{ //connecté
+    echo"Vous êtes déjà connecté !";
 }
+
 ?>

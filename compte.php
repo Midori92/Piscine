@@ -330,13 +330,17 @@ if( $data = mysqli_fetch_assoc($result)){
 }
 
 
+
+
 //Message
 if ($who == 0) {
 echo "Connexion refusée. Utilisateur inconnu.
 <br>
 Etes-vous sûr d'avoir déjà un compte ? <br> <br>
 <button TYPE='button'>
-<a href='creation.html'><INPUT TYPE = 'PDC' Name = 'Pas de compte' VALUE = 'Pas de compte ?'> </a>
+<a href='toutparcourir.html'><INPUT TYPE = 'button' Name = 'essaie' VALUE = 'Réessayer'> </a>
+</button> 
+<a href='creation.html'><INPUT TYPE = 'button' Name = 'Pas de compte' VALUE = 'Pas de compte ?'> </a>
 </button> 
 
 ";
@@ -350,7 +354,8 @@ if ($connexion) {
 	session_start();
 	$_SESSION['me'] = $who;
 	$_SESSION['login'] = $login; //numero client ou mail
-
+	echo"
+<button> <a href='deconnect.php'> Deconnexion  </a> </button>";
 
 echo "Connexion okay.";
 } else {
@@ -358,3 +363,5 @@ echo "Connexion refusée. Mot de passe invalide.";
 }
 }
 ?>
+
+

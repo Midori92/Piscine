@@ -27,6 +27,14 @@ $result = mysqli_query($db_handle, $sql);
 $conn = new mysqli('localhost', 'root', '',$database);
 //me = email
 
+if($who == NULL){
+    $who == 0;
+}
+
+if($me == NULL){
+    $me ==0;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -104,7 +112,7 @@ $conn = new mysqli('localhost', 'root', '',$database);
 </head>
 <body>
 
-<?php
+<?php // connecté
 
 if( $who != 0 ){ ?>
 
@@ -272,6 +280,8 @@ while ($data = mysqli_fetch_assoc($result_mess2)) {
                     </div>
                     <?php }
 
+
+
 ?>
 
 
@@ -290,14 +300,19 @@ while ($data = mysqli_fetch_assoc($result_mess2)) {
 </div>
 
 
+
+    <button> <a href='deconnect.php'> Deconnexion  </a> </button>
+
+
     <?php }
 
 
-else{
+else{ //non connecté
 
-    echo" <p> Vous devez créer un compte </p>
+    echo" <p> Vous devez créer un compte ou vous connecter</p>
     
-    <button> <a href='creation.html'> Créer un compte  </a> </button>";
+    <button> <a href='creation.html'> Créer un compte  </a> </button>
+    <button> <a href='compte.html'> Connexion  </a> </button>";
 } ?>
 
 
