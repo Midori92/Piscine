@@ -1,0 +1,152 @@
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+header {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 0;
+}
+
+header nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+header nav ul li {
+    margin: 0 15px;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+header nav ul li a:hover {
+    text-decoration: underline;
+}
+
+main {
+    padding: 20px;
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+h1, h2 {
+    color: #007BFF;
+}
+
+.hidden {
+    display: none;
+}
+
+#services-btn {
+    display: inline-block;
+    margin: 20px 0;
+    padding: 10px 20px;
+    color: white;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#services-btn:hover {
+    background-color: #0056b3;
+}
+
+#services {
+    margin: 20px 0;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fafafa;
+}
+
+#services ul {
+    list-style: none;
+    padding: 0;
+}
+
+#services ul li {
+    margin: 5px 0;
+}
+
+#services ul li a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+#services ul li a:hover {
+    text-decoration: underline;
+}
+
+#regles-utilisation ul {
+    list-style: none;
+    padding: 0;
+}
+
+#regles-utilisation ul li {
+    margin: 5px 0;
+}
+
+#calendrier {
+    margin-top: 20px;
+}
+
+#calendrier table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+#calendrier th, #calendrier td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+#calendrier th {
+    background-color: #007BFF;
+    color: white;
+}
+
+.available {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.not-available {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 20px;
+}
+
+footer a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
