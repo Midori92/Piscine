@@ -104,6 +104,9 @@ $conn = new mysqli('localhost', 'root', '',$database);
 </head>
 <body>
 
+<?php
+
+if( $who != 0 ){ ?>
 
     <?php
 //raisonnement nom coach -> numero client
@@ -285,6 +288,18 @@ while ($data = mysqli_fetch_assoc($result_mess2)) {
 </div>
     </div>
 </div>
+
+
+    <?php }
+
+
+else{
+
+    echo" <p> Vous devez créer un compte </p>
+    
+    <button> <a href='creation.html'> Créer un compte  </a> </button>";
+} ?>
+
 
 </body>
 </html>
