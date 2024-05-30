@@ -2,6 +2,7 @@
 $login = isset($_POST["id"])? $_POST["id"] : "";
 $pass = isset($_POST["mdp"])? $_POST["mdp"] : "";
 
+
 //test//
 $users = array("admin" => "123654789");
 
@@ -59,6 +60,7 @@ if($data1 = mysqli_fetch_assoc($result1) && $who == 0){ //dans la table client
 	}
 
 }
+
 
 
 //connexion fin 
@@ -206,6 +208,14 @@ if ($who == 2){ //COACH
 
 $sql = "SELECT * FROM coach WHERE Mail = '$login' AND Mot_de_passe ='$pass'";
 $result = mysqli_query($db_handle, $sql);
+
+//bouton message
+
+	echo"
+<button><a href='message.php'> MESSAGE</a> </button>
+";
+
+
 if( $data = mysqli_fetch_assoc($result)){
 
 echo" BIENVENUE ". $data["Nom"] ." ! <br>
@@ -252,11 +262,18 @@ if( $who == 3){ //Client
 
 $sql = "SELECT * FROM client WHERE Carte = '$login' AND Mot_de_passe ='$pass'";
 $result = mysqli_query($db_handle, $sql);
+
+//bouton message
+
+	echo"
+<button><a href='message.php'> MESSAGE</a> </button>
+";
+
 if( $data = mysqli_fetch_assoc($result)){
 	//if(($data['Carte'] == $id) && ($data["Mot de pasee"] == $pass)) ////A revoirr
 
 
-	echo" BIENVENUE ". $data["Nom"] ." ! <br>
+	echo" BIENVENUE ". $data["Nom"] ." ".$data["Prenom"]." ! <br>
 
 <br> 
 <h1> VOS INFOS </h1>
@@ -275,8 +292,6 @@ if( $data = mysqli_fetch_assoc($result)){
 <td>". $data["Carte"] ."</td>
  </tr>
  ";
-
-
 
 }
 
@@ -332,6 +347,11 @@ Etes-vous sûr d'avoir déjà un compte ? <br> <br>
 
 else {
 if ($connexion) {
+	session_start();
+	$_SESSION['me'] = $who;
+	$_SESSION['login'] = $login; //numero client ou mail
+
+
 echo "Connexion okay.";
 } else {
 echo "Connexion refusée. Mot de passe invalide.";

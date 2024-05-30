@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 $database = "sportify";
 
 //connectez-vous dans votre BDD
@@ -6,9 +8,11 @@ $database = "sportify";
 $db_handle = mysqli_connect('localhost', 'root', '' );
 $db_found = mysqli_select_db($db_handle, $database);
 
-$me = 132645; ///session
+$who = $_SESSION['me']; //1/2 ou 3
+$me = $_SESSION['login']; //mail ou carte
 $sql = "SELECT * FROM coach";
 $result = mysqli_query($db_handle, $sql);
+
 $conn = new mysqli('localhost', 'root', '',$database);
 
 
@@ -27,7 +31,7 @@ $conn = new mysqli('localhost', 'root', '',$database);
             text-align: center;
         }
 
-        .titre{
+        .titre {
             color: white;
             background-color: gray;
             height: 30px;
@@ -38,7 +42,7 @@ $conn = new mysqli('localhost', 'root', '',$database);
 
         .recu{
             color:white;
-            background: gray;
+            background: blue;
             margin-bottom: 10px;
             width: 100px;
             float: left;
@@ -89,13 +93,37 @@ $conn = new mysqli('localhost', 'root', '',$database);
 </head>
 <body>
 
+
     <?php
-    $coach = isset($_POST["Coach"])? mysqli_real_escape_string($db_handle, $_POST["Coach"]) : "";
-    $mess = isset($_POST["message"])? mysqli_real_escape_string($db_handle, $_POST["message"]) : "";
+
+    if ($who == 2){ //coach
+
+        $client = isset($_POST["client"]) ? mysqli_real_escape_string($db_handle, $_POST["client"]) : "";
+        $mess = isset($_POST["message"]) ? mysqli_real_escape_string($db_handle, $_POST["message"]) : "";
+
+        $sql1 = "INSERT INTO message (source, dest, message) 
+Values ('$me','$client','$mess')";
 
 
 
-    $sql1 = "INSERT INTO message (source, dest, message) 
+        if (mysqli_query($db_handle, $sql1)){
+
+            echo "
+<br>
+<p> Message envoyé ! </p>
+
+";
+        }
+    }
+
+
+
+    if ($who == 3){ //client
+
+        $coach = isset($_POST["Coach"]) ? mysqli_real_escape_string($db_handle, $_POST["Coach"]) : "";
+        $mess = isset($_POST["message"]) ? mysqli_real_escape_string($db_handle, $_POST["message"]) : "";
+
+        $sql1 = "INSERT INTO message (source, dest, message) 
 Values ('$me','$coach','$mess')";
 
 
@@ -108,7 +136,7 @@ Values ('$me','$coach','$mess')";
 
 ";
     }
-
+ }
 
     //affichage  message
     ?>
@@ -118,10 +146,25 @@ Values ('$me','$coach','$mess')";
 
 <div class="chat">
     <div class="titre"> <p>
-            <?php echo"$coach" ?></p></div>
+            <?php  if($who == 2) //coach
+            {
+                echo"$client";
+            }
+
+            if($who == 3) //client
+            {
+                echo "$coach";
+            }
+
+            ?>
+        </p></div>
     <div class="message">
 
 <?php
+
+if($who == 3) //client
+
+{
 
 
 $sql2 = "SELECT * FROM message WHERE source = '$me' AND dest = '$coach'"; //message envoyé
@@ -165,6 +208,59 @@ while($data = mysqli_fetch_assoc($result3)){//messages reçu
 
                 ?>
 </div>
+<?php }
+
+
+if($who == 2) //coach
+
+{
+
+$sql = "SELECT * FROM client";
+$resultc = mysqli_query($db_handle, $sql);
+
+
+$sql4 = "SELECT * FROM message WHERE source = '$me' AND dest = '$client'"; //message envoyé
+$sql5 = "SELECT * FROM message WHERE dest = '$me' AND source = '$client'"; //messages reçu
+$result4 = mysqli_query($db_handle, $sql4);
+$result5 = mysqli_query($db_handle, $sql5);
+
+
+while($data = mysqli_fetch_assoc($result4)){//messages envoyé
+    echo"
+    <p class = 'send'>".$data['message']."</p>
+    ";}
+
+while($data = mysqli_fetch_assoc($result5)){//messages reçu
+    echo"
+    <p class='recu'>".$data['message']."</p>
+    ";
+
+}
+
+?>
+
+            <div class="bas">
+
+                <form action = "" method = "post">
+                    <div class="form1">
+                        <label for="client">Choose a Client:</label>
+                        <select id="client" name="client">
+
+
+
+                            <?php
+
+                            ///affichage nom coach
+                            while ($data = mysqli_fetch_assoc($resultc)){
+
+                                echo'
+            <option value="'.$data["Nom"].'">'. $data["Nom"].' '. $data["Prenom"].'</option>
+            ';  }
+
+                            ?>
+                    </div>
+                    <?php } ?>
+
 
             <div class="form2">
             <input type = "text" name = "message" required>
