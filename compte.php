@@ -42,20 +42,24 @@ echo"
 
 ";
 
+echo" who 2 = ".$who."<br>";
+
 //dééjà connecté
 if( $connect == TRUE){
 
-	if($who == 0){
-
-		$sql0 = "SELECT * FROM coach WHERE Mail = '$login' AND Mot_de_passe ='$pass'";
-		$sql1 = "SELECT * FROM client WHERE Carte = '$login' AND Mot_de_passe ='$pass'";
-		$result0 = mysqli_query($db_handle, $sql0);
-		$result1 = mysqli_query($db_handle, $sql1);
 
 
 
-		if($data = mysqli_fetch_assoc($result0)){ //dans la table coach
 
+		$sql_aff1 = "SELECT * FROM coach WHERE Mail = '$login' AND Mot_de_passe ='$pass'";
+		$sql_aff2 = "SELECT * FROM client WHERE Carte = '$login' AND Mot_de_passe ='$pass'";
+		$result_aff1 = mysqli_query($db_handle, $sql_aff1);
+		$result_aff2 = mysqli_query($db_handle, $sql_aff2);
+
+
+
+		if($data = mysqli_fetch_assoc($result_aff1)){ //dans la table coach
+			echo" who 3.5 = ".$who."<br>";
 			$who = 2;
 			echo" who0= ". $who."<br>";
 			$connexion = true;
@@ -66,7 +70,7 @@ if( $connect == TRUE){
 
 
 
-		if($data1 = mysqli_fetch_assoc($result1) && $who == 0){ //dans la table client
+		if($data1 = mysqli_fetch_assoc($result_aff2) && $who == 0){ //dans la table client
 
 			$who = 3;
 			echo" who1 = ". $who."<br>";
@@ -78,7 +82,7 @@ if( $connect == TRUE){
 
 		}
 
-	}
+
 
 	echo" who 3 = ".$who."<br>";
 
@@ -352,12 +356,14 @@ if( $connect == TRUE){
 
 	}
 
-
+	echo" who 4 = ".$who."<br>";
 }
+
 
 
 //pas connecté
 else{
+
 	if($who == 0){
 
 		$sql0 = "SELECT * FROM coach WHERE Mail = '$login' AND Mot_de_passe ='$pass'";
