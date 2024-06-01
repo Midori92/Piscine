@@ -222,7 +222,62 @@ $(document).ready(function(){
                 <div class="button-group">
                     <button class="btn-rdv"  id="book-appointment" onclick="window.location.href='disponibilites.html'">Prendre Rendez-vous</button>
                     <button class="btn-comm" onclick="communicateWithCoach()">Communiquer avec le coach</button>
-    <button class="btn-cv" onclick="window.location.href='guydumais.pdf'">Voir le CV</button>
+                    <button class="btn-cv" onclick="afficherXML()">Voir le CV </button>
+
+    <pre id="xmlContent" style="display: none;">
+
+        <?xml version="1.0" encoding="UTF-8"?>
+        <coach>
+    <informationsPersonnelles>
+    <p> Informations personnelles :</p>
+    <nom>Marc LECLERC</nom>
+        <adresse>Salle de Sport Omnes, 12 rue de l'université,75015 Paris</adresse>
+        <telephone>+33 621098765</telephone>
+        <email>marc.leclerc@sportify.com</email>
+        <dateDeNaissance>1983-07-15</dateDeNaissance>
+        <nationalite>Française</nationalite>
+</informationsPersonnelles>
+<formation>
+    <p>Formation : </p>
+        <diplome>Certificat de Qualification Professionnelle (CQP) - Animateur de Loisir Sportif (ALS) - Option Cours Collectifs</diplome>
+        <institution>Institut des Métiers de la Forme (IMF), Paris</institution>
+        <annee>2012</annee>
+        <diplome>Licence STAPS (Sciences et Techniques des Activités Physiques et Sportives) - Entraînement Sportif</diplome>
+        <institution>Université Paris Descartes, Paris</institution>
+        <annee>2009</annee>
+</formation>
+<experience>
+    <p>Experiences professionnelles : </p>
+        <poste>Professeur de Cours Collectifs</poste>
+        <employeur>Fitness Center, Paris</employeur>
+        <periode>2013 - Présent</periode>
+        <responsabilite>Animation de divers cours collectifs (aérobic, step, yoga, etc.)</responsabilite>
+        <responsabilite>Suivi et motivation des participants</responsabilite>
+        <responsabilite>Développement de programmes de cours collectifs adaptés à différents niveaux</responsabilite>
+        <poste>Coach Personnel</poste>
+        <employeur>Gym Fit, Lyon</employeur>
+        <periode>2010 - 2012</periode>
+        <responsabilite>Encadrement individuel des clients dans leurs objectifs de fitness</responsabilite>
+        <responsabilite>Évaluation de la condition physique et création de plans d'entraînement</responsabilite>
+</experience>
+<competences>
+    <p>Compétences : </p>
+        <competence>Maîtrise de l'animation de divers cours collectifs</competence>
+        <competence>Connaissance approfondie de l'anatomie et de la physiologie</competence>
+        <competence>Création de programmes d'entraînement collectifs et individuels</competence>
+        <competence>Capacité à motiver et à encourager les participants</competence>
+</competences>
+<langue>
+    <p>Langues :</p>
+        <nom>Français : Langue maternelle</nom>
+        <nom>Anglais : Courant</nom>
+        <nom>Espagnol : Notions</nom>
+</langue>
+
+
+
+</coach>
+</pre>
 </div>
 
 <script>
@@ -238,7 +293,12 @@ function communicateWithCoach() {
         alert("Choix invalide. Veuillez réessayer.");
     }
 }
-</script> 
+function afficherXML() {
+            var xmlContent = document.getElementById("xmlContent").innerText;
+            var newWindow = window.open();
+            newWindow.document.write("<pre>" + xmlContent + "</pre>");
+        }
+</script>
 </div>
 </div>
 </main>        

@@ -219,10 +219,64 @@ $(document).ready(function(){
                     </tbody>
                 </table>
                 <br>
-                <div class="button-group">
+             <div class="button-group">
                     <button class="btn-rdv"  id="book-appointment" onclick="window.location.href='disponibilites.html'">Prendre Rendez-vous</button>
                     <button class="btn-comm" onclick="communicateWithCoach()">Communiquer avec le coach</button>
-    <button class="btn-cv" onclick="window.location.href='guydumais.pdf'">Voir le CV</button>
+                    <button class="btn-cv" onclick="afficherXML()">Voir le CV </button>
+
+    <pre id="xmlContent" style="display: none;">
+
+        <?xml version="1.0" encoding="UTF-8"?>
+        <coach>
+    <informationsPersonnelles>
+    <p> Information personnelle :</p>
+        <nom>Sophie LEROY</nom>
+        <adresse>Salle de Sport Omnes, 12 rue de l'université,75015 Paris</adresse>
+        <telephone>+33 654321098</telephone>
+        <email>sophie.leroy@sportify.com</email>
+        <dateDeNaissance>1990-01-15</dateDeNaissance>
+        <nationalite>Française</nationalite>
+</informationsPersonnelles>
+<formation>
+    <p>Formation : </p>
+        <diplome>Certificat de Qualification Professionnelle (CQP) - Animateur de Loisir Sportif (ALS) - Option Fitness</diplome>
+        <institution>Institut des Métiers de la Forme (IMF), Paris</institution>
+        <annee>2014</annee>
+        <diplome>Licence STAPS (Sciences et Techniques des Activités Physiques et Sportives) - Entraînement Sportif</diplome>
+        <institution>Université Paris Descartes, Paris</institution>
+        <annee>2011</annee>
+</formation>
+<experience>
+    <p>Experience professionnelle : </p>
+        <poste>Professionnelle de Fitness</poste>
+        <employeur>Fitness World, Paris</employeur>
+        <periode>2016 - Présent</periode>
+        <responsabilite>Encadrement et suivi des adhérents dans leurs programmes de fitness</responsabilite>
+        <responsabilite>Animation de cours collectifs de fitness et de cardio-training</responsabilite>
+        <responsabilite>Développement de programmes personnalisés de remise en forme</responsabilite>
+        <poste>Coach Personnel</poste>
+        <employeur>Gym Center, Lyon</employeur>
+        <periode>2012 - 2015</periode>
+        <responsabilite>Accompagnement individuel des clients dans leurs objectifs de fitness</responsabilite>
+        <responsabilite>Évaluation de la condition physique et conception de plans d'entraînement</responsabilite>
+</experience>
+<competences>
+    <p>Compétences : </p>
+        <competence>Maîtrise des techniques de fitness et de cardio-training</competence>
+        <competence>Connaissance approfondie de l'anatomie et de la physiologie</competence>
+        <competence>Création de programmes d'entraînement personnalisés</competence>
+        <competence>Capacité à motiver et à encourager les clients</competence>
+</competences>
+<langue>
+    <p>Langues :</p>
+        <nom>Français : Langue maternelle</nom>
+        <nom>Anglais : Courant</nom>
+        <nom>Espagnol : Notions</nom>
+</langue>
+
+
+</coach>
+</pre>
 </div>
 
 <script>
@@ -238,7 +292,13 @@ function communicateWithCoach() {
         alert("Choix invalide. Veuillez réessayer.");
     }
 }
-</script> 
+function afficherXML() {
+            var xmlContent = document.getElementById("xmlContent").innerText;
+            var newWindow = window.open();
+            newWindow.document.write("<pre>" + xmlContent + "</pre>");
+        }
+</script>    
+
 </div>
 </main>        
     <footer>

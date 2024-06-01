@@ -216,10 +216,65 @@ $(document).ready(function(){
                     </tbody>
                 </table>
                 <br>
-                div class="button-group">
+                <div class="button-group">
                     <button class="btn-rdv"  id="book-appointment" onclick="window.location.href='disponibilites.html'">Prendre Rendez-vous</button>
                     <button class="btn-comm" onclick="communicateWithCoach()">Communiquer avec le coach</button>
-    <button class="btn-cv" onclick="window.location.href='paulbertrand.pdf'">Voir le CV</button>
+                    <button class="btn-cv" onclick="afficherXML()">Voir le CV </button>
+
+    <pre id="xmlContent" style="display: none;">
+
+        <?xml version="1.0" encoding="UTF-8"?>
+        <coach>
+            <informationsPersonnelles>
+    <p> Information personnelle:</p>
+        <nom>Paul MARTIN</nom>
+        <adresse>88 Boulevard du Football, 75015 Paris</adresse>
+        <telephone>+33 687654321</telephone>
+        <email>paul.martin@sportify.com</email>
+        <dateDeNaissance>1985-09-25</dateDeNaissance>
+        <nationalite>Française</nationalite>
+</informationsPersonnelles>
+<formation>
+    <p>Formation : </p>
+        <diplome>Diplôme d'Entraîneur de Football</diplome>
+        <institution>Fédération Française de Football (FFF)</institution>
+        <annee>2010</annee>
+        <diplome>Licence STAPS (Sciences et Techniques des Activités Physiques et Sportives) - Entraînement Sportif</diplome>
+        <institution>Université Paris-Sud, Paris</institution>
+        <annee>2007</annee>
+</formation>
+<experience>
+    <p>Experience professionnelle : </p>
+        <poste>Entraîneur Principal</poste>
+        <employeur>Paris FC</employeur>
+        <periode>2016 - Présent</periode>
+        <responsabilite>Entraînement et tactiques des joueurs</responsabilite>
+        <responsabilite>Participation aux compétitions de la Ligue 1</responsabilite>
+        <responsabilite>Recrutement et gestion de l'équipe technique</responsabilite>
+        <poste>Entraîneur Adjoint</poste>
+        <employeur>AS Monaco</employeur>
+        <periode>2012 - 2015</periode>
+        <responsabilite>Assistance dans la planification des entraînements</responsabilite>
+        <responsabilite>Analyses des performances des joueurs</responsabilite>
+</experience>
+<competences>
+    <p>Compétences : </p>
+        <competence>Maîtrise des techniques individuelles et collectives du football</competence>
+        <competence>Analyse tactique et stratégique du jeu</competence>
+        <competence>Leadership et motivation des joueurs</competence>
+        <competence>Communication efficace avec l'équipe et le staff technique</competence>
+</competences>
+<langue>
+    <p>Langues :</p>
+        <nom>Français : Langue maternelle</nom>
+        <nom>Anglais : Courant </nom>
+        <nom>Espagnol: Notions</nom>
+</langue>
+
+</coach>  
+    </pre>
+</div>
+
 </div>
 
 <script>
@@ -235,7 +290,12 @@ function communicateWithCoach() {
         alert("Choix invalide. Veuillez réessayer.");
     }
 }
-</script>   
+function afficherXML() {
+            var xmlContent = document.getElementById("xmlContent").innerText;
+            var newWindow = window.open();
+            newWindow.document.write("<pre>" + xmlContent + "</pre>");
+        }
+</script>
 
 </main>
 <footer>
