@@ -219,7 +219,60 @@ $(document).ready(function(){
                <div class="button-group">
                     <button class="btn-rdv"  id="book-appointment" onclick="window.location.href='disponibilites.html'">Prendre Rendez-vous</button>
                     <button class="btn-comm" onclick="communicateWithCoach()">Communiquer avec le coach</button>
-    <button class="btn-cv" onclick="window.location.href='luciebertrand.pdf'">Voir le CV</button>
+                    <button class="btn-cv" onclick="afficherXML()">Voir le CV </button>
+
+    <pre id="xmlContent" style="display: none;">
+
+        <?xml version="1.0" encoding="UTF-8"?>
+        <coach>
+    <informationsPersonnelles>
+    <p>Informations personnelles :</p>
+        <nom>Lucie BERTRAND</nom>
+        <adresse>01 Piscine Muniscipale, 92100 Boulogne-Billancourt</adresse>
+        <telephone>+33 645321009</telephone>
+        <email>lucie.bertrand@sportify.com</email>
+        <dateDeNaissance>1992-04-28</dateDeNaissance>
+        <nationalite>Française</nationalite>
+</informationsPersonnelles>
+<formation>
+    <p>Formation : </p>
+        <diplome>Master en Natation Professionnelle</diplome>
+        <institution>Université de la Natation, Paris</institution>
+        <annee>2017</annee>
+        <diplome>Bachelor en Sciences du Sport avec spécialisation en Natation</diplome>
+        <institution>Université Paris-Sorbonne, Paris</institution>
+        <annee>2014</annee>
+</formation>
+<experience>
+    <p>Experiences professionnelles : </p>
+        <poste>Nageuse Professionnelle</poste>
+        <employeur>Équipe Nationale Française de Natation</employeur>
+        <periode>2015 - Présent</periode>
+        <responsabilite>Participation à des compétitions internationales</responsabilite>
+        <responsabilite>Entraînement quotidien avec des coachs de renom</responsabilite>
+        <responsabilite>Remporté plusieurs médailles lors de championnats nationaux et continentaux</responsabilite>
+        <poste>Entraîneure de Natation</poste>
+        <employeur>Club de Natation de Paris</employeur>
+        <periode>2013 - 2015</periode>
+        <responsabilite>Enseignement des techniques de natation à des nageurs de tous niveaux</responsabilite>
+        <responsabilite>Préparation des athlètes pour les compétitions locales</responsabilite>
+</experience>
+<competences>
+    <p>Compétences : </p>
+        <competence>Maîtrise des différentes nages : crawl, dos, brasse, papillon</competence>
+        <competence>Connaissance approfondie des techniques de respiration et de virage</competence>
+        <competence>Capacité à analyser et à améliorer les performances des nageurs</competence>
+        <competence>Leadership et motivation des athlètes</competence>
+</competences>
+<langue>
+    <p>Langues :</p>
+        <nom>Français : Langue maternelle</nom>
+        <nom>Anglais : Courant </nom>
+        <nom>Espagnol: Notions</nom>
+</langue>
+
+</coach>
+</pre>
 </div>
 
 <script>
@@ -235,7 +288,13 @@ function communicateWithCoach() {
         alert("Choix invalide. Veuillez réessayer.");
     }
 }
+function afficherXML() {
+            var xmlContent = document.getElementById("xmlContent").innerText;
+            var newWindow = window.open();
+            newWindow.document.write("<pre>" + xmlContent + "</pre>");
+        }
 </script>   
+  
 
 </main>
 <footer>
