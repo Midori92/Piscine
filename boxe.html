@@ -216,17 +216,71 @@ $(document).ready(function(){
                     </tbody>
                 </table>
                 <br>
-                <div class="button-group">
+               <div class="button-group">
                     <button class="btn-rdv"  id="book-appointment" onclick="window.location.href='disponibilites.html'">Prendre Rendez-vous</button>
                     <button class="btn-comm" onclick="communicateWithCoach()">Communiquer avec le coach</button>
-    <button class="btn-cv" onclick="window.location.href='guydumais.pdf'">Voir le CV</button>
+                    <button class="btn-cv" onclick="afficherXML()">Voir le CV </button>
+
+    <pre id="xmlContent" style="display: none;">
+
+        <?xml version="1.0" encoding="UTF-8"?>
+        <coach>
+            <informationsPersonnelles>
+        <p> Informations personnelles :</p>
+            <nom>Guy DUMAIS</nom>
+            <adresse>Salle de Sport Omnes, 12 rue de l'université,75015 Paris</adresse>
+            <telephone>+33 2147483647</telephone>
+            <email>guy.dumais@sportify.com</email>                
+            <dateDeNaissance>1980-05-22</dateDeNaissance>
+            <nationalite>Français</nationalite>
+            </informationsPersonnelles>
+       <formation>
+        <p>Formation : </p>
+            <diplome>Diplôme d'État Supérieur de la Jeunesse, de l'Éducation Populaire et du Sport (DEJEPS) - Mention Boxe</diplome>
+            <institution>Institut National du Sport, de l'Expertise et de la Performance (INSEP), Paris</institution>
+            <annee>2012</annee>
+            <diplome>Licence STAPS (Sciences et Techniques des Activités Physiques et Sportives) - Entraînement Sportif</diplome>
+            <institution>Université Paris Descartes, Paris</institution>
+            <annee>2003</annee>
+        </formation>
+        <experience>
+        <p>Experience professionelle : </p>
+            <poste>Coach Principal</poste>
+            <employeur>Boxe Elite Academy, Paris</employeur>
+            <periode>2016 - Présent</periosde>
+                <responsabilite>Entraînement des boxeurs amateurs et professionnels</responsabilite>
+                <responsabilite>Développement de programmes d'entraînement personnalisés</responsabilite>
+                <responsabilite>Analyse des performances des boxeurs</responsabilite>
+
+            <poste>Coach Assistant</poste>
+            <employeur>Club de Boxe de Lyon</employeur>
+            <periode>2010 - 2015</periode>
+                <responsabilite>Assistance dans l'entraînement des boxeurs</responsabilite>
+                <responsabilite>Gestion des équipements et des infrastructures</responsabilite>
+                <responsabilite>Analyse et feedback des performances des boxeurs</responsabilite>
+        </experience>
+    <competences>
+        <p>Compétences : </p>
+            <competence>Techniques et tactiques de la boxe</competence>
+            <competence>Préparation physique et mentale</competence>
+            <competence>Analyse vidéo des performances</competence>
+            <competence>Excellente communication et pédagogie</competence>
+    </competences>
+        <langue>
+        <p>Langues :</p>
+            <nom>Français : Langue maternelle</nom>
+            <nom>Anglais : Courant </nom>
+            <nom>Espagnol: Intermédiaire</nom>
+        </langue>
+</coach>  
+    </pre>
 </div>
 
 <script>
 function communicateWithCoach() {
     const choice = prompt("Souhaitez-vous (1) appeler le coach, (2) envoyer un email, ou (3) retourner? Entrez le numéro correspondant à votre choix:");
     if (choice === '1') {
-        alert("Appeler le coach au numéro: (+33) 2 147483647");
+        alert("Appeler le coach au numéro: (+33) 2 147483");
     } else if (choice === '2') {
         window.location.href = "mailto:guy.dumais@sportify.com";
     } else if (choice === '3') {
@@ -235,7 +289,12 @@ function communicateWithCoach() {
         alert("Choix invalide. Veuillez réessayer.");
     }
 }
-</script>      
+function afficherXML() {
+            var xmlContent = document.getElementById("xmlContent").innerText;
+            var newWindow = window.open();
+            newWindow.document.write("<pre>" + xmlContent + "</pre>");
+        }
+</script>        
 
 </main>
 <footer>
