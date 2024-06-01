@@ -33,19 +33,19 @@ $connect = isset($_SESSION['connexion']) ? $_SESSION['connexion'] : null;
 
             <div id="nav">
                 <a href="index.php">
-                    <img src="accueilbouton.png" width="150" heigh="115">
+                    <img src="accueilbouton.png" alt = 'index'  width="150" heigh="115">
                 </a>
 
                 <a href="toutparcourir.php">
-                    <img  src="parcourirbouton.png" width="150" heigh="115">
+                    <img  src="parcourirbouton.png" alt = 'parcourir'  width="150" heigh="115">
                 </a>
 
                 <a href="recherche.html">
-                    <img  src="recherchebouton.png" width="150" heigh="150">
+                    <img  src="recherchebouton.png" alt = 'recherche'  width="150" heigh="150">
                 </a>
 
                 <a href="rendezvous.html">
-                    <img  src="rendezvousbouton.png" width="150" heigh="150">
+                    <img  src="rendezvousbouton.png" alt = 'rdv'  width="150" heigh="150">
                 </a>
 
                 <?php
