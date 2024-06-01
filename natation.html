@@ -219,18 +219,18 @@ $(document).ready(function(){
                <div class="button-group">
                     <button class="btn-rdv"  id="book-appointment" onclick="window.location.href='disponibilites.html'">Prendre Rendez-vous</button>
                     <button class="btn-comm" onclick="communicateWithCoach()">Communiquer avec le coach</button>
-    <button class="btn-cv" onclick="window.location.href='clarapetit.pdf'">Voir le CV</button>
+    <button class="btn-cv" onclick="window.location.href='luciebertrand.pdf'">Voir le CV</button>
 </div>
 
 <script>
 function communicateWithCoach() {
     const choice = prompt("Souhaitez-vous (1) appeler le coach, (2) envoyer un email, ou (3) retourner? Entrez le numéro correspondant à votre choix:");
     if (choice === '1') {
-        alert("Appeler le coach au numéro: (+33) 01 02 03 04 05 06");
+        alert("Appeler le coach au numéro: (+33) 6 453221009");
     } else if (choice === '2') {
-        window.location.href = "mailto:jean.dupont@sportify.com";
+        window.location.href = "mailto:lucie.bertrand@sportify.com";
     } else if (choice === '3') {
-        window.location.href = 'danse.html';
+        window.location.href = 'natation.html';
     } else {
         alert("Choix invalide. Veuillez réessayer.");
     }
