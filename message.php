@@ -27,13 +27,6 @@ $result = mysqli_query($db_handle, $sql);
 $conn = new mysqli('localhost', 'root', '',$database);
 //me = email
 
-if($who == NULL){
-    $who == 0;
-}
-
-if($me == NULL){
-    $me ==0;
-}
 
 ?>
 
@@ -186,6 +179,8 @@ Values ('$me_client[Carte]','$coach','$mess')";
         </p></div>
     <div class="message">
 
+
+
 <?php
 
 if($who == 3) //client
@@ -307,6 +302,7 @@ while ($data = mysqli_fetch_assoc($result_mess2)) {
     <?php }
 
 
+
 else{ //non connecté
 
     echo" <p> Vous devez créer un compte ou vous connecter</p>
@@ -315,6 +311,13 @@ else{ //non connecté
     <button> <a href='compte.html'> Connexion  </a> </button>";
 } ?>
 
+    <a href="message.php">
+        <img  src="message.png" alt="messagerie" width="115" heigh="150">
+    </a>
+
+    <a href="acceuil.php">
+        <img  src="acceuil.png" alt="acceuil" width="115" heigh="150">
+    </a>
 
 </body>
 </html>

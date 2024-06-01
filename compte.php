@@ -27,8 +27,16 @@ if ($pass == "123654789" && $login == "admin") { ///admin $who = 1
 
 }
 
+echo"
+<a href='message.php'>
+            <img  src='message.png' alt='messagerie' width='115' heigh='150'>
+        </a>
 
+        <a href='acceuil.php'>
+            <img  src='acceuil.png' alt='acceuil' width='115 heigh='150'>
+        </a>
 
+";
 if($who == 0){
 
 	$sql0 = "SELECT * FROM coach WHERE Mail = '$login' AND Mot_de_passe ='$pass'";
@@ -61,8 +69,6 @@ if($data1 = mysqli_fetch_assoc($result1) && $who == 0){ //dans la table client
 
 }
 
-
-
 //connexion fin 
 ///////////
 
@@ -75,6 +81,10 @@ if ($who == 1){ //admin
 	 	$result = mysqli_query($db_handle, $sql);
 
 	echo"
+
+
+
+
 	<h1> LISTE DE COACH <h1>
 
 	<table>
@@ -329,9 +339,6 @@ if( $data = mysqli_fetch_assoc($result)){
 
 }
 
-
-
-
 //Message
 if ($who == 0) {
 echo "Connexion refusée. Utilisateur inconnu.
@@ -352,16 +359,23 @@ Etes-vous sûr d'avoir déjà un compte ? <br> <br>
 else {
 if ($connexion) {
 	session_start();
+
 	$_SESSION['me'] = $who;
 	$_SESSION['login'] = $login; //numero client ou mail
-	echo"
-<button> <a href='deconnect.php'> Deconnexion  </a> </button>";
 
-echo "Connexion okay.";
+
+echo "<p> Vous vous êtes connecté </p>
+<button> <a href='deconnect.php'> Deconnexion  </a> </button>
+<button> <a href='connexion.php'> Connexion  </a> </button>";
+
+
 } else {
 echo "Connexion refusée. Mot de passe invalide.";
 }
 }
+
+$_SESSION['connexion'] = $connexion;
+
 ?>
 
 

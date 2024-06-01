@@ -2,7 +2,12 @@
 session_start();
 session_unset();
 session_destroy();
-header("Location: toutparcourir.html");
+$_SESSION['connexion'] = FALSE;
+
+echo"
+Vous vous êtes déconnecté !
+";
+header("Location: acceuil.php");
 exit();
 
 
