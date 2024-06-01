@@ -1,0 +1,199 @@
+<?php
+session_start();
+$connect = isset($_SESSION['connexion']) ? $_SESSION['connexion'] : null;
+
+?>
+
+<!DOCTYPE html>
+<head>
+    <title>Sportify</title>
+    <meta charset="utf-8"/>
+    <link href="prime.css" rel="stylesheet" type="text/css" />
+    <link rel="icon"type="image/x-icon" href="favicon.ico">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+</head>
+<body>
+<style>
+    #rightcolumn {
+        padding: 10px;
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: aliceblue;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        height: 220px;
+        width: 650px;
+    }
+</style>
+
+<div id="wrapper">
+    <h1 class=titre> <img width="750" heigh="750" src="titre.png"></h1>
+    <div id ="nav">
+        <div id="leftcolumn">
+
+            <div id="nav">
+                <a href="index.php">
+                    <img src="accueilbouton.png" width="150" heigh="115">
+                </a>
+
+                <a href="toutparcourir.php">
+                    <img  src="parcourirbouton.png" width="150" heigh="115">
+                </a>
+
+                <a href="recherche.html">
+                    <img  src="recherchebouton.png" width="150" heigh="150">
+                </a>
+
+                <a href="rendezvous.html">
+                    <img  src="rendezvousbouton.png" width="150" heigh="150">
+                </a>
+
+                <?php
+                if($connect == TRUE) { //dejà connecté
+                echo"
+                <a href = 'compte.php' >
+                    <img  src = 'votrecompte.png' alt = 'moncompte' width = '115' heigh = '150' >
+                </a >";
+                }
+
+                else{ //non connecté
+                echo"
+                <a href = 'compte.html' >
+                    <img  src = 'votrecompte.png' alt = 'moncompte' width = '115' heigh = '150' >
+                </a >";
+                }
+
+
+                ?>
+                <a href="message.php">
+                    <img  src="message.png" alt="messagerie" width="115" heigh="150">
+                </a>
+
+
+                <?php
+                if($connect !== null) {
+                    if ($_SESSION['connexion'] == TRUE) { //si connecté
+                        echo "
+                    <a href='deconnect.php'>
+                <img  src='deco.png' alt='deconnexion' width='115' heigh='150'>
+                </a>";
+                    }
+
+                    else {
+                        echo "OK";
+                    };
+
+                }
+                ?>
+                <br>
+                <div id="carousel-container">
+                    <h1> Nos sports </h1>
+                    <div id="carrousel">
+                        <ul>
+                            <li><img src="ten.jpg" width="75%" height="60%"/></li>
+                            <li><img src="bask.jpg" width="75%" height="60%"/></li>
+                            <li><img src="fo.jpg" width="85%" height="60%"/></li>
+                            <li><img src="dan.jpg" width="75%" height="100%"/></li>
+                            <li><img src="nat.jpg" width="85%" height="100%"/></li>
+                            <li><img src="bo.jpg" width="85%" height="100%"/></li>
+                            <li><img src="cours.jpg" width="85%" height="100%"/></li>
+
+                        </ul>
+                    </div>
+
+                </div>
+                <script>
+                    $(document).ready(function(){
+                        var $carrousel = $('#carrousel');
+                        var $img = $('#carrousel img');
+                        var $thumbnails = $('#thumbnails');
+                        var indexImg = $img.length - 1;
+                        var i = 0;
+
+
+                        $carrousel.append('<div class="controls"><span class="prev">Precedent</span><span class="next">Suivant</span></div>');
+
+
+                        $img.each(function(index) {
+                            var thumbnailSrc = $(this).attr('src');
+                            $thumbnails.append('<img src="' + thumbnailSrc + '" alt="thumbnail' + index + '">');
+                        });
+
+
+                        $thumbnails.on('click', 'img', function() {
+                            var index = $(this).index();
+                            changeSlide(index);
+                        });
+
+
+                        $('.next').click(function(){
+                            changeSlide(i + 1);
+                        });
+
+
+                        $('.prev').click(function(){
+                            changeSlide(i - 1);
+                        });
+
+
+                        function changeSlide(index) {
+                            if (index < 0) {
+                                index = indexImg;
+                            } else if (index > indexImg) {
+                                index = 0;
+                            }
+                            i = index;
+                            var translateValue = -(100 / $img.length) * i + '%';
+                            $carrousel.find('ul').css('transform', 'translateX(' + translateValue + ')');
+                            // Mettre en surbrillance la miniature correspondante
+                            $thumbnails.find('img').removeClass('active');
+                            $thumbnails.find('img').eq(i).addClass('active');
+                        }
+
+
+                        function slideImg() {
+                            setInterval(function() {
+                                changeSlide(i + 1);
+                            }, 4000);
+                        }
+
+                        slideImg();
+
+                    });
+                </script>
+            </div>
+        </div>
+        <main>
+
+            <div id="rightcolumn">
+                <h2>Bienvenue chez Sportify ! </h2>
+
+                <p>Nous sommes ravis de vous accueillir sur notre plateforme dédiée au sport et au bien-être. Que vous soyez un athlète chevronné ou un amateur de sport, Sportify est votre destination idéale pour découvrir, apprendre et s'engager dans diverses activités sportives.</p>
+                <p>Notre mission est de promouvoir un mode de vie sain et actif en offrant un accès facile à des ressources sportives, des événements excitants et des opportunités de développement personnel. Chez Sportify, nous croyons que le sport est pour tout le monde, et nous nous efforçons de créer une communauté inclusive où chacun peut atteindre ses objectifs.</p>
+                <br>
+
+
+                <div id="event-week">
+                    <h2>L'Évènement de la Semaine</h2>
+                    <h3>Porte Ouverte de Sportify</h3>
+                    <p>Cette semaine, ne manquez pas notre événement spécial: la Porte Ouverte de Sportify. Rejoignez-nous pour une journée pleine d'activités et de découvertes, où vous pourrez rencontrer nos coachs, assister à des démonstrations sportives, et participer à des ateliers interactifs.</p>
+                    <p>Nous aurons également un match de basket palpitant entre l'équipe d'Omnes Education et nos visiteurs. Venez soutenir vos équipes et profiter de l'ambiance sportive !</p>
+                    <p>N'oubliez pas de réserver votre place pour une rencontre exclusive avec nos coachs et joueurs de tennis. C'est une occasion unique de poser toutes vos questions et d'obtenir des conseils personnalisés pour améliorer votre jeu.</p>
+                    <p>Nous avons hâte de vous voir à cet événement exceptionnel et de partager notre passion pour le sport avec vous !</p>
+                </div>
+
+                <br>
+
+        </main>
+        <footer>
+            <p class="contact">Sportify <br>
+                67 avenue Marceau 75015 Paris</p>
+            Contactez-nous : <a href="mailto:sportify@omneseducation.com">sportify@omneseducation.com</a> | Téléphone : 01 23 45 67 89</p>
+        </footer>
+    </div>
+</div>
+
+</div>
+</body>
+</html>
+

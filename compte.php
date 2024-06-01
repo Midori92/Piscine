@@ -36,8 +36,8 @@ echo"
             <img  src='message.png' alt='messagerie' width='115' heigh='150'>
         </a>
 
-<a href='acceuil.php'>
-            <img  src='acceuil.png' alt='acceuil' width='115 heigh='150'>
+<a href='index.php'>
+            <img  src='index.png' alt='index' width='115 heigh='150'>
         </a>
 
 ";
@@ -672,7 +672,7 @@ else{
 <br>
 Etes-vous sûr d'avoir déjà un compte ? <br> <br>
 <button TYPE='button'>
-<a href='acceuil.php'><INPUT TYPE = 'button' Name = 'essaie' VALUE = 'Réessayer'> </a>
+<a href='index.php'><INPUT TYPE = 'button' Name = 'index' VALUE = 'index'> </a>
 </button> 
 <a href='creation.html'><INPUT TYPE = 'button' Name = 'Pas de compte' VALUE = 'Pas de compte ?'> </a>
 </button> 
@@ -964,7 +964,7 @@ if($_SESSION["connexion"] == TRUE){
 else {
 if ($connexion) {
 	session_start();
-
+	$_SESSION['connexion'] = $connexion;
 	$_SESSION['me'] = $who;
 	$_SESSION['login'] = $login; //numero client ou mail
 
@@ -978,8 +978,6 @@ echo "<p> Vous vous êtes connecté </p>
 echo "Connexion refusée. Mot de passe invalide.";
 }
 }
-
-$_SESSION['connexion'] = $connexion;
 
 ?>
 

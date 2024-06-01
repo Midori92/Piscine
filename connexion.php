@@ -1,7 +1,7 @@
 <?php
 session_start();
 $_SESSION['connexion'] = TRUE;
-header("Location: acceuil.php");
+header("Location: index.php");
 exit();
 ?>
 

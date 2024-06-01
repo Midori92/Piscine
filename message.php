@@ -315,8 +315,8 @@ else{ //non connecté
         <img  src="message.png" alt="messagerie" width="115" heigh="150">
     </a>
 
-    <a href="acceuil.php">
-        <img  src="acceuil.png" alt="acceuil" width="115" heigh="150">
+    <a href="index.php">
+        <img  src="index.png" alt="index" width="115" heigh="150">
     </a>
 
 </body>

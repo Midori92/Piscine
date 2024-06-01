@@ -7,7 +7,7 @@ $_SESSION['connexion'] = FALSE;
 echo"
 Vous vous êtes déconnecté !
 ";
-header("Location: acceuil.php");
+header("Location: index.php");
 exit();
 
 
