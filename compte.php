@@ -106,7 +106,7 @@ $connexion = false;
 
             <?php
             if($connect !== null) {
-                if ($_SESSION['connexion'] == TRUE) { //si connecté
+                if ($connect == TRUE) { //si connecté
                     echo "
                     <a href='deconnect.php'>
                 <img  src='deco.png' alt='deconnexion' width='115' heigh='150'>
@@ -215,18 +215,20 @@ if ($pass == "123654789" && $login == "admin") { ///admin $who = 1
 }
 
 //dééjà connecté
-if( $connect == TRUE){
-    $login = $login_sess;
 
-    if($poste_sess == 1){ //admin
+if($connect !== null) {
+    if ($connect == TRUE) {
+        $login = $login_sess;
+
+        if ($poste_sess == 1) { //admin
 
 
-        //affichage coach
+            //affichage coach
 
-        $sql = "SELECT * FROM coach";
-        $result = mysqli_query($db_handle, $sql);
+            $sql = "SELECT * FROM coach";
+            $result = mysqli_query($db_handle, $sql);
 
-        echo"
+            echo "
 
 
 
@@ -242,17 +244,17 @@ if( $connect == TRUE){
 	 </tr>
 	";
 
-        while ($data = mysqli_fetch_assoc($result)) {
+            while ($data = mysqli_fetch_assoc($result)) {
 
 
-            ///affichage
-            echo "
+                ///affichage
+                echo "
 
 	 <tr> 
 		<td>" . $data['ID_coach'] . " </td> 
 		<td>" . $data['Nom'] . " </td>
 		<td>" . $data['Specialite'] . " </td>
-		<td> <img src='".$data['Photo']."' height='100' width='100'>" .  " </td>
+		<td> <img src='" . $data['Photo'] . "' height='100' width='100'>" . " </td>
 		<td>" . $data['Adresse'] . " </td>
 		<td>" . $data['Mail'] . " </td>
 		 <td> CV </td>
@@ -261,11 +263,11 @@ if( $connect == TRUE){
 
 	";
 
-        }
+            }
 
-        ///ajouter un coatch
+            ///ajouter un coatch
 
-        echo"
+            echo "
 
 	</table>
 
@@ -322,12 +324,12 @@ if( $connect == TRUE){
 
 //////////////////////////TEST
 
-        //affichage clients
+            //affichage clients
 
-        $sql0 = "SELECT * FROM client";
-        $result0 = mysqli_query($db_handle, $sql0);
+            $sql0 = "SELECT * FROM client";
+            $result0 = mysqli_query($db_handle, $sql0);
 
-        echo"
+            echo "
 	<h1> LISTE DE CLIENT </h1>
 
 	<table>
@@ -339,11 +341,11 @@ if( $connect == TRUE){
 	 </tr>
 	";
 
-        while ($data = mysqli_fetch_assoc($result0)) {
+            while ($data = mysqli_fetch_assoc($result0)) {
 
 
-            ///affichage
-            echo "
+                ///affichage
+                echo "
 
 	 <tr> 
 		<td>" . $data['Nom'] . " </td> 
@@ -356,24 +358,318 @@ if( $connect == TRUE){
 
 	";
 
+            }
+
         }
 
-    }
+
+        if ($poste_sess == 2) { //coach
 
 
-    if($poste_sess == 2){ //coach
-
-
-        $sql = "SELECT * FROM coach WHERE Mail = '$login'";
-        $result = mysqli_query($db_handle, $sql);
-        //  $poste = 2;
+            $sql = "SELECT * FROM coach WHERE Mail = '$login'";
+            $result = mysqli_query($db_handle, $sql);
+            //  $poste = 2;
 
 //bouton message
 
 
-        if( $data = mysqli_fetch_assoc($result)){
+            if ($data = mysqli_fetch_assoc($result)) {
 
-            echo" BIENVENUE ". $data["Nom"] ." ! <br>
+                echo " BIENVENUE " . $data["Nom"] . " ! <br>
+
+	<br> 
+	<h1> VOS INFOS </h1>
+
+<table>
+	<tr> <td> Specialité </td>
+	<td>" . $data["Specialite"] . "</td>
+	 </tr>
+
+	 <tr> <td> PHOTO </td>
+	<td>" . $data["Photo"] . "</td>
+	 </tr>
+
+	 <tr> <td> Adresse </td>
+	<td>" . $data["Adresse"] . "</td>
+	 </tr>
+
+	 <tr> <td> Mail </td>
+	<td>" . $data["Mail"] . "</td>
+	 </tr>
+
+	 <tr> <td> Tarif </td>
+	<td>" . $data["Tarif"] . "</td>
+	 </tr>
+
+
+</table>
+
+";
+            }
+
+
+        }
+
+        if ($poste_sess == 3) { //client
+
+            $sql = "SELECT * FROM client WHERE Carte = '$login'";
+            $result = mysqli_query($db_handle, $sql);
+
+
+            if ($data = mysqli_fetch_assoc($result)) {
+
+                echo " BIENVENUE " . $data["Nom"] . " " . $data["Prenom"] . " ! <br>
+
+<br> 
+<h1> VOS INFOS </h1>
+
+<table>
+<tr> <td> Adresse </td>
+<td>" . $data["Adresse"] . "</td>
+ </tr>
+
+ <tr> <td> Numero de carte étudiante </td>
+<td>" . $data["Carte"] . "</td>
+ </tr>
+
+
+ <tr> <td> Carte </td>
+<td>" . $data["Carte"] . "</td>
+ </tr>
+ ";
+
+            }
+
+            echo "
+
+</table>
+<br>
+
+<h1> VOS RDV </h1>
+
+<table>
+
+<tr> <th> SPE</th> <th> COACH </th> <th> HEURES </th> <th> LIEU </th> </tr>";
+
+            $sql = "SELECT * FROM rdv WHERE Carte = '{$data['Carte']}'";
+            $result = mysqli_query($db_handle, $sql);
+            if ($data = mysqli_fetch_assoc($result)) {
+
+                echo "
+<tr> 
+<td> SPE DU COACH </td>
+<td>" . $data["coach"] . "</td>
+<td>" . $data["Heures"] . "</td>
+<td>" . $data["Lieu"] . "</td>
+</tr>
+
+
+";
+
+            }
+
+            "
+</table>
+";
+
+        }
+
+    }
+
+    else{
+        if($who == 0){
+
+            $sql0 = "SELECT * FROM coach WHERE Mail = '$login' AND Mot_de_passe ='$pass'";
+            $sql1 = "SELECT * FROM client WHERE Carte = '$login' AND Mot_de_passe ='$pass'";
+            $result0 = mysqli_query($db_handle, $sql0);
+            $result1 = mysqli_query($db_handle, $sql1);
+
+
+            if($data = mysqli_fetch_assoc($result0)){ //dans la table coach
+
+                $who = 2;
+                $connexion = true;
+                echo "
+<p> OK: Caotch CONNECTE </p>
+";
+            }
+
+
+
+            if($data1 = mysqli_fetch_assoc($result1) && $who == 0){ //dans la table client
+
+                $who = 3;
+                $connexion = true;
+
+                echo"
+<p> OK: client CONNECTE </p>
+";
+
+            }
+
+        }
+
+//connexion fin
+///////////
+
+        if ($who == 1 &&  ($_SESSION["connexion"] !== TRUE or $connect == null)){ //admin
+
+
+            //affichage coach
+
+            $sql = "SELECT * FROM coach";
+            $result = mysqli_query($db_handle, $sql);
+
+            echo"
+
+
+
+
+	<h1> LISTE DE COACH <h1>
+
+	<table>
+	<tr>
+
+	<th> ID </th> <th> Nom </th> <th> Spécialité </th> <th>Photo </th>
+	 <th> Adresse </th> <th> Mail </th> <th> CV </th> <th> Tarif </th> 
+
+	 </tr>
+	";
+
+            while ($data = mysqli_fetch_assoc($result)) {
+
+
+                ///affichage
+                echo "
+
+	 <tr> 
+		<td>" . $data['ID_coach'] . " </td> 
+		<td>" . $data['Nom'] . " </td>
+		<td>" . $data['Specialite'] . " </td>
+		<td> <img src='".$data['Photo']."' height='100' width='100'>" .  " </td>
+		<td>" . $data['Adresse'] . " </td>
+		<td>" . $data['Mail'] . " </td>
+		 <td> CV </td>
+		 <td> " . $data['Tarif'] . "</td>		 
+	 </tr>
+
+	";
+
+            }
+
+            ///ajouter un coatch
+
+            echo"
+
+	</table>
+
+
+	<h1> AJOUTER OU SUPPRIMER COACH </h1>
+
+	<table>
+		<form action = 'admin.php' method = 'post'>
+		<tr> 
+			<td>  NOM </td>
+			<td><input type = 'text' name = 'nom'></td> 
+		</tr>
+		<tr> 
+			<td> Spécialité </td>
+			<td><input type = 'text' name = 'spe'></td> 
+		</tr>
+
+		<tr> 
+			<td> Photo </td>
+			<td><input type = 'text' name = 'photo'></td> 
+		</tr>
+
+		<tr> 
+			<td> Adresse </td>
+			<td><input type = 'text' name = 'ad'></td> 
+		</tr>
+
+		<tr> 
+			<td> Mail </td>
+			<td><input type = 'text' name = 'mail'></td> 
+		</tr>
+
+		<tr> 
+			<td> Tarif </td>
+			<td><input type = 'text' name = 'tarif'></td> 
+		</tr>
+
+		<tr>
+			<td colspan='2'>
+			<INPUT TYPE = 'Submit' Name = 'Ajouter' VALUE = 'Ajouter'>
+		</td>
+		<tr>
+			<td colspan='2'>
+			<INPUT TYPE = 'Submit' Name = 'Supprimer' VALUE = 'Supprimer'>
+		</td>
+		</tr>
+
+		
+
+		</form>
+	</table>	
+		";
+
+
+//////////////////////////TEST
+
+            //affichage clients
+
+            $sql0 = "SELECT * FROM client";
+            $result0 = mysqli_query($db_handle, $sql0);
+
+            echo"
+	<h1> LISTE DE CLIENT <h1>
+
+	<table>
+	<tr>
+
+	<th> NOM </th> <th> Prenom </th> <th> Adresse </th> <th>Numero </th>
+	 <th> Carte </th> <th> Mot de passe </th>  
+
+	 </tr>
+	";
+
+            while ($data = mysqli_fetch_assoc($result0)) {
+
+
+                ///affichage
+                echo "
+
+	 <tr> 
+		<td>" . $data['Nom'] . " </td> 
+		<td>" . $data['Prenom'] . " </td>
+		<td>" . $data['Adresse'] . " </td>
+		<td>" . $data['Numero'] . " </td>
+		<td>" . $data['Carte'] . " </td>
+		 <td> " . $data['Mot_de_passe'] . "</td>		 
+	 </tr>
+
+	";
+
+            }
+
+        }
+
+        if ($who == 2 &&  ($_SESSION["connexion"] !== TRUE or $connect == null)){ //COACH
+
+            $sql = "SELECT * FROM coach WHERE Mail = '$login' AND Mot_de_passe ='$pass'";
+            $result = mysqli_query($db_handle, $sql);
+            $poste = 2;
+
+//bouton message
+
+            echo"
+<button><a href='message.php'> MESSAGE</a> </button>
+";
+
+
+            if( $data = mysqli_fetch_assoc($result)){
+
+                echo" BIENVENUE ". $data["Nom"] ." ! <br>
 
 	<br> 
 	<h1> VOS INFOS </h1>
@@ -403,20 +699,33 @@ if( $connect == TRUE){
 </table>
 
 ";
+            }
+
+
+
+
+
+
+
         }
 
+        if( $who == 3 &&  ($_SESSION["connexion"] !== TRUE or $connect == null)){ //Client
 
-    }
+            $sql = "SELECT * FROM client WHERE Carte = '$login' AND Mot_de_passe ='$pass'";
+            $result = mysqli_query($db_handle, $sql);
+            $poste = 3;
 
-    if($poste_sess == 3){ //client
+//bouton message
 
-        $sql = "SELECT * FROM client WHERE Carte = '$login'";
-        $result = mysqli_query($db_handle, $sql);
+            echo"
+<button><a href='message.php'> MESSAGE</a> </button>
+";
+
+            if( $data = mysqli_fetch_assoc($result)){
+                //if(($data['Carte'] == $id) && ($data["Mot de pasee"] == $pass)) ////A revoirr
 
 
-        if( $data = mysqli_fetch_assoc($result)){
-
-            echo" BIENVENUE ". $data["Nom"] ." ".$data["Prenom"]." ! <br>
+                echo" BIENVENUE ". $data["Nom"] ." ".$data["Prenom"]." ! <br>
 
 <br> 
 <h1> VOS INFOS </h1>
@@ -436,9 +745,9 @@ if( $connect == TRUE){
  </tr>
  ";
 
-        }
+            }
 
-        echo"
+            echo"
 
 </table>
 <br>
@@ -449,11 +758,11 @@ if( $connect == TRUE){
 
 <tr> <th> SPE</th> <th> COACH </th> <th> HEURES </th> <th> LIEU </th> </tr>";
 
-        $sql = "SELECT * FROM rdv WHERE Carte = '{$data['Carte']}'";
-        $result = mysqli_query($db_handle, $sql);
-        if( $data = mysqli_fetch_assoc($result)){
+            $sql = "SELECT * FROM rdv WHERE Carte = '{$data['Carte']}'";
+            $result = mysqli_query($db_handle, $sql);
+            if( $data = mysqli_fetch_assoc($result)){
 
-            echo"
+                echo"
 <tr> 
 <td> SPE DU COACH </td>
 <td>". $data["coach"]."</td>
@@ -464,17 +773,31 @@ if( $connect == TRUE){
 
 ";
 
-        }
+            }
 
-        "
+            "
 </table>
 ";
 
+        }
+
+//Message
+        if ($who == 0 && ($_SESSION["connexion"] !== TRUE or $connect == null)) {
+            echo "Connexion refusée. Utilisateur inconnu.
+<br>
+Etes-vous sûr d'avoir déjà un compte ? <br> <br>
+<button TYPE='button'>
+<a href='index.php'><INPUT TYPE = 'button' Name = 'index' VALUE = 'index'> </a>
+</button> 
+<a href='creation.html'><INPUT TYPE = 'button' Name = 'Pas de compte' VALUE = 'Pas de compte ?'> </a>
+</button> 
+
+";
+        }
+
+
     }
-
 }
-
-
 
 
 //pas encore connecté
@@ -528,7 +851,7 @@ else{
 
 
 
-	<h1> LISTE DE COACH <h1>
+	<h1> LISTE DE COACH </h1>
 
 	<table>
 	<tr>
@@ -625,7 +948,7 @@ else{
 		$result0 = mysqli_query($db_handle, $sql0);
 
 		echo"
-	<h1> LISTE DE CLIENT <h1>
+	<h1> LISTE DE CLIENT </h1>
 
 	<table>
 	<tr>
@@ -663,12 +986,6 @@ else{
 		$result = mysqli_query($db_handle, $sql);
 		$poste = 2;
 
-//bouton message
-
-		echo"
-<button><a href='message.php'> MESSAGE</a> </button>
-";
-
 
 		if( $data = mysqli_fetch_assoc($result)){
 
@@ -705,11 +1022,6 @@ else{
 		}
 
 
-
-
-
-
-
 	}
 
 	if( $who == 3 &&  ($_SESSION["connexion"] !== TRUE or $connect == null)){ //Client
@@ -717,12 +1029,6 @@ else{
 		$sql = "SELECT * FROM client WHERE Carte = '$login' AND Mot_de_passe ='$pass'";
 		$result = mysqli_query($db_handle, $sql);
 		$poste = 3;
-
-//bouton message
-
-		echo"
-<button><a href='message.php'> MESSAGE</a> </button>
-";
 
 		if( $data = mysqli_fetch_assoc($result)){
 			//if(($data['Carte'] == $id) && ($data["Mot de pasee"] == $pass)) ////A revoirr
@@ -798,15 +1104,12 @@ Etes-vous sûr d'avoir déjà un compte ? <br> <br>
 ";
 	}
 
-
-
-
 }
 
 
 
 if ($connexion) {
-	session_start();
+
 	$_SESSION['connexion'] = $connexion;
 	$_SESSION['poste'] = $poste;
 	$_SESSION['login'] = $login; //numero client ou mail
