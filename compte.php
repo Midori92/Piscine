@@ -3,6 +3,7 @@
 session_start();
 $connect = isset($_SESSION['connexion']) ? $_SESSION['connexion'] : null;
 $poste_sess = isset($_SESSION['poste']) ? $_SESSION['poste'] : null;
+$login_sess = isset($_SESSION['login']) ? $_SESSION['login'] : null;
 
 
 $login = isset($_POST["id"])? $_POST["id"] : "";
@@ -177,6 +178,9 @@ $connexion = false;
             </script>
         </div>
     </div>
+    </div>
+</div>
+
     <main>
 
         <div id="rightcolumn">
@@ -195,58 +199,17 @@ if ($pass == "123654789" && $login == "admin") { ///admin $who = 1
 
 //dééjà connecté
 if( $connect == TRUE){
+    $login = $login_sess;
+
+    if($poste_sess == 1){ //admin
 
 
+        //affichage coach
 
+        $sql = "SELECT * FROM coach";
+        $result = mysqli_query($db_handle, $sql);
 
-
-		$sql_aff1 = "SELECT * FROM coach WHERE Mail = '$login' AND Mot_de_passe ='$pass'";
-		$sql_aff2 = "SELECT * FROM client WHERE Carte = '$login' AND Mot_de_passe ='$pass'";
-		$result_aff1 = mysqli_query($db_handle, $sql_aff1);
-		$result_aff2 = mysqli_query($db_handle, $sql_aff2);
-
-
-
-		if($data = mysqli_fetch_assoc($result_aff1)){ //dans la table coach
-			echo" who 3.5 = ".$who."<br>";
-			$who = 2;
-			echo" who0= ". $who."<br>";
-			$connexion = true;
-			echo "
-<p> OK: Caotch CONNECTE </p>
-";
-		}
-
-
-
-		if($data1 = mysqli_fetch_assoc($result_aff2) && $who == 0){ //dans la table client
-
-			$who = 3;
-			echo" who1 = ". $who."<br>";
-			$connexion = true;
-
-			echo"
-<p> OK: client CONNECTE </p>
-";
-
-		}
-
-
-
-	echo" who 3 = ".$who."<br>";
-
-//connexion fin
-///////////
-
-	if ($who == 1){ //admin
-
-
-		//affichage coach
-
-		$sql = "SELECT * FROM coach";
-		$result = mysqli_query($db_handle, $sql);
-
-		echo"
+        echo"
 
 
 
@@ -262,11 +225,11 @@ if( $connect == TRUE){
 	 </tr>
 	";
 
-		while ($data = mysqli_fetch_assoc($result)) {
+        while ($data = mysqli_fetch_assoc($result)) {
 
 
-			///affichage
-			echo "
+            ///affichage
+            echo "
 
 	 <tr> 
 		<td>" . $data['ID_coach'] . " </td> 
@@ -281,11 +244,11 @@ if( $connect == TRUE){
 
 	";
 
-		}
+        }
 
-		///ajouter un coatch
+        ///ajouter un coatch
 
-		echo"
+        echo"
 
 	</table>
 
@@ -342,12 +305,12 @@ if( $connect == TRUE){
 
 //////////////////////////TEST
 
-		//affichage clients
+        //affichage clients
 
-		$sql0 = "SELECT * FROM client";
-		$result0 = mysqli_query($db_handle, $sql0);
+        $sql0 = "SELECT * FROM client";
+        $result0 = mysqli_query($db_handle, $sql0);
 
-		echo"
+        echo"
 	<h1> LISTE DE CLIENT <h1>
 
 	<table>
@@ -359,11 +322,11 @@ if( $connect == TRUE){
 	 </tr>
 	";
 
-		while ($data = mysqli_fetch_assoc($result0)) {
+        while ($data = mysqli_fetch_assoc($result0)) {
 
 
-			///affichage
-			echo "
+            ///affichage
+            echo "
 
 	 <tr> 
 		<td>" . $data['Nom'] . " </td> 
@@ -376,25 +339,24 @@ if( $connect == TRUE){
 
 	";
 
-		}
+        }
 
-	}
+    }
 
-	if ($who == 2){ //COACH
-		echo"OKKKKKKKKK 22222222222";
-		$sql = "SELECT * FROM coach WHERE Mail = '$login' AND Mot_de_passe ='$pass'";
-		$result = mysqli_query($db_handle, $sql);
+
+    if($poste_sess == 2){ //coach
+
+
+        $sql = "SELECT * FROM coach WHERE Mail = '$login'";
+        $result = mysqli_query($db_handle, $sql);
+        //  $poste = 2;
 
 //bouton message
 
-		echo"
-<button><a href='message.php'> MESSAGE</a> </button>
-";
 
+        if( $data = mysqli_fetch_assoc($result)){
 
-		if( $data = mysqli_fetch_assoc($result)){
-
-			echo" BIENVENUE ". $data["Nom"] ." ! <br>
+            echo" BIENVENUE ". $data["Nom"] ." ! <br>
 
 	<br> 
 	<h1> VOS INFOS </h1>
@@ -424,32 +386,20 @@ if( $connect == TRUE){
 </table>
 
 ";
-		}
+        }
 
 
+    }
+
+    if($poste_sess == 3){ //client
+
+        $sql = "SELECT * FROM client WHERE Carte = '$login'";
+        $result = mysqli_query($db_handle, $sql);
 
 
+        if( $data = mysqli_fetch_assoc($result)){
 
-
-
-	}
-
-	if($who == 3){ //Client
-
-		$sql = "SELECT * FROM client WHERE Carte = '$login' AND Mot_de_passe ='$pass'";
-		$result = mysqli_query($db_handle, $sql);
-
-//bouton message
-
-		echo"
-<button><a href='message.php'> MESSAGE</a> </button>
-";
-
-		if( $data = mysqli_fetch_assoc($result)){
-			//if(($data['Carte'] == $id) && ($data["Mot de pasee"] == $pass)) ////A revoirr
-
-
-			echo" BIENVENUE ". $data["Nom"] ." ".$data["Prenom"]." ! <br>
+            echo" BIENVENUE ". $data["Nom"] ." ".$data["Prenom"]." ! <br>
 
 <br> 
 <h1> VOS INFOS </h1>
@@ -469,9 +419,9 @@ if( $connect == TRUE){
  </tr>
  ";
 
-		}
+        }
 
-		echo"
+        echo"
 
 </table>
 <br>
@@ -482,11 +432,11 @@ if( $connect == TRUE){
 
 <tr> <th> SPE</th> <th> COACH </th> <th> HEURES </th> <th> LIEU </th> </tr>";
 
-		$sql = "SELECT * FROM rdv WHERE Carte = '{$data['Carte']}'";
-		$result = mysqli_query($db_handle, $sql);
-		if( $data = mysqli_fetch_assoc($result)){
+        $sql = "SELECT * FROM rdv WHERE Carte = '{$data['Carte']}'";
+        $result = mysqli_query($db_handle, $sql);
+        if( $data = mysqli_fetch_assoc($result)){
 
-			echo"
+            echo"
 <tr> 
 <td> SPE DU COACH </td>
 <td>". $data["coach"]."</td>
@@ -497,21 +447,20 @@ if( $connect == TRUE){
 
 ";
 
-		}
+        }
 
-		"
+        "
 </table>
 ";
 
-	}
+    }
 
-	echo" who 4 = ".$who."<br>";
 }
 
 
 
 
-//pas connecté
+//pas encore connecté
 else{
 
 	if($who == 0){
@@ -837,29 +786,8 @@ Etes-vous sûr d'avoir déjà un compte ? <br> <br>
 
 }
 
-if($_SESSION["connexion"] == TRUE){
 
-	if($poste_sess == 1){
-		echo"Vous êtes admin ! poste_sess == ". $poste_sess." !";
-	}
 
-	if($poste_sess == 2){
-
-		echo"	Vous êtes coach ! poste_sess == ". $poste_sess." !";
-
-	}
-
-	if($poste_sess == 3){
-		echo"Vous êtes client ! poste_sess == ". $poste_sess." !";
-	}
-
-	else{
-		echo"mmmhh welll... ! poste_sess == ". $poste_sess." !";
-	}
-
-}
-
-else {
 if ($connexion) {
 	session_start();
 	$_SESSION['connexion'] = $connexion;
@@ -872,11 +800,15 @@ echo "<p> Vous vous êtes connecté </p>
 <button> <a href='connexion.php'> Connexion  </a> </button>";
 
 
-} else {
-echo "Connexion refusée. Mot de passe invalide.";
 }
+
+else {
+echo "Connexion refusée. Mot de passe invalide.";
+
 }
 
 ?>
 
 
+</div>
+    </main>

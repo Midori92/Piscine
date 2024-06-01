@@ -39,6 +39,16 @@ $conn = new mysqli('localhost', 'root', '',$database);
     <title>Chatroom</title>
 
     <style>
+        #rightcolumn {
+            padding: 10px;
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: aliceblue;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            height: 220px;
+            width: 650px;
+        }
 
         p, h1{
             text-align: center;
@@ -69,7 +79,7 @@ $conn = new mysqli('localhost', 'root', '',$database);
         .send{
             color:white;
             background: blueviolet;
-           margin-right: 20px;
+            margin-right: 20px;
             width: 100px;
             float:right;
             clear: both;
@@ -102,17 +112,7 @@ $conn = new mysqli('localhost', 'root', '',$database);
             cursor:pointer;
 
         }
-    </style><style>
-        #rightcolumn {
-            padding: 10px;
-            max-width: 800px;
-            margin: 20px auto;
-            background-color: aliceblue;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            height: 220px;
-            width: 650px;
-        }
+
     </style>
 </head>
 <body>
@@ -153,14 +153,12 @@ $conn = new mysqli('localhost', 'root', '',$database);
                     <img  src = 'votrecompte.png' alt = 'moncompte' width = '115' heigh = '150' >
                 </a >";
                 }
-
-
                 ?>
+
                 <a href="message.php">
-                    <img  src="message.png" alt="messaguerie" width="115" heigh="150">
+                    <img  src="message.png" alt="messagerie" width="115" heigh="150">
                 </a>
-        </div>
-    </div>
+
 
     <?php
     if($connect !== null) {
@@ -177,6 +175,9 @@ $conn = new mysqli('localhost', 'root', '',$database);
 
     }
     ?>
+        </div>
+    </div>
+
     <br>
     <div id="carousel-container">
         <h1> Nos sports </h1>
@@ -253,18 +254,15 @@ $conn = new mysqli('localhost', 'root', '',$database);
 
         });
     </script>
-</div>
-</div>
+
+
 <main>
 
     <div id="rightcolumn">
 
-
-
-
     <?php // connecté
 
-if( $who != 0 ){ ?>
+if( $connect == TRUE ){ ?>
 
     <?php
 //raisonnement nom coach -> numero client
@@ -381,6 +379,7 @@ while ($data = mysqli_fetch_assoc($result_mess1)) {
 
                 ?>
 </div>
+</div>
 <?php }
 
 
@@ -429,8 +428,12 @@ while ($data = mysqli_fetch_assoc($result_mess2)) {
             ';  }
 
                             ?>
+                        </select>
                     </div>
-                    <?php }
+                    </div>
+
+
+                <?php }
 
 
 
@@ -447,10 +450,9 @@ while ($data = mysqli_fetch_assoc($result_mess2)) {
 
         </form>
 
+    </div>
 
-
-    <button> <a href='deconnect.php'> Deconnexion  </a> </button>
-
+</div>
 
     <?php }
 
@@ -464,12 +466,8 @@ else{ //non connecté
     <button> <a href='compte.html'> Connexion  </a> </button>";
 } ?>
 
-            </div>
-            </div>
-            </div>
 </div>
-    </div>
-            </div>
 </main>
+</div>
 </body>
 </html>
