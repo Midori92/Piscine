@@ -21,15 +21,23 @@ main {
     background-position: center;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    height: 700px;
-    width: 700px;
+    height: 730px;
+    width: 725px;
+    margin : 0 auto;
+}
+
+#nav {
+    color : white ;
+    width: 300px;
+    height : 800px ;
+    clear:left;
+
 }
 
 #wrapper{
     margin : 0 auto;
     width : 680px;
     min-width: 680px ;
-    color: #003300;
     padding-left: 10px;
 } 
 
@@ -39,8 +47,8 @@ main {
     margin-left: -300px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    height: 250px;
-    width: 150px;
+    height: 290px;
+    width: 200px;
 
 }
 #leftcolumn a{
@@ -61,6 +69,7 @@ main {
     width: 650px;
     float: left;
 }
+
 
 
 #map {
@@ -100,12 +109,83 @@ main {
     cursor: pointer;
     font-weight: bold;
 }
-
-#footer { font-size: .60em;  
-font-style: italic;  
-} 
 .contact { font-family: "Times New Roman", serif;  
 font-size: .90em;  
 font-weight: bold;  
-}  
 
+}
+#footer { font-size: .60em;  
+font-style: italic;  
+clear : both;
+} 
+  
+
+
+#nav {
+    color : black ;
+    background-color : white ;
+    text-align : center ;
+    padding : 5px ;
+    width: auto;
+    height : 640px ;
+
+}
+
+#carousel-container {
+    width: 290px;
+    margin: -10px;
+    border: 2px solid #ccc;
+    padding: -10px;
+}
+
+#carrousel {
+    position: relative;
+    height: 350px;
+    width: 300px;
+    margin: -10 auto; 
+    overflow: hidden;
+    padding: -40px;
+}
+
+#carrousel ul {
+    position: absolute;
+    top: 50;
+    left: 900;
+    width: 700%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    transition: left 0.5s;
+    float: left;
+}
+
+#carrousel ul li {
+    float: left;
+    width: 14.2857%;
+    height: auto;
+}
+h1 {  
+      text-align: center;  
+      color: mediumblue;   
+      width: 290px; 
+    } 
+
+footer {
+    background-color: lightblue;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 20px;
+    width: 750px;
+    border-radius: 8px;
+}
+
+
+footer a {
+    color: black;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
