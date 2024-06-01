@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sportify - Parcourir</title>
+    <meta charset="utf-8"/>
+    <link href="prime.css" rel="stylesheet" type="text/css" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <style>
+        .search-container {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .search-container input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #327DC3;
+            border-radius: 5px;
+            outline: none;
+        }
+        .search-container input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #327DC3;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .search-container input[type="submit"]:hover {
+            background-color: #004E87;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <h1 class="titre"><img width="750" heigh="750" src="titre.png" alt="Sportify"></h1>
+        <div id="leftcolumn"> 
+
+            <div id="nav">  
+            <a href="index.html">
+                   <img src="accueilbouton.png" width="115" heigh="115">
+            </a>  
+          
+            <a href="toutparcourir.html">
+               <img  src="parcourirbouton.png" width="115" heigh="115">
+            </a>  
+            
+           <a href="recherche.html">
+                <img  src="recherchebouton.png" width="115" heigh="150">
+           </a>  
+          
+           <a href="rendezvous.html">
+                <img  src="rendezvousbouton.png" width="115" heigh="150">
+           </a>  
+           <a href="votrecompte.html">
+                <img  src="votrecompte.png" width="115" heigh="150">
+           </a> 
+          </div> 
+     </div>
+        <div id="rightcolumn">
+           <div class="search-container">
+        <form action="recherche.php" method="post">
+            <input type="text" name="query" placeholder="Nom, Spécialité ou Etablissement.....">
+            <input type="submit" value="Recherche">
+        </form>
+    </div>
+
+
+                <br>
+                <p class="contact">Sportify <br>  
+                    67 avenue Marceau<br>  
+                    75015 Paris<br><br>  
+                    Contactez nous au : (+33) 01 02 03 04 05 06  
+                </p>
+                <div id="footer">Copyright &copy; 2024 Sportify<br>
+                    <a href="mailto:sportify@gmail.com">sportify@gmail.com</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
