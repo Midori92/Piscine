@@ -27,6 +27,15 @@ $who = 0; //1 -> admin // 2 -> coatch // 3 -> client
 //Si l'utilisateur est valide, vérifier son mot de passe
 $connexion = false;
 ?>
+<!DOCTYPE html>
+<head>
+    <title>Sportify: Mon Compte</title>
+    <meta charset="utf-8"/>
+    <link href="prime.css" rel="stylesheet" type="text/css" />
+    <link rel="icon"type="image/x-icon" href="favicon.ico">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+</head>
+
 
  <style>
         #rightcolumn {
@@ -36,9 +45,19 @@ $connexion = false;
             background-color: aliceblue;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
-            height: 220px;
+            height: auto;
             width: 650px;
         }
+
+        table{
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        h1{
+            text-align: center;
+        }
+
     </style>
 
 <div id="wrapper">
@@ -178,8 +197,6 @@ $connexion = false;
             </script>
         </div>
     </div>
-    </div>
-</div>
 
     <main>
 
@@ -214,7 +231,7 @@ if( $connect == TRUE){
 
 
 
-	<h1> LISTE DE COACH <h1>
+	<h1> LISTE DE COACH </h1>
 
 	<table>
 	<tr>
@@ -311,7 +328,7 @@ if( $connect == TRUE){
         $result0 = mysqli_query($db_handle, $sql0);
 
         echo"
-	<h1> LISTE DE CLIENT <h1>
+	<h1> LISTE DE CLIENT </h1>
 
 	<table>
 	<tr>
@@ -812,3 +829,9 @@ echo "Connexion refusée. Mot de passe invalide.";
 
 </div>
     </main>
+
+    </div>
+</div>
+
+</body>
+</html>

@@ -21,7 +21,7 @@ $connect = isset($_SESSION['connexion']) ? $_SESSION['connexion'] : null;
         background-color: aliceblue;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         border-radius: 8px;
-        height: 220px;
+        height: auto;
         width: 650px;
     }
 </style>
@@ -33,7 +33,7 @@ $connect = isset($_SESSION['connexion']) ? $_SESSION['connexion'] : null;
 
             <div id="nav">
                 <a href="index.php">
-                    <img src="accueilbouton.png" alt = 'index'  width="150" heigh="115">
+                    <img src="accueilbouton.png" alt = 'index' width="150" heigh="115">
                 </a>
 
                 <a href="toutparcourir.php">

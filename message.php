@@ -2,6 +2,8 @@
 
 session_start();
 $connect = isset($_SESSION['connexion']) ? $_SESSION['connexion'] : null;
+$log_sess = isset($_SESSION['login']) ? $_SESSION['login'] : null;
+
 $database = "sportify";
 
 //connectez-vous dans votre BDD
@@ -32,11 +34,13 @@ $conn = new mysqli('localhost', 'root', '',$database);
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <title>Sportify: Messagerie </title>
+    <meta charset="utf-8"/>
+    <link href="prime.css" rel="stylesheet" type="text/css" />
+    <link rel="icon"type="image/x-icon" href="favicon.ico">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 
-    <title>Chatroom</title>
 
     <style>
         #rightcolumn {
@@ -46,7 +50,7 @@ $conn = new mysqli('localhost', 'root', '',$database);
             background-color: aliceblue;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
-            height: 220px;
+            height: auto;
             width: 650px;
         }
 
@@ -101,16 +105,6 @@ $conn = new mysqli('localhost', 'root', '',$database);
             margin-right: auto;
             margin-left: auto;
             clear: both;
-        }
-
-        .icon{
-            position: fixed;
-            border-radius: 50%;
-            background-color: blueviolet;
-            align-items: center;
-            color: white;
-            cursor:pointer;
-
         }
 
     </style>
@@ -175,8 +169,7 @@ $conn = new mysqli('localhost', 'root', '',$database);
 
     }
     ?>
-        </div>
-    </div>
+
 
     <br>
     <div id="carousel-container">
@@ -254,13 +247,16 @@ $conn = new mysqli('localhost', 'root', '',$database);
 
         });
     </script>
-
+        </div>
+    </div>
 
 <main>
 
     <div id="rightcolumn">
 
     <?php // connecté
+
+    if($log_sess !== null && $connect !== null ){
 
 if( $connect == TRUE ){ ?>
 
@@ -358,10 +354,10 @@ while ($data = mysqli_fetch_assoc($result_mess1)) {
 }
 
 ?>
-
+    </div>
 <div class="bas">
 
-        <form action = "" method = "post">
+        <div action = "" method = "post">
 <div class="form1">
             <label for="Coach">Choose a Coach:</label>
             <select id="Coach" name="Coach">
@@ -379,7 +375,7 @@ while ($data = mysqli_fetch_assoc($result_mess1)) {
 
                 ?>
 </div>
-</div>
+        </div>
 <?php }
 
 
@@ -456,6 +452,7 @@ while ($data = mysqli_fetch_assoc($result_mess2)) {
 
     <?php }
 
+    }
 
 
 else{ //non connecté
@@ -469,5 +466,6 @@ else{ //non connecté
 </div>
 </main>
 </div>
+
 </body>
 </html>

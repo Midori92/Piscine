@@ -35,9 +35,16 @@ $db_found = mysqli_select_db($db_handle, $database);
             background-color: aliceblue;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
-            height: 220px;
+            height: auto;
             width: 650px;
         }
+
+        table{
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+
     </style>
 
 <div id="wrapper">
@@ -232,7 +239,7 @@ echo"
  	$result = mysqli_query($db_handle, $sql);
 
 echo"
-<h1> LISTE DE COATCH <h1>
+<h1> LISTE DE COATCH </h1>
 
 <table>
 <tr>

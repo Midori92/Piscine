@@ -42,7 +42,7 @@ $adresse = $adresse1." ". $adresse2. "  ". $ville."  ". $cdp."  ". $pays;
             background-color: aliceblue;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
-            height: 220px;
+            height: auto;
             width: 650px;
         }
     </style>
