@@ -219,7 +219,60 @@ $(document).ready(function(){
                 <div class="button-group">
                     <button class="btn-rdv"  id="book-appointment" onclick="window.location.href='disponibilites.html'">Prendre Rendez-vous</button>
                     <button class="btn-comm" onclick="communicateWithCoach()">Communiquer avec le coach</button>
-    <button class="btn-cv" onclick="window.location.href='clarapetit.pdf'">Voir le CV</button>
+                    <button class="btn-cv" onclick="afficherXML()">Voir le CV </button>
+
+    <pre id="xmlContent" style="display: none;">
+
+        <?xml version="1.0" encoding="UTF-8"?>
+        <coach>
+    <informationsPersonnelles>
+    <p>Information personnelle :</p>
+        <nom>Clara PETIT</nom>
+        <adresse>77 rue de la Danse, 75009 Paris</adresse>
+        <telephone>+33 676543210</telephone>
+        <email>clara.petit@sportify.com</email>
+        <dateDeNaissance>1990-07-15</dateDeNaissance>
+        <nationalite>Française</nationalite>
+</informationsPersonnelles>
+<formation>
+    <p>Formation : </p>
+        <diplome>Master en Danse Contemporaine</diplome>
+        <institution>Conservatoire National Supérieur de Musique et de Danse de Lyon</institution>
+        <annee>2015</annee>
+        <diplome>Licence en Arts de la Danse</diplome>
+        <institution>Université Lumière Lyon 2, Lyon</institution>
+        <annee>2012</annee>
+</formation>
+<experience>
+    <p>Experience professionnelle : </p>
+        <poste>Danseuse Principale</poste>
+        <employeur>Compagnie de Danse Lyon Art</employeur>
+        <periode>2016 - Présent</periode>
+        <responsabilite>Interprétation de rôles principaux dans diverses productions</responsabilite>
+        <responsabilite>Collaboration avec des chorégraphes renommés</responsabilite>
+        <responsabilite>Participation à des festivals de danse nationaux et internationaux</responsabilite>
+        <poste>Chorégraphe Assistant</poste>
+        <employeur>Studio de Danse Harmony, Lyon</employeur>
+        <periode>2013 - 2015</periode>
+        <responsabilite>Assistance dans la création de chorégraphies</responsabilite>
+        <responsabilite>Enseignement de cours de danse contemporaine</responsabilite>
+</experience>
+<competences>
+    <p>Compétences : </p>
+        <competence>Maîtrise de divers styles de danse contemporaine</competence>
+        <competence>Créativité et capacité à interpréter des concepts artistiques</competence>
+        <competence>Expérience dans l'enseignement de la danse</competence>
+        <competence>Collaboration efficace avec d'autres artistes et chorégraphes</competence>
+</competences>
+<langue>
+    <p>Langues :</p>
+        <nom>Français : Langue maternelle</nom>
+        <nom>Anglais : Courant </nom>
+        <nom>Espagnol: Notions</nom>
+</langue>
+
+</coach>
+</pre>
 </div>
 
 <script>
@@ -235,7 +288,12 @@ function communicateWithCoach() {
         alert("Choix invalide. Veuillez réessayer.");
     }
 }
-</script>   
+function afficherXML() {
+            var xmlContent = document.getElementById("xmlContent").innerText;
+            var newWindow = window.open();
+            newWindow.document.write("<pre>" + xmlContent + "</pre>");
+        }
+</script>  
 </main>
 <footer>
         <p class="contact">Sportify <br>  
