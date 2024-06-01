@@ -802,7 +802,7 @@ echo "<p> Vous vous êtes connecté </p>
 
 }
 
-else {
+if(!$connexion && !$connect OR $connect == null) {
 echo "Connexion refusée. Mot de passe invalide.";
 
 }
