@@ -543,8 +543,6 @@ $result = mysqli_query($db_handle, $sql);
             $sql = "SELECT * FROM coach WHERE Mail = '$login'";
             $result = mysqli_query($db_handle, $sql);
             //  $poste = 2;
-            $days = array('lundi','mardi','mercredi','jeudi','vendredi','samedi','dimanche');
-            $heures = array('10h-11h', '11h-12h', '12h-13h','13h-14h','14h-15h','15h-16h','16h-17h','17h-18h','18h-19h','19h-20h','20h-21h','21h-22h');
 
 //bouton message
 
@@ -579,68 +577,8 @@ $result = mysqli_query($db_handle, $sql);
 
 
 </table>
-<br>
-<br>
-<br>
 
-<table>
-<tr>
-<th colspan='8'> <h1>Diponibilité</h1></th>
-</tr>
-
-<tr>
-        <td> </td>
-        <td> Lundi </td>
-        <td> Mardi </td>
-        <td> Mercredi </td>
-        <td> Jeudi </td>
-        <td> Vendredi </td>
-        <td> Samedi </td>
-        <td> Dimanche </td>
-
-</tr>
-   ";
-
-
-$valeur= "" ;
-$hours = "" ;
-                foreach( $heures as $hours){
-
-
-echo"
-    <tr>
-    <td> " . $hours . " </td>
-    ";
-            foreach( $days as $valeur) {
-                        $sql_edt = "SELECT * FROM dispo_coach WHERE Jour = '$valeur' AND Horaire = '$hours'";
-                        $result_edt = mysqli_query($db_handle, $sql_edt);
-
-
-                        if($data = mysqli_fetch_assoc($result_edt)) {
-                            echo "
-                
-                     <td style='background-color: green'> 
-                            Disponible
-                     </td>";
-                        }
-
-                       else {
-                            echo "
-                
-                     <td style='background-color: red'> 
-                            Non disponible
-                     </td>";
-                       }
-                    }
-echo"
-            </tr>";
-                }
-
-                    ?>
-    </tr>
-</table>
-
-<?php
+";
             }
 
 
@@ -1048,7 +986,6 @@ else{
 
 
 		if($data = mysqli_fetch_assoc($result0)){ //dans la table coach
-
 			$who = 2;
 			$connexion = true;
 			echo "
@@ -1368,10 +1305,13 @@ echo "Connexion refusée. Mot de passe invalide.";
 
 </div>
     </main>
-
+<footer>
+        <p class="contact">Sportify <br>  
+            67 avenue Marceau 75015 Paris</p> 
+            Contactez-nous : <a href="mailto:sportify@omneseducation.com">sportify@omneseducation.com</a> | Téléphone : 01 23 45 67 89</p>
+    </footer> 
     </div>
 </div>
-<?php echo "}";?>
 
 </body>
 </html>
