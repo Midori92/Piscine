@@ -1,8 +1,10 @@
 <?php
-
 session_start();
+
 $connect = isset($_SESSION['connexion']) ? $_SESSION['connexion'] : null;
-$log_sess = isset($_SESSION['login']) ? $_SESSION['login'] : null;
+$poste_sess = isset($_SESSION['poste']) ? $_SESSION['poste'] : null;
+$login_sess = isset($_SESSION['login']) ? $_SESSION['login'] : null;
+
 
 $database = "sportify";
 
@@ -11,8 +13,8 @@ $database = "sportify";
 $db_handle = mysqli_connect('localhost', 'root', '' );
 $db_found = mysqli_select_db($db_handle, $database);
 
-$who = $_SESSION['me']; //1/2 ou 3
-$me = $_SESSION['login']; //mail ou carte
+$who = $poste_sess; //1/2 ou 3
+$me = $login_sess; //mail ou carte
 
 //nom du coach a partir de son mail
 $namecoach = "SELECT * From coach WHERE Mail = '$me'";
@@ -28,31 +30,23 @@ $sql = "SELECT * FROM coach";
 $result = mysqli_query($db_handle, $sql);
 
 $conn = new mysqli('localhost', 'root', '',$database);
-//me = email
+//me = email.
+
+echo"<a href='compte.php'>
+                <img  src='votrecompte.png' alt='moncompte' width='115' heigh='150'>
+            </a>";
 
 
 ?>
 
 <!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Sportify: Messagerie </title>
-    <meta charset="utf-8"/>
-    <link href="prime.css" rel="stylesheet" type="text/css" />
-    <link rel="icon"type="image/x-icon" href="favicon.ico">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <meta charset="UTF-8">
 
+    <title>Chatroom</title>
 
     <style>
-        #rightcolumn {
-            padding: 10px;
-            max-width: 800px;
-            margin: 20px auto;
-            background-color: aliceblue;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            height: auto;
-            width: 650px;
-        }
 
         p, h1{
             text-align: center;
@@ -83,7 +77,7 @@ $conn = new mysqli('localhost', 'root', '',$database);
         .send{
             color:white;
             background: blueviolet;
-            margin-right: 20px;
+           margin-right: 20px;
             width: 100px;
             float:right;
             clear: both;
@@ -107,351 +101,222 @@ $conn = new mysqli('localhost', 'root', '',$database);
             clear: both;
         }
 
+        .icon{
+            position: fixed;
+            border-radius: 50%;
+            background-color: blueviolet;
+            align-items: center;
+            color: white;
+            cursor:pointer;
+
+        }
     </style>
 </head>
 <body>
 
+<?php // connecté
 
-<div id="wrapper">
-    <h1 class=titre> <img width="750" heigh="750" src="titre.png"></h1>
-    <div id ="nav">
-        <div id="leftcolumn">
+if($poste_sess !== null && $login_sess !== null && $connect !== null){
+        if( $_SESSION['connexion'] == TRUE){ ?>
 
-                <a href="index.php">
-                    <img src="accueilbouton.png"  alt = 'index' width="150" heigh="115">
-                </a>
+            <?php
+        //raisonnement nom coach -> numero client
+            if ($who == 2){ //coach
 
-                <a href="toutparcourir.php">
-                    <img  src="parcourirbouton.png"  alt = 'paarcourir' width="150" heigh="115">
-                </a>
+                $client = isset($_POST["client"]) ? mysqli_real_escape_string($db_handle, $_POST["client"]) : "";
+                $mess = isset($_POST["message"]) ? mysqli_real_escape_string($db_handle, $_POST["message"]) : "";
 
-                <a href="recherche.html">
-                    <img  src="recherchebouton.png"  alt = 'recherche' width="150" heigh="150">
-                </a>
+                $sql_cl = "SELECT * From client WHERE Nom = '$client'";
+                $result_cl = mysqli_query($db_handle, $sql_cl);
+                $info_client = mysqli_fetch_assoc($result_cl);
 
-                <a href="rendezvous.html">
-                    <img  src="rendezvousbouton.png"  alt = 'rdv' width="150" heigh="150">
-                </a>
+                $sql1 = "INSERT INTO message (source, dest, message) 
+        Values ('$me_coach[Nom]','$info_client[Carte]','$mess')";
 
-                <?php
-                if($connect == TRUE) { //dejà connecté
-                    echo"
-                <a href = 'compte.php' >
-                    <img  src = 'votrecompte.png' alt = 'moncompte' width = '115' heigh = '150' >
-                </a >";
+
+
+                if (mysqli_query($db_handle, $sql1)){
+                    //if($conn->query($sql1) == TRUE) {
+                    echo "
+        <br>
+        <p> Message envoyé ! </p>
+         <p> ".$me." ". $me_coach["Nom"]." ".$client." </p>
+        ";
                 }
-
-                else{ //non connecté
-                    echo"
-                <a href = 'compte.html'>
-                    <img  src = 'votrecompte.png' alt = 'moncompte' width = '115' heigh = '150' >
-                </a >";
-                }
-                ?>
-
-                <a href="message.php">
-                    <img  src="message.png" alt="messagerie" width="115" heigh="150">
-                </a>
-
-
-    <?php
-    if($connect !== null) {
-        if ($_SESSION['connexion'] == TRUE) { //si connecté
-            echo "
-                    <a href='deconnect.php'>
-                <img  src='deco.png' alt='deconnexion' width='115' heigh='150'>
-                </a>";
-        }
-
-        else {
-            echo "OK";
-        };
-
-    }
-    ?>
-
-
-    <br>
-    <div id="carousel-container">
-        <h1> Nos sports </h1>
-        <div id="carrousel">
-            <ul>
-                <li><img src="ten.jpg" width="75%" height="60%"/></li>
-                <li><img src="bask.jpg" width="75%" height="60%"/></li>
-                <li><img src="fo.jpg" width="85%" height="60%"/></li>
-                <li><img src="dan.jpg" width="75%" height="100%"/></li>
-                <li><img src="nat.jpg" width="85%" height="100%"/></li>
-                <li><img src="bo.jpg" width="85%" height="100%"/></li>
-                <li><img src="cours.jpg" width="85%" height="100%"/></li>
-
-            </ul>
-        </div>
-
-    </div>
-    <script>
-        $(document).ready(function(){
-            var $carrousel = $('#carrousel');
-            var $img = $('#carrousel img');
-            var $thumbnails = $('#thumbnails');
-            var indexImg = $img.length - 1;
-            var i = 0;
-
-
-            $carrousel.append('<div class="controls"><span class="prev">Precedent</span><span class="next">Suivant</span></div>');
-
-
-            $img.each(function(index) {
-                var thumbnailSrc = $(this).attr('src');
-                $thumbnails.append('<img src="' + thumbnailSrc + '" alt="thumbnail' + index + '">');
-            });
-
-
-            $thumbnails.on('click', 'img', function() {
-                var index = $(this).index();
-                changeSlide(index);
-            });
-
-
-            $('.next').click(function(){
-                changeSlide(i + 1);
-            });
-
-
-            $('.prev').click(function(){
-                changeSlide(i - 1);
-            });
-
-
-            function changeSlide(index) {
-                if (index < 0) {
-                    index = indexImg;
-                } else if (index > indexImg) {
-                    index = 0;
-                }
-                i = index;
-                var translateValue = -(100 / $img.length) * i + '%';
-                $carrousel.find('ul').css('transform', 'translateX(' + translateValue + ')');
-                // Mettre en surbrillance la miniature correspondante
-                $thumbnails.find('img').removeClass('active');
-                $thumbnails.find('img').eq(i).addClass('active');
             }
 
 
-            function slideImg() {
-                setInterval(function() {
-                    changeSlide(i + 1);
-                }, 4000);
+
+            if ($who == 3){ //client
+
+                $coach = isset($_POST["Coach"]) ? mysqli_real_escape_string($db_handle, $_POST["Coach"]) : "";
+                $mess = isset($_POST["message"]) ? mysqli_real_escape_string($db_handle, $_POST["message"]) : "";
+
+                $sql1 = "INSERT INTO message (source, dest, message) 
+        Values ('$me_client[Carte]','$coach','$mess')";
+
+
+
+            if (mysqli_query($db_handle, $sql1)){
+                //if($conn->query($sql1) == TRUE) {
+                    echo "
+        <br>
+        <p> Message envoyé ! </p>
+         <p> ".$_SESSION['login']." ". $me_client["Nom"]." ".$coach."</p>
+        ";
             }
+         }
 
-            slideImg();
-
-        });
-    </script>
-        </div>
-    </div>
-
-<main>
-
-    <div id="rightcolumn">
-
-    <?php // connecté
-
-    if($log_sess !== null && $connect !== null ){
-
-if( $connect == TRUE ){ ?>
-
-    <?php
-//raisonnement nom coach -> numero client
-    if ($who == 2){ //coach
-
-        $client = isset($_POST["client"]) ? mysqli_real_escape_string($db_handle, $_POST["client"]) : "";
-        $mess = isset($_POST["message"]) ? mysqli_real_escape_string($db_handle, $_POST["message"]) : "";
-
-        $sql_cl = "SELECT * From client WHERE Nom = '$client'";
-        $result_cl = mysqli_query($db_handle, $sql_cl);
-        $info_client = mysqli_fetch_assoc($result_cl);
-
-        $sql1 = "INSERT INTO message (source, dest, message) 
-Values ('$me_coach[Nom]','$info_client[Carte]','$mess')";
-
-
-
-        if (mysqli_query($db_handle, $sql1)){
-            //if($conn->query($sql1) == TRUE) {
-            echo "
-<br>
-<p> Message envoyé ! </p>
- <p> ".$me." ". $me_coach["Nom"]." ".$client." </p>
-";
-        }
-    }
-
-
-
-    if ($who == 3){ //client
-
-        $coach = isset($_POST["Coach"]) ? mysqli_real_escape_string($db_handle, $_POST["Coach"]) : "";
-        $mess = isset($_POST["message"]) ? mysqli_real_escape_string($db_handle, $_POST["message"]) : "";
-
-        $sql1 = "INSERT INTO message (source, dest, message) 
-Values ('$me_client[Carte]','$coach','$mess')";
-
-
-
-    if (mysqli_query($db_handle, $sql1)){
-        //if($conn->query($sql1) == TRUE) {
-            echo "
-<br>
-<p> Message envoyé ! </p>
- <p> ".$_SESSION['login']." ". $me_client["Nom"]." ".$coach."</p>
-";
-    }
- }
-
-    //affichage  message
-    ?>
-
-
-<h1> Messages </h1>
-
-<div class="chat">
-    <div class="titre"> <p>
-            <?php  if($who == 2) //coach
-            {
-                echo"$client";
-            }
-
-            if($who == 3) //client
-            {
-                echo "$coach";
-            }
-
+            //affichage  message
             ?>
-        </p></div>
-    <div class="message">
 
 
+        <h1> Messages </h1>
 
-<?php
+        <div class="chat">
+            <div class="titre"> <p>
+                    <?php  if($who == 2) //coach
+                    {
+                        echo"$client";
+                    }
 
-if($who == 3) //client
+                    if($who == 3) //client
+                    {
+                        echo "$coach";
+                    }
 
-{
+                    ?>
+                </p></div>
+            <div class="message">
 
-//$caoch == nom et prenom du coach choisi
+        <?php
 
-$sql_mess1 = "SELECT * FROM message WHERE (source = '$me' AND dest = '$coach') OR (source = '$coach' AND dest = '$me') ORDER BY id ASC";
-$result_mess1 = mysqli_query($db_handle, $sql_mess1);
+        if($who == 3) //client
 
-while ($data = mysqli_fetch_assoc($result_mess1)) {
+        {
 
-    if ($data['source'] == $me) {
-        echo "<p class='send'>".$data['message']."</p>";
-    } else {
-        echo "<p class='recu'>".$data['message']."</p>";
-    }
+        //$caoch == nom et prenom du coach choisi
 
-}
+        $sql_mess1 = "SELECT * FROM message WHERE (source = '$me' AND dest = '$coach') OR (source = '$coach' AND dest = '$me') ORDER BY id ASC";
+        $result_mess1 = mysqli_query($db_handle, $sql_mess1);
 
-?>
-    </div>
-<div class="bas">
+        while ($data = mysqli_fetch_assoc($result_mess1)) {
 
-        <form action = "" method = "post">
-<div class="form1">
-            <label for="Coach">Choose a Coach:</label>
-            <select id="Coach" name="Coach">
+            if ($data['source'] == $me) {
+                echo "<p class='send'>".$data['message']."</p>";
+            } else {
+                echo "<p class='recu'>".$data['message']."</p>";
+            }
 
+        }
 
+        ?>
 
-                <?php
-
-                ///affichage nom coach
-                while ($data = mysqli_fetch_assoc($result)){
-
-                    echo'
-            <option value="'.$data["Nom"].'">'. $data["Nom"].'</option>
-            ';  }
-
-                ?>
-</div>
-        </form>
-<?php }
-
-
-if($who == 2) //coach
-
-{
-
-$sql_coach = "SELECT * FROM client";
-$result_coach = mysqli_query($db_handle, $sql_coach);
-
-
-$sql_mess2 = "SELECT * FROM message WHERE (source = '$me_coach[Nom]' AND dest = '$info_client[Carte]') OR (source = '$info_client[Carte]' AND dest = '$me_coach[Nom]') ORDER BY id ASC";
-$result_mess2 = mysqli_query($db_handle, $sql_mess2);
-
-while ($data = mysqli_fetch_assoc($result_mess2)) {
-
-    if ($data['source'] == $me_coach['Nom']) {
-        echo "<p class='send'>".$data['message']."</p>";
-    } else {
-        echo "<p class='recu'>".$data['message']."</p>";
-    }
-
-}
-//ORDER BY ID ASC
-
-
-
-?>
-
-            <div class="bas">
+        <div class="bas">
 
                 <form action = "" method = "post">
-                    <div class="form1">
-                        <label for="client">Choose a client:</label>
-                        <select id="client" name="client">
+        <div class="form1">
+                    <label for="Coach">Choose a Coach:</label>
+                    <select id="Coach" name="Coach">
 
 
 
-                            <?php
+                        <?php
 
-                            ///affichage nom client
-                            while ($data = mysqli_fetch_assoc($result_coach)){
+                        ///affichage nom coach
+                        while ($data = mysqli_fetch_assoc($result)){
 
-                                echo'
-            <option value="'.$data["Nom"].'">'. $data["Nom"].' '.$data["Prenom"].'</option>
-            ';  }
+                            echo'
+                    <option value="'.$data["Nom"].'">'. $data["Nom"].'</option>
+                    ';  }
 
-                            ?>
-                        </select>
+                        ?>
+        </div>
+        <?php }
+
+
+        if($who == 2) //coach
+
+        {
+
+        $sql_coach = "SELECT * FROM client";
+        $result_coach = mysqli_query($db_handle, $sql_coach);
+
+
+        $sql_mess2 = "SELECT * FROM message WHERE (source = '$me_coach[Nom]' AND dest = '$info_client[Carte]') OR (source = '$info_client[Carte]' AND dest = '$me_coach[Nom]') ORDER BY id ASC";
+        $result_mess2 = mysqli_query($db_handle, $sql_mess2);
+
+        while ($data = mysqli_fetch_assoc($result_mess2)) {
+
+            if ($data['source'] == $me_coach['Nom']) {
+                echo "<p class='send'>".$data['message']."</p>";
+            } else {
+                echo "<p class='recu'>".$data['message']."</p>";
+            }
+
+        }
+        //ORDER BY ID ASC
+
+
+
+        ?>
+
+                    <div class="bas">
+
+                        <form action = "" method = "post">
+                            <div class="form1">
+                                <label for="client">Choose a client:</label>
+                                <select id="client" name="client">
+
+
+
+                                    <?php
+
+                                    ///affichage nom client
+                                    while ($data = mysqli_fetch_assoc($result_coach)){
+
+                                        echo'
+                    <option value="'.$data["Nom"].'">'. $data["Nom"].' '.$data["Prenom"].'</option>
+                    ';  }
+
+                                    ?>
+                            </div>
+                            <?php }
+
+
+
+        ?>
+
+
+                    <div class="form2">
+                    <input type = "text" name = "message" required>
+                    <INPUT TYPE = "Submit" Name = "Submit1" VALUE = "Envoyer">
+
+
                     </div>
-                    </div>
 
 
-                <?php }
+                </form>
 
-
-
-?>
-
-
-            <div class="form2">
-            <input type = "text" name = "message" required>
-            <INPUT TYPE = "Submit" Name = "Submit1" VALUE = "Envoyer">
-
-
+        </div>
             </div>
+        </div>
 
 
-        </form>
 
-    </div>
+            <button> <a href='deconnect.php'> Deconnexion  </a> </button>
 
-</div>
 
-    <?php }
+            <?php }
 
+        else{ //non connecté
+
+                echo" <p> Vous devez créer un compte ou vous connecter</p>
+            
+            <button> <a href='creation.html'> Créer un compte  </a> </button>
+            <button> <a href='compte.html'> Connexion  </a> </button>";
+            }
+        
     }
 
 
@@ -463,9 +328,6 @@ else{ //non connecté
     <button> <a href='compte.html'> Connexion  </a> </button>";
 } ?>
 
-</div>
-</main>
-</div>
 
 </body>
 </html>
