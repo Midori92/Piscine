@@ -58,6 +58,10 @@ $connexion = false;
             text-align: center;
         }
 
+        footer{
+            clear: both;
+        }
+
 
 
     </style>
@@ -543,6 +547,8 @@ $result = mysqli_query($db_handle, $sql);
             $sql = "SELECT * FROM coach WHERE Mail = '$login'";
             $result = mysqli_query($db_handle, $sql);
             //  $poste = 2;
+            $days = array('lundi','mardi','mercredi','jeudi','vendredi','samedi','dimanche');
+            $heures = array('10h-11h', '11h-12h', '12h-13h','13h-14h','14h-15h','15h-16h','16h-17h','17h-18h','18h-19h','19h-20h','20h-21h','21h-22h');
 
 //bouton message
 
@@ -578,7 +584,65 @@ $result = mysqli_query($db_handle, $sql);
 
 </table>
 
-";
+
+<table>
+<tr>
+<th colspan='8'> <h1>Diponibilité</h1></th>
+</tr>
+
+<tr>
+        <td> </td>
+        <td> Lundi </td>
+        <td> Mardi </td>
+        <td> Mercredi </td>
+        <td> Jeudi </td>
+        <td> Vendredi </td>
+        <td> Samedi </td>
+        <td> Dimanche </td>
+
+</tr>
+   ";
+
+
+$valeur= "" ;
+$hours = "" ;
+                foreach( $heures as $hours){
+
+
+echo"
+    <tr>
+    <td> " . $hours . " </td>
+    ";
+            foreach( $days as $valeur) {
+                        $sql_edt = "SELECT * FROM dispo_coach WHERE Jour = '$valeur' AND Horaire = '$hours'";
+                        $result_edt = mysqli_query($db_handle, $sql_edt);
+
+
+                        if($data = mysqli_fetch_assoc($result_edt)) {
+                            echo "
+                
+                     <td style='background-color: green'> 
+                            Disponible
+                     </td>";
+                        }
+
+                       else {
+                            echo "
+                
+                     <td style='background-color: red'> 
+                            Non disponible
+                     </td>";
+                       }
+                    }
+echo"
+            </tr>";
+                }
+
+                    ?>
+    </tr>
+</table>
+
+<?php
             }
 
 
@@ -650,8 +714,8 @@ $result = mysqli_query($db_handle, $sql);
 
     }
 
-    else{
-        if($who == 0){
+    else {
+        if ($who == 0) {
 
             $sql0 = "SELECT * FROM coach WHERE Mail = '$login' AND Mot_de_passe ='$pass'";
             $sql1 = "SELECT * FROM client WHERE Carte = '$login' AND Mot_de_passe ='$pass'";
@@ -659,7 +723,7 @@ $result = mysqli_query($db_handle, $sql);
             $result1 = mysqli_query($db_handle, $sql1);
 
 
-            if($data = mysqli_fetch_assoc($result0)){ //dans la table coach
+            if ($data = mysqli_fetch_assoc($result0)) { //dans la table coach
 
                 $who = 2;
                 $connexion = true;
@@ -669,13 +733,12 @@ $result = mysqli_query($db_handle, $sql);
             }
 
 
-
-            if($data1 = mysqli_fetch_assoc($result1) && $who == 0){ //dans la table client
+            if ($data1 = mysqli_fetch_assoc($result1) && $who == 0) { //dans la table client
 
                 $who = 3;
                 $connexion = true;
 
-                echo"
+                echo "
 <p> OK: client CONNECTE </p>
 ";
 
@@ -686,7 +749,7 @@ $result = mysqli_query($db_handle, $sql);
 //connexion fin
 ///////////
 
-        if ($who == 1 &&  ($_SESSION["connexion"] !== TRUE or $connect == null)){ //admin
+        if ($who == 1 && ($_SESSION["connexion"] !== TRUE or $connect == null)) { //admin
 
 
             //affichage coach
@@ -694,7 +757,7 @@ $result = mysqli_query($db_handle, $sql);
             $sql = "SELECT * FROM coach";
             $result = mysqli_query($db_handle, $sql);
 
-            echo"
+            echo "
 
 
 
@@ -720,7 +783,7 @@ $result = mysqli_query($db_handle, $sql);
 		<td>" . $data['ID_coach'] . " </td> 
 		<td>" . $data['Nom'] . " </td>
 		<td>" . $data['Specialite'] . " </td>
-		<td> <img src='".$data['Photo']."' height='100' width='100'>" .  " </td>
+		<td> <img src='" . $data['Photo'] . "' height='100' width='100'>" . " </td>
 		<td>" . $data['Adresse'] . " </td>
 		<td>" . $data['Mail'] . " </td>
 		 <td> CV </td>
@@ -733,7 +796,7 @@ $result = mysqli_query($db_handle, $sql);
 
             ///ajouter un coatch
 
-            echo"
+            echo "
 
 	</table>
 
@@ -795,7 +858,7 @@ $result = mysqli_query($db_handle, $sql);
             $sql0 = "SELECT * FROM client";
             $result0 = mysqli_query($db_handle, $sql0);
 
-            echo"
+            echo "
 	<h1> LISTE DE CLIENT <h1>
 
 	<table>
@@ -828,100 +891,145 @@ $result = mysqli_query($db_handle, $sql);
 
         }
 
-        if ($who == 2 &&  ($_SESSION["connexion"] !== TRUE or $connect == null)){ //COACH
+        if ($who == 2 && ($_SESSION["connexion"] !== TRUE or $connect == null)) { //COACH
 
             $sql = "SELECT * FROM coach WHERE Mail = '$login' AND Mot_de_passe ='$pass'";
             $result = mysqli_query($db_handle, $sql);
             $poste = 2;
 
-//bouton message
 
-            echo"
-<button><a href='message.php'> MESSAGE</a> </button>
-";
+            if ($data = mysqli_fetch_assoc($result)) {
 
-
-            if( $data = mysqli_fetch_assoc($result)){
-
-                echo" BIENVENUE ". $data["Nom"] ." ! <br>
+                echo " BIENVENUE " . $data["Nom"] . " ! <br>
 
 	<br> 
 	<h1> VOS INFOS </h1>
 
 <table>
 	<tr> <td> Specialité </td>
-	<td>". $data["Specialite"] ."</td>
+	<td>" . $data["Specialite"] . "</td>
 	 </tr>
 
 	 <tr> <td> PHOTO </td>
-	<td>". $data["Photo"] ."</td>
+	<td>" . $data["Photo"] . "</td>
 	 </tr>
 
 	 <tr> <td> Adresse </td>
-	<td>". $data["Adresse"] ."</td>
+	<td>" . $data["Adresse"] . "</td>
 	 </tr>
 
 	 <tr> <td> Mail </td>
-	<td>". $data["Mail"] ."</td>
+	<td>" . $data["Mail"] . "</td>
 	 </tr>
 
 	 <tr> <td> Tarif </td>
-	<td>". $data["Tarif"] ."</td>
+	<td>" . $data["Tarif"] . "</td>
 	 </tr>
 
 
 </table>
 
-";
-            }
+
+        
+<table>
+<tr>
+<th colspan='8'> <h1>Diponibilité</h1></th>
+</tr>
+
+<tr>
+        <td> </td>
+        <td> Lundi </td>
+        <td> Mardi </td>
+        <td> Mercredi </td>
+        <td> Jeudi </td>
+        <td> Vendredi </td>
+        <td> Samedi </td>
+        <td> Dimanche </td>
+
+</tr>
+   ";
+
+                $days = array('lundi','mardi','mercredi','jeudi','vendredi','samedi','dimanche');
+                $heures = array('10h-11h', '11h-12h', '12h-13h','13h-14h','14h-15h','15h-16h','16h-17h','17h-18h','18h-19h','19h-20h','20h-21h','21h-22h');
+
+$valeur= "" ;
+$hours = "" ;
+foreach( $heures as $hours){
 
 
+    echo"
+    <tr>
+    <td> " . $hours . " </td>
+    ";
+    foreach( $days as $valeur) {
+        $sql_edt = "SELECT * FROM dispo_coach WHERE Jour = '$valeur' AND Horaire = '$hours'";
+        $result_edt = mysqli_query($db_handle, $sql_edt);
 
 
-
-
-
+        if($data = mysqli_fetch_assoc($result_edt)) {
+            echo "
+                
+                     <td style='background-color: green'> 
+                            Disponible
+                     </td>";
         }
 
-        if( $who == 3 &&  ($_SESSION["connexion"] !== TRUE or $connect == null)){ //Client
+        else {
+            echo "
+                
+                     <td style='background-color: red'> 
+                            Non disponible
+                     </td>";
+        }
+    }
+    echo"
+            </tr>";
+}
 
-            $sql = "SELECT * FROM client WHERE Carte = '$login' AND Mot_de_passe ='$pass'";
-            $result = mysqli_query($db_handle, $sql);
-            $poste = 3;
+?>
+            </tr>
+            </table>
+          <?php  }
+
+            if ($who == 3 && ($_SESSION["connexion"] !== TRUE or $connect == null)) { //Client
+
+                $sql = "SELECT * FROM client WHERE Carte = '$login' AND Mot_de_passe ='$pass'";
+                $result = mysqli_query($db_handle, $sql);
+                $poste = 3;
 
 //bouton message
 
-            echo"
+                echo "
 <button><a href='message.php'> MESSAGE</a> </button>
 ";
 
-            if( $data = mysqli_fetch_assoc($result)){
-                //if(($data['Carte'] == $id) && ($data["Mot de pasee"] == $pass)) ////A revoirr
+                if ($data = mysqli_fetch_assoc($result)) {
+                    //if(($data['Carte'] == $id) && ($data["Mot de pasee"] == $pass)) ////A revoirr
 
 
-                echo" BIENVENUE ". $data["Nom"] ." ".$data["Prenom"]." ! <br>
+                    echo " BIENVENUE " . $data["Nom"] . " " . $data["Prenom"] . " ! <br>
 
 <br> 
 <h1> VOS INFOS </h1>
 
 <table>
 <tr> <td> Adresse </td>
-<td>". $data["Adresse"] ."</td>
+<td>" . $data["Adresse"] . "</td>
  </tr>
 
  <tr> <td> Numero de carte étudiante </td>
-<td>". $data["Carte"] ."</td>
+<td>" . $data["Carte"] . "</td>
  </tr>
 
 
  <tr> <td> Carte </td>
-<td>". $data["Carte"] ."</td>
+<td>" . $data["Carte"] . "</td>
  </tr>
  ";
 
-            }
+                }
 
-            echo"
+                echo "
 
 </table>
 <br>
@@ -932,32 +1040,32 @@ $result = mysqli_query($db_handle, $sql);
 
 <tr> <th> SPE</th> <th> COACH </th> <th> HEURES </th> <th> LIEU </th> </tr>";
 
-            $sql = "SELECT * FROM rdv WHERE Carte = '{$data['Carte']}'";
-            $result = mysqli_query($db_handle, $sql);
-            if( $data = mysqli_fetch_assoc($result)){
+                $sql = "SELECT * FROM rdv WHERE Carte = '{$data['Carte']}'";
+                $result = mysqli_query($db_handle, $sql);
+                if ($data = mysqli_fetch_assoc($result)) {
 
-                echo"
+                    echo "
 <tr> 
 <td> SPE DU COACH </td>
-<td>". $data["coach"]."</td>
-<td>". $data["Heures"]."</td>
-<td>". $data["Lieu"]."</td>
+<td>" . $data["coach"] . "</td>
+<td>" . $data["Heures"] . "</td>
+<td>" . $data["Lieu"] . "</td>
 </tr>
 
 
 ";
 
-            }
+                }
 
-            "
+                "
 </table>
 ";
 
-        }
+            }
 
 //Message
-        if ($who == 0 && ($_SESSION["connexion"] !== TRUE or $connect == null)) {
-            echo "Connexion refusée. Utilisateur inconnu.
+            if ($who == 0 && ($_SESSION["connexion"] !== TRUE or $connect == null)) {
+                echo "Connexion refusée. Utilisateur inconnu.
 <br>
 Etes-vous sûr d'avoir déjà un compte ? <br> <br>
 <button TYPE='button'>
@@ -967,59 +1075,60 @@ Etes-vous sûr d'avoir déjà un compte ? <br> <br>
 </button> 
 
 ";
+            }
+
+
         }
-
-
     }
+
 }
 
 
 //pas encore connecté
-else{
+else {
 
-	if($who == 0){
+    if ($who == 0) {
 
-		$sql0 = "SELECT * FROM coach WHERE Mail = '$login' AND Mot_de_passe ='$pass'";
-		$sql1 = "SELECT * FROM client WHERE Carte = '$login' AND Mot_de_passe ='$pass'";
-		$result0 = mysqli_query($db_handle, $sql0);
-		$result1 = mysqli_query($db_handle, $sql1);
+        $sql0 = "SELECT * FROM coach WHERE Mail = '$login' AND Mot_de_passe ='$pass'";
+        $sql1 = "SELECT * FROM client WHERE Carte = '$login' AND Mot_de_passe ='$pass'";
+        $result0 = mysqli_query($db_handle, $sql0);
+        $result1 = mysqli_query($db_handle, $sql1);
 
 
-		if($data = mysqli_fetch_assoc($result0)){ //dans la table coach
-			$who = 2;
-			$connexion = true;
-			echo "
+        if ($data = mysqli_fetch_assoc($result0)) { //dans la table coach
+            $who = 2;
+            $connexion = true;
+            echo "
 <p> OK: Caotch CONNECTE </p>
 ";
-		}
+        }
 
 
+        if ($data1 = mysqli_fetch_assoc($result1) && $who == 0) { //dans la table client
 
-		if($data1 = mysqli_fetch_assoc($result1) && $who == 0){ //dans la table client
+            $who = 3;
+            $connexion = true;
 
-			$who = 3;
-			$connexion = true;
-
-			echo"
+            echo "
 <p> OK: client CONNECTE </p>
 ";
 
-		}
+        }
 
-	}
+    }
 
 //connexion fin
 ///////////
 
-	if ($who == 1 &&  ($_SESSION["connexion"] !== TRUE or $connect == null)){ //admin
+    if ($who == 1 && ($_SESSION["connexion"] !== TRUE or $connect == null)) { //admin
 
 
-		//affichage coach
+        //affichage coach
 
-		$sql = "SELECT * FROM coach";
-		$result = mysqli_query($db_handle, $sql);
+        $sql = "SELECT * FROM coach";
+        $result = mysqli_query($db_handle, $sql);
 
-		echo"
+        echo "
 
 
 
@@ -1035,17 +1144,17 @@ else{
 	 </tr>
 	";
 
-		while ($data = mysqli_fetch_assoc($result)) {
+        while ($data = mysqli_fetch_assoc($result)) {
 
 
-			///affichage
-			echo "
+            ///affichage
+            echo "
 
 	 <tr> 
 		<td>" . $data['ID_coach'] . " </td> 
 		<td>" . $data['Nom'] . " </td>
 		<td>" . $data['Specialite'] . " </td>
-		<td> <img src='".$data['Photo']."' height='100' width='100'>" .  " </td>
+		<td> <img src='" . $data['Photo'] . "' height='100' width='100'>" . " </td>
 		<td>" . $data['Adresse'] . " </td>
 		<td>" . $data['Mail'] . " </td>
 		 <td> CV </td>
@@ -1054,11 +1163,11 @@ else{
 
 	";
 
-		}
+        }
 
-		///ajouter un coatch
+        ///ajouter un coatch
 
-		echo"
+        echo "
 
 	</table>
 
@@ -1115,12 +1224,12 @@ else{
 
 //////////////////////////TEST
 
-		//affichage clients
+        //affichage clients
 
-		$sql0 = "SELECT * FROM client";
-		$result0 = mysqli_query($db_handle, $sql0);
+        $sql0 = "SELECT * FROM client";
+        $result0 = mysqli_query($db_handle, $sql0);
 
-		echo"
+        echo "
 	<h1> LISTE DE CLIENT </h1>
 
 	<table>
@@ -1132,11 +1241,11 @@ else{
 	 </tr>
 	";
 
-		while ($data = mysqli_fetch_assoc($result0)) {
+        while ($data = mysqli_fetch_assoc($result0)) {
 
 
-			///affichage
-			echo "
+            ///affichage
+            echo "
 
 	 <tr> 
 		<td>" . $data['Nom'] . " </td> 
@@ -1149,87 +1258,150 @@ else{
 
 	";
 
-		}
+        }
 
-	}
+    }
 
-	if ($who == 2 &&  ($_SESSION["connexion"] !== TRUE or $connect == null)){ //COACH
+    if ($who == 2 && ($_SESSION["connexion"] !== TRUE or $connect == null)) { //COACH
 
-		$sql = "SELECT * FROM coach WHERE Mail = '$login' AND Mot_de_passe ='$pass'";
-		$result = mysqli_query($db_handle, $sql);
-		$poste = 2;
+        $sql = "SELECT * FROM coach WHERE Mail = '$login' AND Mot_de_passe ='$pass'";
+        $result = mysqli_query($db_handle, $sql);
+        $poste = 2;
 
 
-		if( $data = mysqli_fetch_assoc($result)){
+        if ($data = mysqli_fetch_assoc($result)) {
 
-			echo" BIENVENUE ". $data["Nom"] ." ! <br>
+            echo " BIENVENUE " . $data["Nom"] . " ! <br>
 
 	<br> 
 	<h1> VOS INFOS </h1>
 
 <table>
 	<tr> <td> Specialité </td>
-	<td>". $data["Specialite"] ."</td>
+	<td>" . $data["Specialite"] . "</td>
 	 </tr>
 
 	 <tr> <td> PHOTO </td>
-	<td>". $data["Photo"] ."</td>
+	<td>" . $data["Photo"] . "</td>
 	 </tr>
 
 	 <tr> <td> Adresse </td>
-	<td>". $data["Adresse"] ."</td>
+	<td>" . $data["Adresse"] . "</td>
 	 </tr>
 
 	 <tr> <td> Mail </td>
-	<td>". $data["Mail"] ."</td>
+	<td>" . $data["Mail"] . "</td>
 	 </tr>
 
 	 <tr> <td> Tarif </td>
-	<td>". $data["Tarif"] ."</td>
+	<td>" . $data["Tarif"] . "</td>
 	 </tr>
 
 
 </table>
 
-";
-		}
+        
+<table>
+<tr>
+<th colspan='8'> <h1>Diponibilité</h1></th>
+</tr>
+
+<tr>
+        <td> </td>
+        <td> Lundi </td>
+        <td> Mardi </td>
+        <td> Mercredi </td>
+        <td> Jeudi </td>
+        <td> Vendredi </td>
+        <td> Samedi </td>
+        <td> Dimanche </td>
+
+</tr>
+   ";
+
+$days = array('lundi','mardi','mercredi','jeudi','vendredi','samedi','dimanche');
+$heures = array('10h-11h', '11h-12h', '12h-13h','13h-14h','14h-15h','15h-16h','16h-17h','17h-18h','18h-19h','19h-20h','20h-21h','21h-22h');
+
+$valeur= "" ;
+$hours = "" ;
+foreach( $heures as $hours){
 
 
-	}
-
-	if( $who == 3 &&  ($_SESSION["connexion"] !== TRUE or $connect == null)){ //Client
-
-		$sql = "SELECT * FROM client WHERE Carte = '$login' AND Mot_de_passe ='$pass'";
-		$result = mysqli_query($db_handle, $sql);
-		$poste = 3;
-
-		if( $data = mysqli_fetch_assoc($result)){
-			//if(($data['Carte'] == $id) && ($data["Mot de pasee"] == $pass)) ////A revoirr
+    echo"
+    <tr>
+    <td> " . $hours . " </td>
+    ";
+    foreach( $days as $valeur) {
+        $sql_edt = "SELECT * FROM dispo_coach WHERE Jour = '$valeur' AND Horaire = '$hours'";
+        $result_edt = mysqli_query($db_handle, $sql_edt);
 
 
-			echo" BIENVENUE ". $data["Nom"] ." ".$data["Prenom"]." ! <br>
+        if($data = mysqli_fetch_assoc($result_edt)) {
+            echo "
+                
+                     <td style='background-color: green'> 
+                            Disponible
+                     </td>";
+        }
+
+        else {
+            echo "
+                
+                     <td style='background-color: red'> 
+                            Non disponible
+                     </td>";
+        }
+    }
+    echo"
+            </tr>";
+}
+
+?>
+            </tr>
+            </table>
+
+
+<?php
+
+
+            }
+        }
+
+
+
+        if ($who == 3 && ($_SESSION["connexion"] !== TRUE or $connect == null)) { //Client
+
+            $sql = "SELECT * FROM client WHERE Carte = '$login' AND Mot_de_passe ='$pass'";
+            $result = mysqli_query($db_handle, $sql);
+            $poste = 3;
+
+            if ($data = mysqli_fetch_assoc($result)) {
+                //if(($data['Carte'] == $id) && ($data["Mot de pasee"] == $pass)) ////A revoirr
+
+
+                echo " BIENVENUE " . $data["Nom"] . " " . $data["Prenom"] . " ! <br>
 
 <br> 
 <h1> VOS INFOS </h1>
 
 <table>
 <tr> <td> Adresse </td>
-<td>". $data["Adresse"] ."</td>
+<td>" . $data["Adresse"] . "</td>
  </tr>
 
  <tr> <td> Numero de carte étudiante </td>
-<td>". $data["Carte"] ."</td>
+<td>" . $data["Carte"] . "</td>
  </tr>
 
 
  <tr> <td> Carte </td>
-<td>". $data["Carte"] ."</td>
+<td>" . $data["Carte"] . "</td>
  </tr>
  ";
 
-		}
+            }
 
-		echo"
+            echo "
 
 </table>
 <br>
@@ -1240,32 +1412,32 @@ else{
 
 <tr> <th> SPE</th> <th> COACH </th> <th> HEURES </th> <th> LIEU </th> </tr>";
 
-		$sql = "SELECT * FROM rdv WHERE Carte = '{$data['Carte']}'";
-		$result = mysqli_query($db_handle, $sql);
-		if( $data = mysqli_fetch_assoc($result)){
+            $sql = "SELECT * FROM rdv WHERE Carte = '{$data['Carte']}'";
+            $result = mysqli_query($db_handle, $sql);
+            if ($data = mysqli_fetch_assoc($result)) {
 
-			echo"
+                echo "
 <tr> 
 <td> SPE DU COACH </td>
-<td>". $data["coach"]."</td>
-<td>". $data["Heures"]."</td>
-<td>". $data["Lieu"]."</td>
+<td>" . $data["coach"] . "</td>
+<td>" . $data["Heures"] . "</td>
+<td>" . $data["Lieu"] . "</td>
 </tr>
 
 
 ";
 
-		}
+            }
 
-		"
+            "
 </table>
 ";
 
-	}
+        }
 
 //Message
-	if ($who == 0 && ($_SESSION["connexion"] !== TRUE or $connect == null)) {
-		echo "Connexion refusée. Utilisateur inconnu.
+        if ($who == 0 && ($_SESSION["connexion"] !== TRUE or $connect == null)) {
+            echo "Connexion refusée. Utilisateur inconnu.
 <br>
 Etes-vous sûr d'avoir déjà un compte ? <br> <br>
 <button TYPE='button'>
@@ -1275,11 +1447,11 @@ Etes-vous sûr d'avoir déjà un compte ? <br> <br>
 </button> 
 
 ";
-	}
+        }
+
+
 
 }
-
-
 
 if ($connexion) {
 
