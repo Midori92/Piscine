@@ -266,18 +266,24 @@ if($connect !== null) {
 	";
 
             }
+            echo"</table>";
 
             ///ajouter un coatch
 
             echo "
 
-	</table>
+	
 
 
-	<h1> AJOUTER OU SUPPRIMER COACH </h1>
+	
 
 	<table>
 		<form action = 'admin.php' method = 'post'>
+		<tr>
+		<td colspan='2'>
+		<h1> AJOUTER OU SUPPRIMER COACH </h1>
+</td>
+</tr>
 		<tr> 
 			<td>  NOM </td>
 			<td><input type = 'text' name = 'nom'></td> 
@@ -329,9 +335,14 @@ if($connect !== null) {
             $result0 = mysqli_query($db_handle, $sql0);
 
             echo "
-	<h1> LISTE DE CLIENT </h1>
+	
 
 	<table>
+	<tr>
+	<th colspan='6'>
+	<h1> LISTE DE CLIENT </h1>
+</th>
+</tr>
 	<tr>
 
 	<th> NOM </th> <th> Prenom </th> <th> Adresse </th> <th>Numero </th>
@@ -366,10 +377,16 @@ $result = mysqli_query($db_handle, $sql);
 
 ?>
 
-            <h1> Disponibilité des coachs </h1>
+        </table>
+
+
             <table>
                 <form action="admin.php" method="post">
-
+                        <tr>
+                            <td colspan="2">
+                                <h1> Disponibilité des coachs </h1>
+                            </td>
+                        </tr>
                     <tr>
                         <td><label for="Coach">Choose a Coach:</label></td>
                         <td>  <select id="Coach" name="Coach">
@@ -395,6 +412,10 @@ $result = mysqli_query($db_handle, $sql);
                             <option value="lundi" > Lundi </option>
                             <option value="mardi" > Mardi </option>
                             <option value="mercredi" > Mercredi </option>
+                                <option value="jeudi" > Jeudi </option>
+                                <option value="vendredi" > Vendredi </option>
+                                <option value="samedi" > Samedi </option>
+                                <option value="dimanche" > Dimanche </option>
                             </select>
                         </td>
 
@@ -407,6 +428,16 @@ $result = mysqli_query($db_handle, $sql);
                             <option value="1011" > 10h-11h </option>
                             <option value="1112" > 11h-12h </option>
                             <option value="1213" > 12h-13h </option>
+                                <option value="1314" > 13h-14h </option>
+                                <option value="1415" > 14h-15h </option>
+                                <option value="1516" > 15h-16h </option>
+                                <option value="1617" > 16h-17h </option>
+                                <option value="1718" > 17h-18h </option>
+                                <option value="1819" > 18h-19h </option>
+                                <option value="1920" > 19h-20h </option>
+                                <option value="2021" > 20h-21h </option>
+                                <option value="2122" > 21h-22h </option>
+
                             </select>
                         </td>
 

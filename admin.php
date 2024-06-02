@@ -298,12 +298,12 @@ WHERE Nom = '$nom' AND Specialite = '$spe'";
   //      if ($data = mysqli_fetch_assoc($result)) {
     //        $ID = $data[ID_coach]; }
 
+        $conn = new mysqli('localhost', 'root', '', $database);
 
 
-            if($horaire == '1011'){
+        if($horaire == '1011'){
             $heure = '10h-11h';
         }
-
 
         if($horaire == '1112'){
             $heure = '11h-12h';
@@ -313,17 +313,52 @@ WHERE Nom = '$nom' AND Specialite = '$spe'";
             $heure = '12h-13h';
         }
 
+        if($horaire == '1314'){
+            $heure = '13h-14h';
+        }
+
+        if($horaire == '1415'){
+            $heure = '14h-15h';
+        }
+
+        if($horaire == '1516'){
+            $heure = '15h-16h';
+        }
+
+        if($horaire == '1617'){
+            $heure = '16h-17h';
+        }
+
+        if($horaire == '1718'){
+            $heure = '17h-18h';
+        }
+
+        if($horaire == '1819'){
+            $heure = '18h-19h';
+        }
+
+        if($horaire == '1920'){
+            $heure = '19h-20h';
+        }
+
+        if($horaire == '2021'){
+            $heure = '20h-21h';
+        }
+
+        if($horaire == '2122'){
+            $heure = '21h-22h';
+        }
 
 
 
 
 
-        //  $sql_dispo = "INSERT INTO dispo_coach (Nom, jour, horaire) Values ('$coach','$jour','$heure')";
-       /// if ($conn->query($sql1) == TRUE)
-        ///  //     {
-        //    //         echo "<p> Vous avez ajouté la disponibilité de " . $coach . " le " . $jour . " à " . $heure . " ! </p>";
-        //
-        // }
+       $sql_dispo = "INSERT INTO dispo_coach (Nom, jour, horaire) Values ('$coach','$jour','$heure')";
+       if ($conn->query($sql_dispo) == TRUE)
+          {
+             echo "<p> Vous avez ajouté la disponibilité de " . $coach . " le " . $jour . " à " . $heure . " ! </p>";
+
+         }
 
 
     }
