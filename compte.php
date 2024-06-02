@@ -208,7 +208,13 @@ $connexion = false;
 
 
 
+	//connexion debuts
+if ($pass == "123654789" && $login == "admin") { ///admin $who = 1
+	$connexion = true;
+	$poste = 1;
+	$who = 1;
 
+}
 
 //dééjà connecté
 
@@ -707,15 +713,6 @@ echo"
     }
 
     else{
-
-        //connexion debuts
-        if ($pass == "123654789" && $login == "admin") { ///admin $who = 1
-            $connexion = true;
-            $poste = 1;
-            $who = 1;
-
-        }
-
         if($who == 0){
 
             $sql0 = "SELECT * FROM coach WHERE Mail = '$login' AND Mot_de_passe ='$pass'";
@@ -1077,7 +1074,7 @@ else{
 //connexion fin
 ///////////
 
-	if ($who == 1 ){ //admin
+	if ($who == 1 &&  ($_SESSION["connexion"] !== TRUE or $connect == null)){ //admin
 
 
 		//affichage coach
@@ -1346,26 +1343,23 @@ Etes-vous sûr d'avoir déjà un compte ? <br> <br>
 }
 
 
-if($connect !== null) {
-    if ($connexion) {
 
-        $_SESSION['connexion'] = $connexion;
-        $_SESSION['poste'] = $poste;
-        $_SESSION['login'] = $login; //numero client ou mail
-        $_SESSION['me'] = $who;
+if ($connexion) {
+
+	$_SESSION['connexion'] = $connexion;
+	$_SESSION['poste'] = $poste;
+	$_SESSION['login'] = $login; //numero client ou mail
 
 
-        echo "<p> Vous vous êtes connecté </p>
+echo "<p> Vous vous êtes connecté </p>
 <button> <a href='deconnect.php'> Deconnexion  </a> </button>
 <button> <a href='connexion.php'> Connexion  </a> </button>";
 
 
-    }
+}
 
-    if (!$connexion ) {
-        echo "Connexion refusée. Mot de passe invalide.";
-
-    }
+if(!$connexion && !$connect OR $connect == null) {
+echo "Connexion refusée. Mot de passe invalide.";
 
 }
 
