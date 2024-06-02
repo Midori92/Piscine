@@ -13,6 +13,7 @@ $tarif = isset($_POST["tarif"])? $_POST["tarif"] : "";
 $horaire = isset($_POST["horaire"])? $_POST["horaire"] : "";
 $coach = isset($_POST["Coach"])? $_POST["Coach"] : "";
 $jour = isset($_POST["day"])? $_POST["day"] : "";
+$salle = isset($_POST["salle"])? $_POST["salle"] : "";
 
 $database = "sportify";
 
@@ -288,15 +289,10 @@ WHERE Nom = '$nom' AND Specialite = '$spe'";
     }
 
 
-    //ajout disponibilité dans bdd
+    //ajout disponibilité de coach dans bdd
 
     if (isset($_POST['Disponibilite'])) {
 
-       // $sql = "SELECT * FROM coach WHERE Nom = '$coach'";
-//        $result = mysqli_query($db_handle, $sql);
-//
-  //      if ($data = mysqli_fetch_assoc($result)) {
-    //        $ID = $data[ID_coach]; }
 
         $conn = new mysqli('localhost', 'root', '', $database);
 
@@ -362,7 +358,80 @@ WHERE Nom = '$nom' AND Specialite = '$spe'";
 
 
     }
+
+    //ajout disponibilite salle dans bdd
+
+    if (isset($_POST['Disponibilite_salle'])) {
+
+
+        $conn = new mysqli('localhost', 'root', '', $database);
+
+
+        if($horaire == '1011'){
+            $heure = '10h-11h';
+        }
+
+        if($horaire == '1112'){
+            $heure = '11h-12h';
+        }
+
+        if($horaire == '1213'){
+            $heure = '12h-13h';
+        }
+
+        if($horaire == '1314'){
+            $heure = '13h-14h';
+        }
+
+        if($horaire == '1415'){
+            $heure = '14h-15h';
+        }
+
+        if($horaire == '1516'){
+            $heure = '15h-16h';
+        }
+
+        if($horaire == '1617'){
+            $heure = '16h-17h';
+        }
+
+        if($horaire == '1718'){
+            $heure = '17h-18h';
+        }
+
+        if($horaire == '1819'){
+            $heure = '18h-19h';
+        }
+
+        if($horaire == '1920'){
+            $heure = '19h-20h';
+        }
+
+        if($horaire == '2021'){
+            $heure = '20h-21h';
+        }
+
+        if($horaire == '2122'){
+            $heure = '21h-22h';
+        }
+
+
+
+
+
+        $sql_dispo_salle = "INSERT INTO dispo_lieu (Salle, jour, horaire) Values ('$salle','$jour','$heure')";
+        if ($conn->query($sql_dispo_salle) == TRUE)
+        {
+            echo "<p> Vous avez ajouté la disponibilité de la salle " . $salle . " le " . $jour . " à " . $heure . " ! </p>";
+
+        }
+
+
+    }
+
 }
+
+
 ?>
 
         </div>

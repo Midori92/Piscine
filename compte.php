@@ -450,6 +450,89 @@ $result = mysqli_query($db_handle, $sql);
                 </tr>
                 </form>
             </table>
+
+<?php
+            ///Disponibilité des salles
+
+    //        $sql_salle = "SELECT * FROM salle_sport";
+     //       $result = mysqli_query($db_handle, $sql_salle);
+
+            ?>
+
+            </table>
+
+
+            <table>
+                <form action="admin.php" method="post">
+                    <tr>
+                        <td colspan="2">
+                            <h1> Disponibilité des Salles </h1>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label for="salle">Choose a salle:</label></td>
+                        <td>  <select id="salle" name="salle">
+
+                                <?php
+
+                                ///affichage nom coach
+                                while ($data = mysqli_fetch_assoc($result)){
+
+                                    echo'
+            <option value="'.$data["Salle"].'">'. $data["Salle"].'</option>
+            ';  }
+
+                                ?>
+                        </td>
+                        </select>
+                    </tr>
+                    <tr>
+                        <td><label for="day">Choose le jour:</label>
+
+                        </td>
+                        <td><select id="day" name="day">
+                                <option value="lundi" > Lundi </option>
+                                <option value="mardi" > Mardi </option>
+                                <option value="mercredi" > Mercredi </option>
+                                <option value="jeudi" > Jeudi </option>
+                                <option value="vendredi" > Vendredi </option>
+                                <option value="samedi" > Samedi </option>
+                                <option value="dimanche" > Dimanche </option>
+                            </select>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td><label for="horaire">Horaires:</label>
+
+                        </td>
+                        <td><select id="horaire" name="horaire">
+                                <option value="1011" > 10h-11h </option>
+                                <option value="1112" > 11h-12h </option>
+                                <option value="1213" > 12h-13h </option>
+                                <option value="1314" > 13h-14h </option>
+                                <option value="1415" > 14h-15h </option>
+                                <option value="1516" > 15h-16h </option>
+                                <option value="1617" > 16h-17h </option>
+                                <option value="1718" > 17h-18h </option>
+                                <option value="1819" > 18h-19h </option>
+                                <option value="1920" > 19h-20h </option>
+                                <option value="2021" > 20h-21h </option>
+                                <option value="2122" > 21h-22h </option>
+
+                            </select>
+                        </td>
+
+                    </tr>
+
+                    <tr>
+                        <td colspan="2">
+                            <INPUT TYPE = "Submit" Name = "Disponibilite_salle" VALUE = "Disponibilite_salle">
+                        </td>
+                    </tr>
+                </form>
+            </table>
+
 <?php
         }
 
