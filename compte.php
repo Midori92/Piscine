@@ -58,6 +58,8 @@ $connexion = false;
             text-align: center;
         }
 
+
+
     </style>
 
 <div id="wrapper">
@@ -321,9 +323,6 @@ if($connect !== null) {
 	</table>	
 		";
 
-
-//////////////////////////TEST
-
             //affichage clients
 
             $sql0 = "SELECT * FROM client";
@@ -360,6 +359,67 @@ if($connect !== null) {
 
             }
 
+///Disponibilité des coach
+
+$sql = "SELECT * FROM coach";
+$result = mysqli_query($db_handle, $sql);
+
+?>
+
+            <h1> Disponibilité des coachs </h1>
+            <table>
+                <form action="admin.php" method="post">
+
+                    <tr>
+                        <td><label for="Coach">Choose a Coach:</label></td>
+                        <td>  <select id="Coach" name="Coach">
+
+                                <?php
+
+                                ///affichage nom coach
+                                while ($data = mysqli_fetch_assoc($result)){
+
+                                    echo'
+            <option value="'.$data["Nom"].'">'. $data["Nom"].'</option>
+            ';  }
+
+                                ?>
+                        </td>
+                        </select>
+                    </tr>
+                    <tr>
+                        <td><label for="day">Choose le jour:</label>
+
+                        </td>
+                        <td><select id="day" name="day">
+                            <option value="lundi" > Lundi </option>
+                            <option value="mardi" > Mardi </option>
+                            <option value="mercredi" > Mercredi </option>
+                            </select>
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td><label for="horaire">Horaire</label>
+
+                        </td>
+                        <td><select id="horaire" name="horaire">
+                            <option value="1011" > 10h-11h </option>
+                            <option value="1112" > 11h-12h </option>
+                            <option value="1213" > 12h-13h </option>
+                            </select>
+                        </td>
+
+                    </tr>
+
+                <tr>
+                    <td colspan="2">
+                        <INPUT TYPE = "Submit" Name = "Disponibilite" VALUE = "Disponibilite">
+                    </td>
+                </tr>
+                </form>
+            </table>
+<?php
         }
 
 

@@ -10,11 +10,30 @@
     <header>
         <nav>
             <ul>
-                <li><a href="index.html">Accueil</a></li>
-                <li><a href="tout-parcourir.html">Tout Parcourir</a></li>
+                <li><a href="index.php">Accueil</a></li>
+                <li><a href="toutparcourir.php">Tout Parcourir</a></li>
                 <li><a href="recherche.html">Recherche</a></li>
                 <li><a href="rendez-vous.html">Rendez-vous</a></li>
-                <li><a href="votre-compte.html">Votre Compte</a></li>
+                <li> <?php
+                if($connect == TRUE) { //dejà connecté
+                    echo"
+                <a href = 'compte.php' >
+                    <img  src = 'votrecompte.png' alt = 'moncompte' width = '115' heigh = '150' >
+                    </a >";
+                    }
+
+                    else{ //non connecté
+                    echo"
+                    <a href = 'compte.html'>
+                        <img  src = 'votrecompte.png' alt = 'moncompte' width = '115' heigh = '150' >
+                    </a >";
+                    }
+                    ?>
+
+                    <a href="message.php">
+                        <img  src="message.png" alt="messagerie" width="115" heigh="150">
+                    </a>
+                </li>
             </ul>
         </nav>
     </header>

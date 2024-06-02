@@ -357,7 +357,7 @@ while ($data = mysqli_fetch_assoc($result_mess1)) {
     </div>
 <div class="bas">
 
-        <div action = "" method = "post">
+        <form action = "" method = "post">
 <div class="form1">
             <label for="Coach">Choose a Coach:</label>
             <select id="Coach" name="Coach">
@@ -375,7 +375,7 @@ while ($data = mysqli_fetch_assoc($result_mess1)) {
 
                 ?>
 </div>
-        </div>
+        </form>
 <?php }
 
 

@@ -9,6 +9,11 @@ $photo = isset($_POST["photo"])? $_POST["photo"] : "";
 $adresse = isset($_POST["ad"])? $_POST["ad"] : "";
 $mail = isset($_POST["mail"])? $_POST["mail"] : "";
 $tarif = isset($_POST["tarif"])? $_POST["tarif"] : "";
+
+$horaire = isset($_POST["horaire"])? $_POST["horaire"] : "";
+$coach = isset($_POST["Coach"])? $_POST["Coach"] : "";
+$jour = isset($_POST["day"])? $_POST["day"] : "";
+
 $database = "sportify";
 
 //connectez-vous dans votre BDD//
@@ -37,6 +42,10 @@ $db_found = mysqli_select_db($db_handle, $database);
             border-radius: 8px;
             height: auto;
             width: 650px;
+        }
+
+        p{
+            color: black;
         }
 
         table{
@@ -184,6 +193,7 @@ $db_found = mysqli_select_db($db_handle, $database);
             </script>
         </div>
     </div>
+    </div>
     <main>
 
         <div id="rightcolumn">
@@ -192,53 +202,51 @@ $db_found = mysqli_select_db($db_handle, $database);
 <?php
 if ($db_found) {
 
- //ajouter coach dans database
+    //ajouter coach dans database
 
 
 ///Si c'est le bouton Ajouter qui est présser
-if(isset($_POST['Ajouter'])){
+    if (isset($_POST['Ajouter'])) {
 
-$conn = new mysqli('localhost', 'root', '',$database);
+        $conn = new mysqli('localhost', 'root', '', $database);
 
-$sql1 = "INSERT INTO coach (Nom, Specialite, Adresse, Photo, Mail, Tarif) 
+        $sql1 = "INSERT INTO coach (Nom, Specialite, Adresse, Photo, Mail, Tarif) 
 Values ('$nom','$spe','$photo','$adresse','$mail','$tarif')";
 
 
-if($conn->query($sql1) == TRUE){
-echo"
+        if ($conn->query($sql1) == TRUE) {
+            echo "
 
 <p> Vous avez ajoutez '. $nom .'  </p>
 
 
 ";
 
-}
-}
+        }
+    }
 
 ///Si c'est le bouton supprimer qui est présser
-if(isset($_POST['Supprimer'])){
+    if (isset($_POST['Supprimer'])) {
 
-$conn = new mysqli('localhost', 'root', '',$database);
+        $conn = new mysqli('localhost', 'root', '', $database);
 
-$sql1 = "DELETE FROM coach
+        $sql1 = "DELETE FROM coach
 WHERE Nom = '$nom' AND Specialite = '$spe'";
 
-if($conn->query($sql1)){
+        if ($conn->query($sql1)) {
 
-echo"
+            echo "
 <p> Vous avez supprimé le coatch: '. $nom .'  </p>
-"
-;
-}
-
+";
+        }
 
 
 //affichage coach
 
-	 $sql = "SELECT * FROM coach";
- 	$result = mysqli_query($db_handle, $sql);
+        $sql = "SELECT * FROM coach";
+        $result = mysqli_query($db_handle, $sql);
 
-echo"
+        echo "
 <h1> LISTE DE COATCH </h1>
 
 <table>
@@ -250,11 +258,11 @@ echo"
  </tr>
 ";
 
- 	 while ($data = mysqli_fetch_assoc($result)) {
+        while ($data = mysqli_fetch_assoc($result)) {
 
 
 ///affichage
-echo "
+            echo "
 
 
 
@@ -262,7 +270,7 @@ echo "
 <td>" . $data['ID_coach'] . " </td> 
 <td>" . $data['Nom'] . " </td>
 <td>" . $data['Specialite'] . " </td>
-<td> <img src='".$data['Photo']."' height='100' width='100'>" .  " </td>
+<td> <img src='" . $data['Photo'] . "' height='100' width='100'>" . " </td>
 <td>" . $data['Adresse'] . " </td>
 <td>" . $data['Mail'] . " </td>
  <td> CV </td>
@@ -275,9 +283,50 @@ echo "
 
 ";
 
-}
+        }
 
-}
+    }
+
+
+    //ajout disponibilité dans bdd
+
+    if (isset($_POST['Disponibilite'])) {
+
+       // $sql = "SELECT * FROM coach WHERE Nom = '$coach'";
+//        $result = mysqli_query($db_handle, $sql);
+//
+  //      if ($data = mysqli_fetch_assoc($result)) {
+    //        $ID = $data[ID_coach]; }
+
+
+
+            if($horaire == '1011'){
+            $heure = '10h-11h';
+        }
+
+
+        if($horaire == '1112'){
+            $heure = '11h-12h';
+        }
+
+        if($horaire == '1213'){
+            $heure = '12h-13h';
+        }
+
+
+
+
+
+
+        //  $sql_dispo = "INSERT INTO dispo_coach (Nom, jour, horaire) Values ('$coach','$jour','$heure')";
+       /// if ($conn->query($sql1) == TRUE)
+        ///  //     {
+        //    //         echo "<p> Vous avez ajouté la disponibilité de " . $coach . " le " . $jour . " à " . $heure . " ! </p>";
+        //
+        // }
+
+
+    }
 }
 ?>
 
