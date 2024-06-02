@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : dim. 02 juin 2024 à 10:37
+-- Généré le : dim. 02 juin 2024 à 14:31
 -- Version du serveur : 8.3.0
 -- Version de PHP : 8.2.18
 
@@ -97,9 +97,19 @@ DROP TABLE IF EXISTS `dispo_coach`;
 CREATE TABLE IF NOT EXISTS `dispo_coach` (
   `Nom` varchar(255) NOT NULL,
   `Jour` varchar(255) DEFAULT NULL,
-  `Horaire` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`Nom`)
+  `Horaire` varchar(255) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `dispo_coach`
+--
+
+INSERT INTO `dispo_coach` (`Nom`, `Jour`, `Horaire`) VALUES
+('Guy DUMAIS', 'lundi', '10h-11h'),
+('Elisa Garnier', 'mercredi', '19h-20h'),
+('Jean Dupont', 'lundi', '10h-11h'),
+('Jean Dupont', 'lundi', '10h-11h'),
+('Jean Dupont', 'vendredi', '10h-11h');
 
 -- --------------------------------------------------------
 
