@@ -101,15 +101,7 @@ echo"<a href='compte.php'>
             clear: both;
         }
 
-        .icon{
-            position: fixed;
-            border-radius: 50%;
-            background-color: blueviolet;
-            align-items: center;
-            color: white;
-            cursor:pointer;
 
-        }
     </style>
 </head>
 <body>
@@ -316,7 +308,7 @@ if($poste_sess !== null && $login_sess !== null && $connect !== null){
             <button> <a href='creation.html'> Créer un compte  </a> </button>
             <button> <a href='compte.html'> Connexion  </a> </button>";
             }
-        
+
     }
 
 
