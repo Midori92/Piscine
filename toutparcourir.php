@@ -53,46 +53,37 @@ $connect = isset($_SESSION['connexion']) ? $_SESSION['connexion'] : null;
                 <img  src="recherchebouton.png" width="150" heigh="150">
            </a>
 
-           <a href="rendezvous.html">
+           <a href="rendezvous.php">
                 <img  src="rendezvousbouton.png" width="150" heigh="150">
            </a>
                 <?php
 
                 if($connect == TRUE) { //dejà connecté
-                    echo"
+                    echo("
                     <a href = 'compte.php' >
                 <img  src = 'votrecompte.png' alt = 'moncompte' width = '115' heigh = '150' >
-                </a >";
-                }
-
-                else{ //non connecté
-                echo"
-                <a href = 'compte.html' >
-                    <img  src = 'votrecompte.png' alt = 'moncompte' width = '115' heigh = '150' >
-                </a >";
+                </a >");
                 }
 
 
                 ?>
                 <a href="message.php">
-                    <img  src="message.png" alt="messagerie" width="115" heigh="150">
+                    <img  src="message.png" alt="messagerie" width="150" heigh="150">
                 </a>
 
 
                 <?php
             if($connect !== null) {
                 if ($_SESSION['connexion'] == TRUE) { //si connecté
-                    echo "
+                    echo ("
                     <a href='deconnect.php'>
                 <img  src='deco.png' alt='deconnexion' width='115' heigh='150'>
-                </a>";
+                </a>");
                 }
 
                 else {
-                echo "OK";
-                };
-
-                }
+                echo ("OK");
+                };}
                 ?>
  <br>
            <div id="carousel-container">
@@ -168,7 +159,7 @@ $(document).ready(function(){
 
   slideImg();
 
-});
+};
 </script>
           </div>
      </div>
@@ -201,4 +192,3 @@ $(document).ready(function(){
     </div>
 </body>
 </html>
-
