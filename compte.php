@@ -17,8 +17,8 @@ $users = array("admin" => "123654789");
 $database = "sportify";
 
 //connectez-vous dans votre BDD
-//Rappel : votre serveur = localhost | votre login = root | votre mot de pass = '' (rien)
-$db_handle = mysqli_connect('localhost', 'root', '' );
+//Rappel : votre serveur = localhost | votre login = root | votre mot de pass = '' (rien)s
+$db_handle = mysqli_connect('localhost', 'root', '',$database, 3307 );
 $db_found = mysqli_select_db($db_handle, $database);
 
 //0 -> non connecté
@@ -212,11 +212,11 @@ $connexion = false;
 
 
 
-	//connexion debuts
+    //connexion debuts
 if ($pass == "123654789" && $login == "admin") { ///admin $who = 1
-	$connexion = true;
-	$poste = 1;
-	$who = 1;
+    $connexion = true;
+    $poste = 1;
+    $who = 1;
 
 }
 
@@ -239,16 +239,16 @@ if($connect !== null) {
 
 
 
-	<h1> LISTE DE COACH </h1>
+    <h1> LISTE DE COACH </h1>
 
-	<table>
-	<tr>
+    <table>
+    <tr>
 
-	<th> ID </th> <th> Nom </th> <th> Spécialité </th> <th>Photo </th>
-	 <th> Adresse </th> <th> Mail </th> <th> CV </th> <th> Tarif </th> 
+    <th> ID </th> <th> Nom </th> <th> Spécialité </th> <th>Photo </th>
+     <th> Adresse </th> <th> Mail </th> <th> CV </th> <th> Tarif </th> 
 
-	 </tr>
-	";
+     </tr>
+    ";
 
             while ($data = mysqli_fetch_assoc($result)) {
 
@@ -256,18 +256,18 @@ if($connect !== null) {
                 ///affichage
                 echo "
 
-	 <tr> 
-		<td>" . $data['ID_coach'] . " </td> 
-		<td>" . $data['Nom'] . " </td>
-		<td>" . $data['Specialite'] . " </td>
-		<td> <img src='" . $data['Photo'] . "' height='100' width='100'>" . " </td>
-		<td>" . $data['Adresse'] . " </td>
-		<td>" . $data['Mail'] . " </td>
-		 <td> CV </td>
-		 <td> " . $data['Tarif'] . "</td>		 
-	 </tr>
+     <tr> 
+        <td>" . $data['ID_coach'] . " </td> 
+        <td>" . $data['Nom'] . " </td>
+        <td>" . $data['Specialite'] . " </td>
+        <td> <img src='" . $data['Photo'] . "' height='100' width='100'>" . " </td>
+        <td>" . $data['Adresse'] . " </td>
+        <td>" . $data['Mail'] . " </td>
+         <td> CV </td>
+         <td> " . $data['Tarif'] . "</td>        
+     </tr>
 
-	";
+    ";
 
             }
             echo"</table>";
@@ -276,62 +276,62 @@ if($connect !== null) {
 
             echo "
 
-	
+    
 
 
-	
+    
 
-	<table>
-		<form action = 'admin.php' method = 'post'>
-		<tr>
-		<td colspan='2'>
-		<h1> AJOUTER OU SUPPRIMER COACH </h1>
+    <table>
+        <form action = 'admin.php' method = 'post'>
+        <tr>
+        <td colspan='2'>
+        <h1> AJOUTER OU SUPPRIMER COACH </h1>
 </td>
 </tr>
-		<tr> 
-			<td>  NOM </td>
-			<td><input type = 'text' name = 'nom'></td> 
-		</tr>
-		<tr> 
-			<td> Spécialité </td>
-			<td><input type = 'text' name = 'spe'></td> 
-		</tr>
+        <tr> 
+            <td>  NOM </td>
+            <td><input type = 'text' name = 'nom'></td> 
+        </tr>
+        <tr> 
+            <td> Spécialité </td>
+            <td><input type = 'text' name = 'spe'></td> 
+        </tr>
 
-		<tr> 
-			<td> Photo </td>
-			<td><input type = 'text' name = 'photo'></td> 
-		</tr>
+        <tr> 
+            <td> Photo </td>
+            <td><input type = 'text' name = 'photo'></td> 
+        </tr>
 
-		<tr> 
-			<td> Adresse </td>
-			<td><input type = 'text' name = 'ad'></td> 
-		</tr>
+        <tr> 
+            <td> Adresse </td>
+            <td><input type = 'text' name = 'ad'></td> 
+        </tr>
 
-		<tr> 
-			<td> Mail </td>
-			<td><input type = 'text' name = 'mail'></td> 
-		</tr>
+        <tr> 
+            <td> Mail </td>
+            <td><input type = 'text' name = 'mail'></td> 
+        </tr>
 
-		<tr> 
-			<td> Tarif </td>
-			<td><input type = 'text' name = 'tarif'></td> 
-		</tr>
+        <tr> 
+            <td> Tarif </td>
+            <td><input type = 'text' name = 'tarif'></td> 
+        </tr>
 
-		<tr>
-			<td colspan='2'>
-			<INPUT TYPE = 'Submit' Name = 'Ajouter' VALUE = 'Ajouter'>
-		</td>
-		<tr>
-			<td colspan='2'>
-			<INPUT TYPE = 'Submit' Name = 'Supprimer' VALUE = 'Supprimer'>
-		</td>
-		</tr>
+        <tr>
+            <td colspan='2'>
+            <INPUT TYPE = 'Submit' Name = 'Ajouter' VALUE = 'Ajouter'>
+        </td>
+        <tr>
+            <td colspan='2'>
+            <INPUT TYPE = 'Submit' Name = 'Supprimer' VALUE = 'Supprimer'>
+        </td>
+        </tr>
 
-		
+        
 
-		</form>
-	</table>	
-		";
+        </form>
+    </table>    
+        ";
 
             //affichage clients
 
@@ -339,21 +339,21 @@ if($connect !== null) {
             $result0 = mysqli_query($db_handle, $sql0);
 
             echo "
-	
+    
 
-	<table>
-	<tr>
-	<th colspan='6'>
-	<h1> LISTE DE CLIENT </h1>
+    <table>
+    <tr>
+    <th colspan='6'>
+    <h1> LISTE DE CLIENT </h1>
 </th>
 </tr>
-	<tr>
+    <tr>
 
-	<th> NOM </th> <th> Prenom </th> <th> Adresse </th> <th>Numero </th>
-	 <th> Carte </th> <th> Mot de passe </th>  
+    <th> NOM </th> <th> Prenom </th> <th> Adresse </th> <th>Numero </th>
+     <th> Carte </th> <th> Mot de passe </th>  
 
-	 </tr>
-	";
+     </tr>
+    ";
 
             while ($data = mysqli_fetch_assoc($result0)) {
 
@@ -361,16 +361,16 @@ if($connect !== null) {
                 ///affichage
                 echo "
 
-	 <tr> 
-		<td>" . $data['Nom'] . " </td> 
-		<td>" . $data['Prenom'] . " </td>
-		<td>" . $data['Adresse'] . " </td>
-		<td>" . $data['Numero'] . " </td>
-		<td>" . $data['Carte'] . " </td>
-		 <td> " . $data['Mot_de_passe'] . "</td>		 
-	 </tr>
+     <tr> 
+        <td>" . $data['Nom'] . " </td> 
+        <td>" . $data['Prenom'] . " </td>
+        <td>" . $data['Adresse'] . " </td>
+        <td>" . $data['Numero'] . " </td>
+        <td>" . $data['Carte'] . " </td>
+         <td> " . $data['Mot_de_passe'] . "</td>         
+     </tr>
 
-	";
+    ";
 
             }
 
@@ -557,29 +557,29 @@ $result = mysqli_query($db_handle, $sql);
 
                 echo " BIENVENUE " . $data["Nom"] . " ! <br>
 
-	<br> 
-	<h1> VOS INFOS </h1>
+    <br> 
+    <h1> VOS INFOS </h1>
 
 <table>
-	<tr> <td> Specialité </td>
-	<td>" . $data["Specialite"] . "</td>
-	 </tr>
+    <tr> <td> Specialité </td>
+    <td>" . $data["Specialite"] . "</td>
+     </tr>
 
-	 <tr> <td> PHOTO </td>
-	<td>" . $data["Photo"] . "</td>
-	 </tr>
+     <tr> <td> PHOTO </td>
+    <td>" . $data["Photo"] . "</td>
+     </tr>
 
-	 <tr> <td> Adresse </td>
-	<td>" . $data["Adresse"] . "</td>
-	 </tr>
+     <tr> <td> Adresse </td>
+    <td>" . $data["Adresse"] . "</td>
+     </tr>
 
-	 <tr> <td> Mail </td>
-	<td>" . $data["Mail"] . "</td>
-	 </tr>
+     <tr> <td> Mail </td>
+    <td>" . $data["Mail"] . "</td>
+     </tr>
 
-	 <tr> <td> Tarif </td>
-	<td>" . $data["Tarif"] . "</td>
-	 </tr>
+     <tr> <td> Tarif </td>
+    <td>" . $data["Tarif"] . "</td>
+     </tr>
 
 
 </table>
@@ -762,16 +762,16 @@ echo"
 
 
 
-	<h1> LISTE DE COACH <h1>
+    <h1> LISTE DE COACH <h1>
 
-	<table>
-	<tr>
+    <table>
+    <tr>
 
-	<th> ID </th> <th> Nom </th> <th> Spécialité </th> <th>Photo </th>
-	 <th> Adresse </th> <th> Mail </th> <th> CV </th> <th> Tarif </th> 
+    <th> ID </th> <th> Nom </th> <th> Spécialité </th> <th>Photo </th>
+     <th> Adresse </th> <th> Mail </th> <th> CV </th> <th> Tarif </th> 
 
-	 </tr>
-	";
+     </tr>
+    ";
 
             while ($data = mysqli_fetch_assoc($result)) {
 
@@ -779,18 +779,18 @@ echo"
                 ///affichage
                 echo "
 
-	 <tr> 
-		<td>" . $data['ID_coach'] . " </td> 
-		<td>" . $data['Nom'] . " </td>
-		<td>" . $data['Specialite'] . " </td>
-		<td> <img src='" . $data['Photo'] . "' height='100' width='100'>" . " </td>
-		<td>" . $data['Adresse'] . " </td>
-		<td>" . $data['Mail'] . " </td>
-		 <td> CV </td>
-		 <td> " . $data['Tarif'] . "</td>		 
-	 </tr>
+     <tr> 
+        <td>" . $data['ID_coach'] . " </td> 
+        <td>" . $data['Nom'] . " </td>
+        <td>" . $data['Specialite'] . " </td>
+        <td> <img src='" . $data['Photo'] . "' height='100' width='100'>" . " </td>
+        <td>" . $data['Adresse'] . " </td>
+        <td>" . $data['Mail'] . " </td>
+         <td> CV </td>
+         <td> " . $data['Tarif'] . "</td>        
+     </tr>
 
-	";
+    ";
 
             }
 
@@ -798,57 +798,57 @@ echo"
 
             echo "
 
-	</table>
+    </table>
 
 
-	<h1> AJOUTER OU SUPPRIMER COACH </h1>
+    <h1> AJOUTER OU SUPPRIMER COACH </h1>
 
-	<table>
-		<form action = 'admin.php' method = 'post'>
-		<tr> 
-			<td>  NOM </td>
-			<td><input type = 'text' name = 'nom'></td> 
-		</tr>
-		<tr> 
-			<td> Spécialité </td>
-			<td><input type = 'text' name = 'spe'></td> 
-		</tr>
+    <table>
+        <form action = 'admin.php' method = 'post'>
+        <tr> 
+            <td>  NOM </td>
+            <td><input type = 'text' name = 'nom'></td> 
+        </tr>
+        <tr> 
+            <td> Spécialité </td>
+            <td><input type = 'text' name = 'spe'></td> 
+        </tr>
 
-		<tr> 
-			<td> Photo </td>
-			<td><input type = 'text' name = 'photo'></td> 
-		</tr>
+        <tr> 
+            <td> Photo </td>
+            <td><input type = 'text' name = 'photo'></td> 
+        </tr>
 
-		<tr> 
-			<td> Adresse </td>
-			<td><input type = 'text' name = 'ad'></td> 
-		</tr>
+        <tr> 
+            <td> Adresse </td>
+            <td><input type = 'text' name = 'ad'></td> 
+        </tr>
 
-		<tr> 
-			<td> Mail </td>
-			<td><input type = 'text' name = 'mail'></td> 
-		</tr>
+        <tr> 
+            <td> Mail </td>
+            <td><input type = 'text' name = 'mail'></td> 
+        </tr>
 
-		<tr> 
-			<td> Tarif </td>
-			<td><input type = 'text' name = 'tarif'></td> 
-		</tr>
+        <tr> 
+            <td> Tarif </td>
+            <td><input type = 'text' name = 'tarif'></td> 
+        </tr>
 
-		<tr>
-			<td colspan='2'>
-			<INPUT TYPE = 'Submit' Name = 'Ajouter' VALUE = 'Ajouter'>
-		</td>
-		<tr>
-			<td colspan='2'>
-			<INPUT TYPE = 'Submit' Name = 'Supprimer' VALUE = 'Supprimer'>
-		</td>
-		</tr>
+        <tr>
+            <td colspan='2'>
+            <INPUT TYPE = 'Submit' Name = 'Ajouter' VALUE = 'Ajouter'>
+        </td>
+        <tr>
+            <td colspan='2'>
+            <INPUT TYPE = 'Submit' Name = 'Supprimer' VALUE = 'Supprimer'>
+        </td>
+        </tr>
 
-		
+        
 
-		</form>
-	</table>	
-		";
+        </form>
+    </table>    
+        ";
 
 
 //////////////////////////TEST
@@ -859,16 +859,16 @@ echo"
             $result0 = mysqli_query($db_handle, $sql0);
 
             echo "
-	<h1> LISTE DE CLIENT <h1>
+    <h1> LISTE DE CLIENT <h1>
 
-	<table>
-	<tr>
+    <table>
+    <tr>
 
-	<th> NOM </th> <th> Prenom </th> <th> Adresse </th> <th>Numero </th>
-	 <th> Carte </th> <th> Mot de passe </th>  
+    <th> NOM </th> <th> Prenom </th> <th> Adresse </th> <th>Numero </th>
+     <th> Carte </th> <th> Mot de passe </th>  
 
-	 </tr>
-	";
+     </tr>
+    ";
 
             while ($data = mysqli_fetch_assoc($result0)) {
 
@@ -876,16 +876,16 @@ echo"
                 ///affichage
                 echo "
 
-	 <tr> 
-		<td>" . $data['Nom'] . " </td> 
-		<td>" . $data['Prenom'] . " </td>
-		<td>" . $data['Adresse'] . " </td>
-		<td>" . $data['Numero'] . " </td>
-		<td>" . $data['Carte'] . " </td>
-		 <td> " . $data['Mot_de_passe'] . "</td>		 
-	 </tr>
+     <tr> 
+        <td>" . $data['Nom'] . " </td> 
+        <td>" . $data['Prenom'] . " </td>
+        <td>" . $data['Adresse'] . " </td>
+        <td>" . $data['Numero'] . " </td>
+        <td>" . $data['Carte'] . " </td>
+         <td> " . $data['Mot_de_passe'] . "</td>         
+     </tr>
 
-	";
+    ";
 
             }
 
@@ -902,29 +902,29 @@ echo"
 
                 echo " BIENVENUE " . $data["Nom"] . " ! <br>
 
-	<br> 
-	<h1> VOS INFOS </h1>
+    <br> 
+    <h1> VOS INFOS </h1>
 
 <table>
-	<tr> <td> Specialité </td>
-	<td>" . $data["Specialite"] . "</td>
-	 </tr>
+    <tr> <td> Specialité </td>
+    <td>" . $data["Specialite"] . "</td>
+     </tr>
 
-	 <tr> <td> PHOTO </td>
-	<td>" . $data["Photo"] . "</td>
-	 </tr>
+     <tr> <td> PHOTO </td>
+    <td>" . $data["Photo"] . "</td>
+     </tr>
 
-	 <tr> <td> Adresse </td>
-	<td>" . $data["Adresse"] . "</td>
-	 </tr>
+     <tr> <td> Adresse </td>
+    <td>" . $data["Adresse"] . "</td>
+     </tr>
 
-	 <tr> <td> Mail </td>
-	<td>" . $data["Mail"] . "</td>
-	 </tr>
+     <tr> <td> Mail </td>
+    <td>" . $data["Mail"] . "</td>
+     </tr>
 
-	 <tr> <td> Tarif </td>
-	<td>" . $data["Tarif"] . "</td>
-	 </tr>
+     <tr> <td> Tarif </td>
+    <td>" . $data["Tarif"] . "</td>
+     </tr>
 
 
 </table>
@@ -933,7 +933,7 @@ echo"
         
 <table>
 <tr>
-<th colspan='8'> <h1>Diponibilité</h1></th>
+<th colspan='8'> <h1>Disponibilités</h1></th>
 </tr>
 
 <tr>
@@ -1133,16 +1133,16 @@ else {
 
 
 
-	<h1> LISTE DE COACH </h1>
+    <h1> LISTE DE COACH </h1>
 
-	<table>
-	<tr>
+    <table>
+    <tr>
 
-	<th> ID </th> <th> Nom </th> <th> Spécialité </th> <th>Photo </th>
-	 <th> Adresse </th> <th> Mail </th> <th> CV </th> <th> Tarif </th> 
+    <th> ID </th> <th> Nom </th> <th> Spécialité </th> <th>Photo </th>
+     <th> Adresse </th> <th> Mail </th> <th> CV </th> <th> Tarif </th> 
 
-	 </tr>
-	";
+     </tr>
+    ";
 
         while ($data = mysqli_fetch_assoc($result)) {
 
@@ -1150,18 +1150,18 @@ else {
             ///affichage
             echo "
 
-	 <tr> 
-		<td>" . $data['ID_coach'] . " </td> 
-		<td>" . $data['Nom'] . " </td>
-		<td>" . $data['Specialite'] . " </td>
-		<td> <img src='" . $data['Photo'] . "' height='100' width='100'>" . " </td>
-		<td>" . $data['Adresse'] . " </td>
-		<td>" . $data['Mail'] . " </td>
-		 <td> CV </td>
-		 <td> " . $data['Tarif'] . "</td>		 
-	 </tr>
+     <tr> 
+        <td>" . $data['ID_coach'] . " </td> 
+        <td>" . $data['Nom'] . " </td>
+        <td>" . $data['Specialite'] . " </td>
+        <td> <img src='" . $data['Photo'] . "' height='100' width='100'>" . " </td>
+        <td>" . $data['Adresse'] . " </td>
+        <td>" . $data['Mail'] . " </td>
+         <td> CV </td>
+         <td> " . $data['Tarif'] . "</td>        
+     </tr>
 
-	";
+    ";
 
         }
 
@@ -1169,57 +1169,57 @@ else {
 
         echo "
 
-	</table>
+    </table>
 
 
-	<h1> AJOUTER OU SUPPRIMER COACH </h1>
+    <h1> AJOUTER OU SUPPRIMER COACH </h1>
 
-	<table>
-		<form action = 'admin.php' method = 'post'>
-		<tr> 
-			<td>  NOM </td>
-			<td><input type = 'text' name = 'nom'></td> 
-		</tr>
-		<tr> 
-			<td> Spécialité </td>
-			<td><input type = 'text' name = 'spe'></td> 
-		</tr>
+    <table>
+        <form action = 'admin.php' method = 'post'>
+        <tr> 
+            <td>  NOM </td>
+            <td><input type = 'text' name = 'nom'></td> 
+        </tr>
+        <tr> 
+            <td> Spécialité </td>
+            <td><input type = 'text' name = 'spe'></td> 
+        </tr>
 
-		<tr> 
-			<td> Photo </td>
-			<td><input type = 'text' name = 'photo'></td> 
-		</tr>
+        <tr> 
+            <td> Photo </td>
+            <td><input type = 'text' name = 'photo'></td> 
+        </tr>
 
-		<tr> 
-			<td> Adresse </td>
-			<td><input type = 'text' name = 'ad'></td> 
-		</tr>
+        <tr> 
+            <td> Adresse </td>
+            <td><input type = 'text' name = 'ad'></td> 
+        </tr>
 
-		<tr> 
-			<td> Mail </td>
-			<td><input type = 'text' name = 'mail'></td> 
-		</tr>
+        <tr> 
+            <td> Mail </td>
+            <td><input type = 'text' name = 'mail'></td> 
+        </tr>
 
-		<tr> 
-			<td> Tarif </td>
-			<td><input type = 'text' name = 'tarif'></td> 
-		</tr>
+        <tr> 
+            <td> Tarif </td>
+            <td><input type = 'text' name = 'tarif'></td> 
+        </tr>
 
-		<tr>
-			<td colspan='2'>
-			<INPUT TYPE = 'Submit' Name = 'Ajouter' VALUE = 'Ajouter'>
-		</td>
-		<tr>
-			<td colspan='2'>
-			<INPUT TYPE = 'Submit' Name = 'Supprimer' VALUE = 'Supprimer'>
-		</td>
-		</tr>
+        <tr>
+            <td colspan='2'>
+            <INPUT TYPE = 'Submit' Name = 'Ajouter' VALUE = 'Ajouter'>
+        </td>
+        <tr>
+            <td colspan='2'>
+            <INPUT TYPE = 'Submit' Name = 'Supprimer' VALUE = 'Supprimer'>
+        </td>
+        </tr>
 
-		
+        
 
-		</form>
-	</table>	
-		";
+        </form>
+    </table>    
+        ";
 
 
 //////////////////////////TEST
@@ -1230,16 +1230,16 @@ else {
         $result0 = mysqli_query($db_handle, $sql0);
 
         echo "
-	<h1> LISTE DE CLIENT </h1>
+    <h1> LISTE DE CLIENT </h1>
 
-	<table>
-	<tr>
+    <table>
+    <tr>
 
-	<th> NOM </th> <th> Prenom </th> <th> Adresse </th> <th>Numero </th>
-	 <th> Carte </th> <th> Mot de passe </th>  
+    <th> NOM </th> <th> Prenom </th> <th> Adresse </th> <th>Numero </th>
+     <th> Carte </th> <th> Mot de passe </th>  
 
-	 </tr>
-	";
+     </tr>
+    ";
 
         while ($data = mysqli_fetch_assoc($result0)) {
 
@@ -1247,16 +1247,16 @@ else {
             ///affichage
             echo "
 
-	 <tr> 
-		<td>" . $data['Nom'] . " </td> 
-		<td>" . $data['Prenom'] . " </td>
-		<td>" . $data['Adresse'] . " </td>
-		<td>" . $data['Numero'] . " </td>
-		<td>" . $data['Carte'] . " </td>
-		 <td> " . $data['Mot_de_passe'] . "</td>		 
-	 </tr>
+     <tr> 
+        <td>" . $data['Nom'] . " </td> 
+        <td>" . $data['Prenom'] . " </td>
+        <td>" . $data['Adresse'] . " </td>
+        <td>" . $data['Numero'] . " </td>
+        <td>" . $data['Carte'] . " </td>
+         <td> " . $data['Mot_de_passe'] . "</td>         
+     </tr>
 
-	";
+    ";
 
         }
 
@@ -1273,29 +1273,29 @@ else {
 
             echo " BIENVENUE " . $data["Nom"] . " ! <br>
 
-	<br> 
-	<h1> VOS INFOS </h1>
+    <br> 
+    <h1> VOS INFOS </h1>
 
 <table>
-	<tr> <td> Specialité </td>
-	<td>" . $data["Specialite"] . "</td>
-	 </tr>
+    <tr> <td> Specialité </td>
+    <td>" . $data["Specialite"] . "</td>
+     </tr>
 
-	 <tr> <td> PHOTO </td>
-	<td>" . $data["Photo"] . "</td>
-	 </tr>
+     <tr> <td> PHOTO </td>
+    <td>" . $data["Photo"] . "</td>
+     </tr>
 
-	 <tr> <td> Adresse </td>
-	<td>" . $data["Adresse"] . "</td>
-	 </tr>
+     <tr> <td> Adresse </td>
+    <td>" . $data["Adresse"] . "</td>
+     </tr>
 
-	 <tr> <td> Mail </td>
-	<td>" . $data["Mail"] . "</td>
-	 </tr>
+     <tr> <td> Mail </td>
+    <td>" . $data["Mail"] . "</td>
+     </tr>
 
-	 <tr> <td> Tarif </td>
-	<td>" . $data["Tarif"] . "</td>
-	 </tr>
+     <tr> <td> Tarif </td>
+    <td>" . $data["Tarif"] . "</td>
+     </tr>
 
 
 </table>
@@ -1455,9 +1455,9 @@ Etes-vous sûr d'avoir déjà un compte ? <br> <br>
 
 if ($connexion) {
 
-	$_SESSION['connexion'] = $connexion;
-	$_SESSION['poste'] = $poste;
-	$_SESSION['login'] = $login; //numero client ou mail
+    $_SESSION['connexion'] = $connexion;
+    $_SESSION['poste'] = $poste;
+    $_SESSION['login'] = $login; //numero client ou mail
 
 
 echo "<p> Vous vous êtes connecté </p>
@@ -1476,7 +1476,7 @@ echo "Connexion refusée. Mot de passe invalide.";
 
 
 </div>
-    </main>
+    
 <footer>
         <p class="contact">Sportify <br>  
             67 avenue Marceau 75015 Paris</p> 
@@ -1484,6 +1484,6 @@ echo "Connexion refusée. Mot de passe invalide.";
     </footer> 
     </div>
 </div>
-
+</main>
 </body>
 </html>
