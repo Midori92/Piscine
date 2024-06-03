@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Sportify - Parcourir</title>
-    <meta charset="utf-8"/>
-    <link href="prime.css" rel="stylesheet" type="text/css" />
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
+<!DOCTYPE html>  
+<head>  
+  <title>Sportify</title>  
+  <meta charset="utf-8"/>  
+  <link href="prime.css" rel="stylesheet" type="text/css" />  
+  <link rel="icon"type="image/x-icon" href="favicon.ico">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>  
     <style>
         .search-container {
             margin: 20px 0;
@@ -32,53 +32,144 @@
             background-color: #004E87;
         }
     </style>
-</head>
-<body>
-    <div id="wrapper">
-        <h1 class="titre"><img width="750" heigh="750" src="titre.png" alt="Sportify"></h1>
-        <div id="leftcolumn"> 
 
-            <div id="nav">  
-            <a href="index.html">
-                   <img src="accueilbouton.png" width="115" heigh="115">
+</head>  
+<body> 
+<style>
+    #rightcolumn {
+    padding: 10px;
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: aliceblue;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    height: 220px;
+    width: 650px;
+}
+</style> 
+  
+      <div id="wrapper">
+      <h1 class=titre> <img width="750" heigh="750" src="titre.png"></h1> 
+      <div id ="nav">
+      <div id="leftcolumn"> 
+
+          <div id="nav">  
+            <a href="index.php">
+                 <img src="accueilbouton.png" width="150" heigh="115">
             </a>  
           
-            <a href="toutparcourir.html">
-               <img  src="parcourirbouton.png" width="115" heigh="115">
+            <a href="toutparcourir.php">
+               <img  src="parcourirbouton.png" width="150" heigh="115">
             </a>  
             
            <a href="recherche.html">
-                <img  src="recherchebouton.png" width="115" heigh="150">
+                <img  src="recherchebouton.png" width="150" heigh="150">
            </a>  
           
-           <a href="rendezvous.html">
-                <img  src="rendezvousbouton.png" width="115" heigh="150">
+           <a href="rendezvous.php">
+                <img  src="rendezvousbouton.png" width="150" heigh="150">
            </a>  
-           <a href="votrecompte.html">
-                <img  src="votrecompte.png" width="115" heigh="150">
-           </a> 
+           <a href="compte.html">
+                <img  src="votrecompte.png" width="150" heigh="150">
+           </a>
+           <br>
+           <div id="carousel-container">
+<h1> Nos sports </h1>  
+<div id="carrousel">  
+  <ul>  
+    <li><img src="ten.jpg" width="75%" height="60%"/></li>  
+    <li><img src="bask.jpg" width="75%" height="60%"/></li>  
+    <li><img src="fo.jpg" width="85%" height="60%"/></li>  
+    <li><img src="dan.jpg" width="75%" height="100%"/></li>  
+    <li><img src="nat.jpg" width="85%" height="100%"/></li>  
+    <li><img src="bo.jpg" width="85%" height="100%"/></li>  
+    <li><img src="cours.jpg" width="85%" height="100%"/></li>  
+ 
+  </ul>  
+</div>  
+
+</div>
+<script>
+$(document).ready(function(){  
+  var $carrousel = $('#carrousel');
+  var $img = $('#carrousel img');
+  var $thumbnails = $('#thumbnails');
+  var indexImg = $img.length - 1;
+  var i = 0;
+  
+
+  $carrousel.append('<div class="controls"><span class="prev">Precedent</span><span class="next">Suivant</span></div>');
+  
+
+  $img.each(function(index) {
+    var thumbnailSrc = $(this).attr('src');
+    $thumbnails.append('<img src="' + thumbnailSrc + '" alt="thumbnail' + index + '">');
+  });
+  
+
+  $thumbnails.on('click', 'img', function() {
+    var index = $(this).index();
+    changeSlide(index);
+  });
+  
+
+  $('.next').click(function(){ 
+    changeSlide(i + 1);
+  });
+  
+
+  $('.prev').click(function(){ 
+    changeSlide(i - 1);
+  });
+  
+
+  function changeSlide(index) {
+    if (index < 0) {
+      index = indexImg;
+    } else if (index > indexImg) {
+      index = 0;
+    }
+    i = index;
+    var translateValue = -(100 / $img.length) * i + '%';
+    $carrousel.find('ul').css('transform', 'translateX(' + translateValue + ')');
+    // Mettre en surbrillance la miniature correspondante
+    $thumbnails.find('img').removeClass('active');
+    $thumbnails.find('img').eq(i).addClass('active');
+  }
+  
+
+  function slideImg() {  
+    setInterval(function() { 
+      changeSlide(i + 1);
+    }, 4000); 
+  }  
+
+  slideImg();
+  
+}); 
+</script> 
           </div> 
      </div>
-        <div id="rightcolumn">
-           <div class="search-container">
+<main>
+
+   <div id="rightcolumn">
+  <div class="search-container">
         <form action="recherche.php" method="post">
             <input type="text" name="query" placeholder="Nom, Spécialité ou Etablissement.....">
             <input type="submit" value="Recherche">
         </form>
     </div>
+    <br>
 
+  </main> 
+  <footer>
+        <p class="contact">Sportify <br>  
+            67 avenue Marceau 75015 Paris</p> 
+            Contactez-nous : <a href="mailto:sportify@omneseducation.com">sportify@omneseducation.com</a> | Téléphone : 01 23 45 67 89</p>
+    </footer>  
+  </div> 
+  </div>
 
-                <br>
-                <p class="contact">Sportify <br>  
-                    67 avenue Marceau<br>  
-                    75015 Paris<br><br>  
-                    Contactez nous au : (+33) 01 02 03 04 05 06  
-                </p>
-                <div id="footer">Copyright &copy; 2024 Sportify<br>
-                    <a href="mailto:sportify@gmail.com">sportify@gmail.com</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</body>
-</html>
+</div>
+</body>  
+</html> 
